@@ -1,0 +1,634 @@
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op s : -> Sys .
+	red inv13(init,a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Data .
+	op s : -> Sys .
+	eq (r3 \in knl(s)) = true .
+	red inv13(s,a,b,k) implies inv13(fkmsg1(s,r1,r2,r3),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Data .
+	op s : -> Sys .
+	eq (r3 \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(fkmsg1(s,r1,r2,r3),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Data .
+	op s : -> Sys .
+	eq (r3 \in knl(s)) = true .
+	red inv13(s,a,b,k) implies inv13(fkmsg2(s,r1,r2,r3),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Data .
+	op s : -> Sys .
+	eq (r3 \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(fkmsg2(s,r1,r2,r3),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq r1 = priK(a) .
+	eq (priK(a) \in knl(s)) = true .
+	eq r2 = (b || k) .
+	eq (b \in knl(s)) = true .
+	eq (k \in knl(s)) = true .
+	eq (k \in usecret(s)) = true .
+	red inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq r1 = priK(a) .
+	eq (priK(a) \in knl(s)) = true .
+	eq r2 = (b || k) .
+	eq (b \in knl(s)) = true .
+	eq (k \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in knl(s)) = true .
+	red inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true, use inv2 as a lemma
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq r1 = priK(a) .
+	eq (priK(a) \in knl(s)) = true .
+	eq r2 = (b || k) .
+	eq (b \in knl(s)) = true .
+	eq (k \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in knl(s)) = false .
+	red inv2(s,k) implies inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq r1 = priK(a) .
+	eq (priK(a) \in knl(s)) = true .
+	eq r2 = (b || k) .
+	eq (b \in knl(s)) = true .
+	eq (k \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq r1 = priK(a) .
+	eq (priK(a) \in knl(s)) = true .
+	eq r2 = (b || k) .
+	eq (b \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq r1 = priK(a) .
+	eq (priK(a) \in knl(s)) = true .
+	eq (r2 = (b || k)) = false .
+	red inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq r1 = priK(a) .
+	eq (priK(a) \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (r1 = priK(a)) = false .
+	red inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g2(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq r1 = intru .
+	red inv13(s,a,b,k) implies inv13(g21(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (priK(r1) \in knl(s)) = true .
+	eq (aenc(pubK(r1),r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = true .
+	red inv13(s,a,b,k) implies inv13(g21(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (priK(r1) \in knl(s)) = true .
+	eq (aenc(pubK(r1),r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in r2) = true .
+	eq (aenc(priK(a),(b || k)) \in knl(s)) = true .
+	red inv13(s,a,b,k) implies inv13(g21(s,r1,r2),a,b,k) .
+close
+
+--> true, use inv5 as a lemma
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (priK(r1) \in knl(s)) = true .
+	eq (aenc(pubK(r1),r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in r2) = true .
+	eq (aenc(priK(a),(b || k)) \in knl(s)) = false .
+	red inv5(s,r1) implies inv13(s,a,b,k) implies inv13(g21(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (priK(r1) \in knl(s)) = true .
+	eq (aenc(pubK(r1),r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in r2) = false .
+	red inv13(s,a,b,k) implies inv13(g21(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (priK(r1) \in knl(s)) = true .
+	eq (aenc(pubK(r1),r2) \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g21(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (priK(r1) \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g21(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (senc(r1,r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = true .
+	red inv13(s,a,b,k) implies inv13(g22(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (senc(r1,r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in r2) = true .
+	eq (aenc(priK(a),(b || k)) \in knl(s)) = true .
+	red inv13(s,a,b,k) implies inv13(g22(s,r1,r2),a,b,k) .
+close
+
+--> true, use inv8 as a lemma
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (senc(r1,r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in r2) = true .
+	eq (aenc(priK(a),(b || k)) \in knl(s)) = false .
+	red inv8(s,r1,r2,priK(a),(b || k)) implies inv13(s,a,b,k) implies inv13(g22(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (senc(r1,r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in r2) = false .
+	red inv13(s,a,b,k) implies inv13(g22(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (senc(r1,r2) \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g22(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g22(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq r1 = intru .
+	red inv13(s,a,b,k) implies inv13(g23(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (aenc(priK(r1),r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = true .
+	red inv13(s,a,b,k) implies inv13(g23(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (aenc(priK(r1),r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in r2) = true .
+	eq (aenc(priK(a),(b || k)) \in knl(s)) = true .
+	red inv13(s,a,b,k) implies inv13(g23(s,r1,r2),a,b,k) .
+close
+
+--> true, use inv7 as a lemma
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (aenc(priK(r1),r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in r2) = true .
+	eq (aenc(priK(a),(b || k)) \in knl(s)) = false .
+	red inv7(s,r1,r2) implies inv13(s,a,b,k) implies inv13(g23(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (aenc(priK(r1),r2) \in knl(s)) = true .
+	eq (k \in usecret(s)) = false .
+	eq (aenc(priK(a),(b || k)) \in r2) = false .
+	red inv13(s,a,b,k) implies inv13(g23(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (aenc(priK(r1),r2) \in knl(s)) = false .
+	red inv13(s,a,b,k) implies inv13(g23(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> PubKey .
+	op s : -> Sys .
+	red inv13(s,a,b,k) implies inv13(gBasic(s,r1,r2),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Secret .
+	op s : -> Sys .
+	eq (r1 \in usecret(s)) = true .
+	red inv13(s,a,b,k) implies inv13(gSecret(s,r1),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Secret .
+	op s : -> Sys .
+	eq (r1 \in usecret(s)) = false .
+	red inv13(s,a,b,k) implies inv13(gSecret(s,r1),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Secret .
+	op s : -> Sys .
+	eq (r3 \in usecret(s)) = true .
+	red inv13(s,a,b,k) implies inv13(send1(s,r1,r2,r3),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Secret .
+	op s : -> Sys .
+	eq (r3 \in usecret(s)) = false .
+	red inv13(s,a,b,k) implies inv13(send1(s,r1,r2,r3),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Data .
+	op r5 : -> Nat .
+	op r6 : -> Data .
+	op r7 : -> Secret .
+	op s : -> Sys .
+	eq r4 = aenc(pubK(r3),r6) .
+	eq r6 = aenc(priK(r2),(r3 || r7)) .
+	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+	red inv13(s,a,b,k) implies inv13(send2(s,r1,r2,r3,r4,r5,r6,r7),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Data .
+	op r5 : -> Nat .
+	op r6 : -> Data .
+	op r7 : -> Secret .
+	op s : -> Sys .
+	eq r4 = aenc(pubK(r3),r6) .
+	eq r6 = aenc(priK(r2),(r3 || r7)) .
+	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = false .
+	red inv13(s,a,b,k) implies inv13(send2(s,r1,r2,r3,r4,r5,r6,r7),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Data .
+	op r5 : -> Nat .
+	op r6 : -> Data .
+	op r7 : -> Secret .
+	op s : -> Sys .
+	eq r4 = aenc(pubK(r3),r6) .
+	eq (r6 = aenc(priK(r2),(r3 || r7))) = false .
+	red inv13(s,a,b,k) implies inv13(send2(s,r1,r2,r3,r4,r5,r6,r7),a,b,k) .
+close
+
+--> true
+open INV .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Data .
+	op r5 : -> Nat .
+	op r6 : -> Data .
+	op r7 : -> Secret .
+	op s : -> Sys .
+	eq (r4 = aenc(pubK(r3),r6)) = false .
+	red inv13(s,a,b,k) implies inv13(send2(s,r1,r2,r3,r4,r5,r6,r7),a,b,k) .
+close
+
+--> Time taken is 358ms

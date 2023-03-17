@@ -1,0 +1,65 @@
+open INV .
+	ops a b a2 b2 : -> Prin .
+	op c : -> PqCipher .
+	ops css css2 : -> Suites .
+	ops k k2 : -> EcSecretK .
+	ops k' k2' : -> PqSecretK .
+	ops pk pk2 : -> EcPublicK .
+  ops pk' : -> PqPublicK .
+	ops s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 : -> Sys .
+	op sign : -> Data .
+	ops v v2 : -> Version .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq (a2 = intru) = false .
+  eq (a = a2) = false .
+  eq (k = k2) = false .
+  eq (k' = k2') = false .
+  eq b2 = intru .
+  eq pk = ecPublic(k) .
+  eq pk2 = ecPublic(k2) .
+  eq pk' = keygen(k') .
+  eq c = encapsC(keygen(k'), k2') .
+  eq sign = sign(priK(b), h(v || v2 || css || css2 || 
+    pubK(b) || ecPublic(k) || keygen(k') || ecPublic(k2) ||
+    encapsC(keygen(k'), k2') ||(k | k2) ||(k' & k2'))) .
+
+-- a send to b pk || pk'
+  eq s1 = cVer(init,a,b,v) .
+  eq s2 = sVer(s1,a,a,b,v2,v) .
+  eq s3 = cKexInit(s2,b,a,b,css,v,v2) .
+  eq s4 = sKexInit(s3,a,a,b,css2,v,v2,css) .
+  eq s5 = cHbrInit(s4,b,a,b,k,k',v,v2,css,css2) .
+
+-- intru gleans the msg above, impersonates a2, and sends pk || pk' to b
+  eq s6 = fkHbrInit(s5,a2,b,pk,pk') .
+  eq s7 = fkVer(s6,a2,b,v) .
+  eq s8 = sVer(s7,intru,a2,b,v2,v) .
+  eq s9 = fkKexInit(s8,a2,b,css) .
+  eq s10 = sKexInit(s9,intru,a2,b,css2,v,v2,css) .
+  -- eq s11 = fkHbrInit(s10,a2,b,pk,pk') .
+  eq s11 = sHbrReply(s10,intru,a2,b,k2,k2',v,v2,css,css2,pk,pk',1) .
+
+-- intru gleans the msg above, impersonates b, and sends pk2 || c || v-sign to a
+  eq s12 = gBasic(s11,v,css,pubK(b)) .
+  eq s13 = fkHbrReply(s12,b,a,pubK(b),pk2,c,sign) .
+
+-- time(s13) is 4
+
+  red time(s13) .
+
+-- to check there does not exist such a hbrRepM message (in the implication part of auth),
+-- we show that with ?M ={0,1,2,3}, auth is always false 
+-- the most interesting case is when ?M = 2
+	red auth(s13,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,0,3,2) .
+	red auth(s13,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,0,3,1) .
+	red auth(s13,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,0,3,0) .
+	red auth(s13,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,0,3,3) .
+
+-- there exist the message hbrRepM(b,b,a2,...)  in the network,
+-- but there does not exist the message hbrRepM(b,b,a,...)
+  red hbrRepM(b,b,a2, pubK(b) || pk2 || c || sign, 2) \in nw(s13) .
+close
+
+eof
+load v5/auth-ctx.cafe .

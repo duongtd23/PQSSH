@@ -1,0 +1,178 @@
+--> false
+open INV .
+	op ?m : -> Nat .
+	op ?p : -> Prin .
+	op a : -> Prin .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (a = intru) = false .
+	eq (b = intru) = false .
+	eq r1 = priK(b) .
+	eq (priK(b) \in knl(s)) = true .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (k' \in leakscr(s)) = false .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (pqSecret(c) \in leakscr(s)) = false .
+	eq (decaps(c,k') \in leakscr(s)) = false .
+	eq (sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) \in knl(s)) = false .
+	eq (hbrRepM(b,b,?p,(pubK(b) || pk2 || c || sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))))),?m) \in nw(s)) = false .
+	red inv12(s,b)
+  implies inv16(s,a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) implies inv16(g2(s,r1,r2),a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) .
+close
+
+--> false
+open INV .
+	op ?m : -> Nat .
+	op ?p : -> Prin .
+	op a : -> Prin .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (a = intru) = false .
+	eq (b = intru) = false .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (k' \in leakscr(s)) = false .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (pqSecret(c) \in leakscr(s)) = false .
+	eq (decaps(c,k') \in leakscr(s)) = false .
+	eq priK(r1) = priK(b) .
+	eq (sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) \in knl(s)) = false .
+	eq (hbrRepM(b,b,?p,(pubK(b) || pk2 || c || sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))))),?m) \in nw(s)) = false .
+	red inv15(s,b,r1)
+	implies inv16(s,a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) implies inv16(gSign(s,r1,r2),a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) .
+close
+
+--> false
+open INV .
+	op ?m : -> Nat .
+	op ?p : -> Prin .
+	op a : -> Prin .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (a = intru) = false .
+	eq (r3 = intru) = false .
+	eq ?p = r2 .
+	eq c = encapsC(r11,r5) .
+	eq ecSecret(r10) = k .
+	eq pqSecret(r11) = k' .
+	eq ecSecret(pk2) = r4 .
+	eq (time(s) = ?m) = false .
+	eq (k' \in leakscr(s)) = false .
+	eq (r5 \in leakscr(s)) = false .
+	eq (priK(r3) \in' leakscr(s)) = false .
+	eq ((k' & r5) \in leakscr(s)) = false .
+	eq (sign(priK(r3),h((v || v2 || r8 || r9 || pubK(r3) || ecPublic(k) || keygen(k') || pk2 || encapsC(r11,r5) || (k | r4) || (k' & r5)))) \in knl(s)) = false .
+	eq (hbrRepM(r3,r3,r2,(pubK(r3) || pk2 || encapsC(r11,r5) || sign(priK(r3),h((v || v2 || r8 || r9 || pubK(r3) || ecPublic(k) || keygen(k') || pk2 || encapsC(r11,r5) || (k | r4) || (k' & r5))))),?m) \in nw(s)) = false .
+	-- red inv16(s,a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) implies inv16(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) .
+-- the witness ?m in the successor state will be time(s)
+	red inv16(s,a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) implies inv16(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a,b,?p,v,v2,css,css2,k,k',pk2,c,time(s)) .
+close
+
+--> false
+open INV .
+	op ?m : -> Nat .
+	op ?p : -> Prin .
+	op a : -> Prin .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (a = intru) = false .
+	eq (r3 = intru) = false .
+	eq (?p = r2) = false .
+	eq c = encapsC(r11,r5) .
+	eq ecSecret(r10) = k .
+	eq pqSecret(r11) = k' .
+	eq ecSecret(pk2) = r4 .
+	eq (k' \in leakscr(s)) = false .
+	eq (r5 \in leakscr(s)) = false .
+	eq (priK(r3) \in' leakscr(s)) = false .
+	eq ((k' & r5) \in leakscr(s)) = false .
+	eq (sign(priK(r3),h((v || v2 || r8 || r9 || pubK(r3) || ecPublic(k) || keygen(k') || pk2 || encapsC(r11,r5) || (k | r4) || (k' & r5)))) \in knl(s)) = false .
+	eq (hbrRepM(r3,r3,?p,(pubK(r3) || pk2 || encapsC(r11,r5) || sign(priK(r3),h((v || v2 || r8 || r9 || pubK(r3) || ecPublic(k) || keygen(k') || pk2 || encapsC(r11,r5) || (k | r4) || (k' & r5))))),?m) \in nw(s)) = false .
+	-- red inv16(s,a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) implies inv16(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) .
+-- the witness ?p in the successor state will be r2, and 
+-- the witness ?m in the successor state will be time(s)
+	red inv16(s,a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) implies inv16(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a,b,r2,v,v2,css,css2,k,k',pk2,c,time(s)) .
+close

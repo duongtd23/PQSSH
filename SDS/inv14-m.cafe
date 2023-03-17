@@ -1,0 +1,148 @@
+--> false
+open INV .
+	op ?t : -> Nat .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op n : -> Nat .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq r1 = k .
+	eq (k \in knl(s)) = true .
+	eq (a = intru) = false .
+	eq (b = intru) = false .
+	eq r2 = (a || b) .
+	eq (a \in knl(s)) = true .
+	eq (b \in knl(s)) = true .
+	eq (senc(k,(a || b)) \in knl(s)) = false .
+	eq (msg2(b,b,a,senc(k,(a || b)),?t) \in nw(s)) = false .
+	eq (msg1(a,a,b,aenc(pubK(b),aenc(priK(a),(b || k))),n) \in nw(s)) = true .
+	red keySe(s,a,b,k,n) .
+  -- red inv14(s,a,b,k,n,?t) implies inv14(g2(s,r1,r2),a,b,k,n,?t) .
+close
+
+--> false
+open INV .
+	op ?t : -> Nat .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op n : -> Nat .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (priK(r1) \in knl(s)) = true .
+	eq (aenc(pubK(r1),r2) \in knl(s)) = true .
+	eq (a = intru) = false .
+	eq (b = intru) = false .
+	eq (senc(k,(a || b)) \in r2) = true .
+	eq (senc(k,(a || b)) \in knl(s)) = false .
+	eq (msg2(b,b,a,senc(k,(a || b)),?t) \in nw(s)) = false .
+	eq (msg1(a,a,b,aenc(pubK(b),aenc(priK(a),(b || k))),n) \in nw(s)) = true .
+	red inv5(s,r1) .
+  -- red inv14(s,a,b,k,n,?t) implies inv14(g21(s,r1,r2),a,b,k,n,?t) .
+close
+
+--> false
+open INV .
+	op ?t : -> Nat .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op n : -> Nat .
+	op r1 : -> Data .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 \in knl(s)) = true .
+	eq (senc(r1,r2) \in knl(s)) = true .
+	eq (a = intru) = false .
+	eq (b = intru) = false .
+	eq (senc(k,(a || b)) \in r2) = true .
+	eq (senc(k,(a || b)) \in knl(s)) = false .
+	eq (msg2(b,b,a,senc(k,(a || b)),?t) \in nw(s)) = false .
+	eq (msg1(a,a,b,aenc(pubK(b),aenc(priK(a),(b || k))),n) \in nw(s)) = true .
+  red inv4(s,r1,r2,k,a || b) .
+  -- red inv14(s,a,b,k,n,?t) implies inv14(g22(s,r1,r2),a,b,k,n,?t) .
+close
+
+--> false
+open INV .
+	op ?t : -> Nat .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op n : -> Nat .
+	op r1 : -> Prin .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	eq (r1 = intru) = false .
+	eq (aenc(priK(r1),r2) \in knl(s)) = true .
+	eq (a = intru) = false .
+	eq (b = intru) = false .
+	eq (senc(k,(a || b)) \in r2) = true .
+	eq (senc(k,(a || b)) \in knl(s)) = false .
+	eq (msg2(b,b,a,senc(k,(a || b)),?t) \in nw(s)) = false .
+	eq (msg1(a,a,b,aenc(pubK(b),aenc(priK(a),(b || k))),n) \in nw(s)) = true .
+  red inv7(s,r1,r2) .
+	-- red inv14(s,a,b,k,n,?t) implies inv14(g23(s,r1,r2),a,b,k,n,?t) .
+close
+
+--> false
+open INV .
+	op ?t : -> Nat .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op n : -> Nat .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Secret .
+	op s : -> Sys .
+	eq (r3 \in usecret(s)) = false .
+	eq a = r1 .
+	eq b = r2 .
+	eq k = r3 .
+	eq (r1 = intru) = false .
+	eq (r2 = intru) = false .
+	eq time(s) = n .
+	eq (senc(r3,(r1 || r2)) \in knl(s)) = true .
+	eq (msg2(r2,r2,r1,senc(r3,(r1 || r2)),?t) \in nw(s)) = false .
+	eq (msg1(r1,r1,r2,aenc(pubK(r2),aenc(priK(r1),(r2 || r3))),n) \in nw(s)) = false .
+	red inv10(s,r1,r2,r3) .
+  -- red inv14(s,a,b,k,n,?t) implies inv14(send1(s,r1,r2,r3),a,b,k,n,?t) .
+close
+
+--> false
+open INV .
+	op ?t : -> Nat .
+	op a : -> Prin .
+	op b : -> Prin .
+	op k : -> Secret .
+	op n : -> Nat .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Data .
+	op r5 : -> Nat .
+	op r6 : -> Data .
+	op r7 : -> Secret .
+	op s : -> Sys .
+	eq r4 = aenc(pubK(r3),r6) .
+	eq r6 = aenc(priK(r2),(r3 || r7)) .
+	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+	eq a = r2 .
+	eq b = r3 .
+	eq k = r7 .
+	eq (r2 = intru) = false .
+	eq (r3 = intru) = false .
+	eq (time(s) = ?t) = false .
+	eq (senc(r7,(r2 || r3)) \in knl(s)) = false .
+	eq (msg2(r3,r3,r2,senc(r7,(r2 || r3)),?t) \in nw(s)) = false .
+	eq (msg1(r2,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),n) \in nw(s)) = true .
+	red inv14(s,a,b,k,n,?t) implies inv14(send2(s,r1,r2,r3,r4,r5,r6,r7),a,b,k,n,time(s)) .
+	-- red inv14(s,a,b,k,n,?t) implies inv14(send2(s,r1,r2,r3,r4,r5,r6,r7),a,b,k,n,?t) .
+close

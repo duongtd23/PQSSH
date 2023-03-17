@@ -1,0 +1,91 @@
+--> false
+open INV .
+	op ?t : -> Nat .
+	op a : -> Prin .
+	op b : -> Prin .
+	op b2 : -> Prin .
+	op k : -> Secret .
+	op n : -> Nat .
+	op n2 : -> Nat .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Data .
+	op s : -> Sys .
+	eq (r3 \in knl(s)) = true .
+	eq a = r2 .
+	eq b = r1 .
+	eq b2 = intru .
+	eq (r1 = intru) = false .
+	eq (r2 = intru) = false .
+	eq r3 = senc(k,(r2 || r1)) .
+	eq (senc(k,(r2 || r1)) \in knl(s)) = true .
+	eq time(s) = n2 .
+	eq (msg2(intru,r1,r2,senc(k,(r2 || r1)),n2) \in nw(s)) = false .
+	eq (msg2(r1,r1,r2,senc(k,(r2 || r1)),?t) \in nw(s)) = false .
+	eq (msg1(r2,r2,r1,aenc(pubK(r1),aenc(priK(r2),(r1 || k))),n) \in nw(s)) = true .
+	
+  red inv14(s,a,b,k,n,?t) .
+  -- red auth(s,b2,a,b,k,n,n2,?t) implies auth(fkmsg2(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
+close
+
+--> false
+open INV .
+	op ?t : -> Nat .
+	op a : -> Prin .
+	op b : -> Prin .
+	op b2 : -> Prin .
+	op k : -> Secret .
+	op n : -> Nat .
+	op n2 : -> Nat .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Secret .
+	op s : -> Sys .
+	eq (r3 \in usecret(s)) = false .
+	eq a = r1 .
+	eq b = r2 .
+	eq k = r3 .
+	eq (r1 = intru) = false .
+	eq (r2 = intru) = false .
+	eq time(s) = n .
+	eq (msg2(b2,r2,r1,senc(r3,(r1 || r2)),n2) \in nw(s)) = true .
+	eq (msg2(r2,r2,r1,senc(r3,(r1 || r2)),?t) \in nw(s)) = false .
+	eq (msg1(r1,r1,r2,aenc(pubK(r2),aenc(priK(r1),(r2 || r3))),n) \in nw(s)) = false .
+	red inv9(s,b2,r1,r2,k,n2) .
+  -- red auth(s,b2,a,b,k,n,n2,?t) implies auth(send1(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
+close
+
+--> false
+open INV .
+	op ?t : -> Nat .
+	op a : -> Prin .
+	op b : -> Prin .
+	op b2 : -> Prin .
+	op k : -> Secret .
+	op n : -> Nat .
+	op n2 : -> Nat .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Data .
+	op r5 : -> Nat .
+	op r6 : -> Data .
+	op r7 : -> Secret .
+	op s : -> Sys .
+	eq r4 = aenc(pubK(r3),r6) .
+	eq r6 = aenc(priK(r2),(r3 || r7)) .
+	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+	eq a = r2 .
+	eq b = r3 .
+	eq b2 = r3 .
+	eq k = r7 .
+	eq (r2 = intru) = false .
+	eq (r3 = intru) = false .
+	eq time(s) = n2 .
+	eq (?t = n2) = false .
+	eq (msg2(r3,r3,r2,senc(r7,(r2 || r3)),?t) \in nw(s)) = false .
+	eq (msg2(r3,r3,r2,senc(r7,(r2 || r3)),n2) \in nw(s)) = false .
+	eq (msg1(r2,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),n) \in nw(s)) = true .
+	red auth(s,b2,a,b,k,n,n2,?t) implies auth(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n,n2,n2) .
+	-- red auth(s,b2,a,b,k,n,n2,?t) implies auth(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n,n2,?t) .
+close

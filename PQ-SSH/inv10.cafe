@@ -1,0 +1,2601 @@
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	red inv10(init,b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
+	eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
+	eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Suites .
+	op r5 : -> Version .
+	op r6 : -> Version .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (verM(r1,r3,r2,r6) \in nw(s)) = true .
+	eq (verM(r2,r2,r3,r5) \in nw(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(cKexInit(s,r1,r2,r3,r4,r5,r6),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Suites .
+	op r5 : -> Version .
+	op r6 : -> Version .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (verM(r1,r3,r2,r6) \in nw(s)) = true .
+	eq (verM(r2,r2,r3,r5) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(cKexInit(s,r1,r2,r3,r4,r5,r6),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Suites .
+	op r5 : -> Version .
+	op r6 : -> Version .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (verM(r1,r3,r2,r6) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(cKexInit(s,r1,r2,r3,r4,r5,r6),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Version .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(cVer(s,r1,r2,r3),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> EcPublicK .
+	op r4 : -> PqPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = true .
+	eq (r4 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkHbrInit(s,r1,r2,r3,r4),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> EcPublicK .
+	op r4 : -> PqPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = true .
+	eq (r4 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkHbrInit(s,r1,r2,r3,r4),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> EcPublicK .
+	op r4 : -> PqPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkHbrInit(s,r1,r2,r3,r4),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> PubKey .
+	op r4 : -> EcPublicK .
+	op r5 : -> PqCipher .
+	op r6 : -> Data .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = true .
+	eq (r4 \in knl(s)) = true .
+	eq (r5 \in knl(s)) = true .
+	eq (r6 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> PubKey .
+	op r4 : -> EcPublicK .
+	op r5 : -> PqCipher .
+	op r6 : -> Data .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = true .
+	eq (r4 \in knl(s)) = true .
+	eq (r5 \in knl(s)) = true .
+	eq (r6 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> PubKey .
+	op r4 : -> EcPublicK .
+	op r5 : -> PqCipher .
+	op r6 : -> Data .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = true .
+	eq (r4 \in knl(s)) = true .
+	eq (r5 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> PubKey .
+	op r4 : -> EcPublicK .
+	op r5 : -> PqCipher .
+	op r6 : -> Data .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = true .
+	eq (r4 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> PubKey .
+	op r4 : -> EcPublicK .
+	op r5 : -> PqCipher .
+	op r6 : -> Data .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkKexInit(s,r1,r2,r3),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkKexInit(s,r1,r2,r3),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Version .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkVer(s,r1,r2,r3),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Version .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r3 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(fkVer(s,r1,r2,r3),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g1(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g1(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq b = intru .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r1 = priK(b) .
+	eq (priK(b) \in knl(s)) = true .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = true .
+	eq (priK(b) \in' leakscr(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r1 = priK(b) .
+	eq (priK(b) \in knl(s)) = true .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = true .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (pqSecret(c) \in leakscr(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r1 = priK(b) .
+	eq (priK(b) \in knl(s)) = true .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = true .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (pqSecret(c) \in leakscr(s)) = false .
+	eq (sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true, use inv12 as a lemma
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r1 = priK(b) .
+	eq (priK(b) \in knl(s)) = true .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = true .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (pqSecret(c) \in leakscr(s)) = false .
+	eq (sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) \in knl(s)) = false .
+	red inv12(s,b) implies inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r1 = priK(b) .
+	eq (priK(b) \in knl(s)) = true .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r1 = priK(b) .
+	eq (priK(b) \in knl(s)) = true .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r1 = priK(b) .
+	eq (priK(b) \in knl(s)) = true .
+	eq (r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r1 = priK(b) .
+	eq (priK(b) \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq (r1 = priK(b)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> DataL .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(g2(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Version .
+	op r2 : -> Suites .
+	op r3 : -> PubKey .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gBasic(s,r1,r2,r3),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op r2 : -> PqCipher .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gDecaps(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op r2 : -> PqCipher .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gDecaps(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op r2 : -> PqCipher .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gDecaps(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> EcPublicK .
+	op r2 : -> EcPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gEcKey(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> EcPublicK .
+	op r2 : -> EcPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gEcKey(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> EcPublicK .
+	op r2 : -> EcPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gEcKey(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> EcSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gEcSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> EcSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gEcSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> EcSecretK .
+	op r2 : -> EcPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gEcShare(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> EcSecretK .
+	op r2 : -> EcPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gEcShare(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> EcSecretK .
+	op r2 : -> EcPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gEcShare(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = false .
+	eq b = intru .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = false .
+	eq (b = intru) = false .
+	eq pqSecret(c) = r1 .
+	eq (r1 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = false .
+	eq (b = intru) = false .
+	eq pqSecret(c) = r1 .
+	eq (r1 \in knl(s)) = false .
+	eq (r1 \in leakscr(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = false .
+	eq (b = intru) = false .
+	eq pqSecret(c) = r1 .
+	eq (r1 \in knl(s)) = false .
+	eq (r1 \in leakscr(s)) = false .
+	eq (priK(b) \in' leakscr(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true, use inv13 as a lemma
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = false .
+	eq (b = intru) = false .
+	eq pqSecret(c) = r1 .
+	eq (r1 \in knl(s)) = false .
+	eq (r1 \in leakscr(s)) = false .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) \in knl(s)) = true .
+	red inv13(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = false .
+	eq (b = intru) = false .
+	eq pqSecret(c) = r1 .
+	eq (r1 \in knl(s)) = false .
+	eq (r1 \in leakscr(s)) = false .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in usecret(s)) = false .
+	eq (b = intru) = false .
+	eq (pqSecret(c) = r1) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqSecretK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op r2 : -> PqPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqShare(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op r2 : -> PqPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqShare(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PqSecretK .
+	op r2 : -> PqPublicK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gPqShare(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq b = intru .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = true .
+	eq (priK(b) \in' leakscr(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = true .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (pqSecret(c) \in leakscr(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = true .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (pqSecret(c) \in leakscr(s)) = false .
+	eq priK(r1) = priK(b) .
+	eq (sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true, use inv15 as a lemma
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = true .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (pqSecret(c) \in leakscr(s)) = false .
+	eq priK(r1) = priK(b) .
+	eq (sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) \in knl(s)) = false .
+	red inv15(s,b,r1) implies inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = true .
+	eq (priK(b) \in' leakscr(s)) = false .
+	eq (pqSecret(c) \in leakscr(s)) = false .
+	eq (priK(r1) = priK(b)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = true .
+	eq (pqSecret(c) \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) .
+	eq (h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k'))) \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = true .
+	eq (b = intru) = false .
+	eq (r2 = h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | ecSecret(pk2)) || decaps(c,k')))) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = true .
+	eq (r2 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> PriKeyTime .
+	op r2 : -> DataL .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r1 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(gSign(s,r1,r2),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (priK(r1) \in' leakscr(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(lLtK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (priK(r1) \in' leakscr(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(lLtK(s,r1),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> EcSecretK .
+	op r4 : -> PqSecretK .
+	op r5 : -> Nat .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(lPqSecretK1(s,r1,r2,r3,r4,r5),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> EcSecretK .
+	op r4 : -> PqSecretK .
+	op r5 : -> Nat .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(lPqSecretK1(s,r1,r2,r3,r4,r5),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> PqPublicK .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Data .
+	op r7 : -> Nat .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> PqPublicK .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Data .
+	op r7 : -> Nat .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> PqSecretK .
+	op r11 : -> Nat .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Version .
+	op r4 : -> Version .
+	op r5 : -> Suites .
+	op r6 : -> Suites .
+	op r7 : -> EcSecretK .
+	op r8 : -> PqSecretK .
+	op r9 : -> EcSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
+	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || (r7 | r9) || (r8 & r10))))),r12) \in nw(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> PqSecretK .
+	op r11 : -> Nat .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Version .
+	op r4 : -> Version .
+	op r5 : -> Suites .
+	op r6 : -> Suites .
+	op r7 : -> EcSecretK .
+	op r8 : -> PqSecretK .
+	op r9 : -> EcSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
+	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || (r7 | r9) || (r8 & r10))))),r12) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> PqSecretK .
+	op r11 : -> Nat .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Version .
+	op r4 : -> Version .
+	op r5 : -> Suites .
+	op r6 : -> Suites .
+	op r7 : -> EcSecretK .
+	op r8 : -> PqSecretK .
+	op r9 : -> EcSecretK .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq r3 = intru .
+	eq (kexInitM(intru,intru,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,intru,(r10 || r11),r12) \in nw(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq r3 = intru .
+	eq (kexInitM(intru,intru,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,intru,(r10 || r11),r12) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq r3 = intru .
+	eq (kexInitM(intru,intru,r2,r9) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (r3 = intru) = false .
+	eq c = encapsC(r11,r5) .
+	eq ecSecret(r10) = k .
+	eq pqSecret(r11) = k' .
+	eq ecSecret(pk2) = r4 .
+	eq (r5 \in knl(s)) = true .
+	eq (r5 \in leakscr(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (r3 = intru) = false .
+	eq c = encapsC(r11,r5) .
+	eq ecSecret(r10) = k .
+	eq pqSecret(r11) = k' .
+	eq ecSecret(pk2) = r4 .
+	eq (r5 \in knl(s)) = true .
+	eq (r5 \in leakscr(s)) = false .
+	eq (priK(r3) \in' leakscr(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (r3 = intru) = false .
+	eq c = encapsC(r11,r5) .
+	eq ecSecret(r10) = k .
+	eq pqSecret(r11) = k' .
+	eq ecSecret(pk2) = r4 .
+	eq (r5 \in knl(s)) = true .
+	eq (r5 \in leakscr(s)) = false .
+	eq (priK(r3) \in' leakscr(s)) = false .
+	eq (sign(priK(r3),h((v || v2 || r8 || r9 || pubK(r3) || ecPublic(k) || keygen(k') || pk2 || encapsC(r11,r5) || (k | r4) || (k' & r5)))) \in knl(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true, use inv2 as a lemma
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (r3 = intru) = false .
+	eq c = encapsC(r11,r5) .
+	eq ecSecret(r10) = k .
+	eq pqSecret(r11) = k' .
+	eq ecSecret(pk2) = r4 .
+	eq (r5 \in knl(s)) = true .
+	eq (r5 \in leakscr(s)) = false .
+	eq (priK(r3) \in' leakscr(s)) = false .
+	eq (sign(priK(r3),h((v || v2 || r8 || r9 || pubK(r3) || ecPublic(k) || keygen(k') || pk2 || encapsC(r11,r5) || (k | r4) || (k' & r5)))) \in knl(s)) = false .
+	red inv2(s,r5) implies inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (r3 = intru) = false .
+	eq c = encapsC(r11,r5) .
+	eq ecSecret(r10) = k .
+	eq pqSecret(r11) = k' .
+	eq ecSecret(pk2) = r4 .
+	eq (r5 \in knl(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (r3 = intru) = false .
+	eq c = encapsC(r11,r5) .
+	eq ecSecret(r10) = k .
+	eq pqSecret(r11) = k' .
+	eq (ecSecret(pk2) = r4) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (r3 = intru) = false .
+	eq c = encapsC(r11,r5) .
+	eq ecSecret(r10) = k .
+	eq (pqSecret(r11) = k') = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (r3 = intru) = false .
+	eq c = encapsC(r11,r5) .
+	eq (ecSecret(r10) = k) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq r7 = v2 .
+	eq (r3 = intru) = false .
+	eq (c = encapsC(r11,r5)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq r6 = v .
+	eq (r7 = v2) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq css2 = r9 .
+	eq (r6 = v) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq css = r8 .
+	eq (css2 = r9) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq b = r3 .
+	eq (css = r8) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+	eq (b = r3) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r10 : -> EcPublicK .
+	op r11 : -> PqPublicK .
+	op r12 : -> Nat .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> EcSecretK .
+	op r5 : -> PqSecretK .
+	op r6 : -> Version .
+	op r7 : -> Version .
+	op r8 : -> Suites .
+	op r9 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (r4 \in usecret(s)) = false .
+	eq (r5 \in usecret(s)) = false .
+	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Suites .
+	op r5 : -> Version .
+	op r6 : -> Version .
+	op r7 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = true .
+	eq (verM(r3,r3,r2,r6) \in nw(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Suites .
+	op r5 : -> Version .
+	op r6 : -> Version .
+	op r7 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = true .
+	eq (verM(r3,r3,r2,r6) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Suites .
+	op r5 : -> Version .
+	op r6 : -> Version .
+	op r7 : -> Suites .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Version .
+	op r5 : -> Version .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (verM(r1,r2,r3,r5) \in nw(s)) = true .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sVer(s,r1,r2,r3,r4,r5),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> true
+open INV .
+	op b : -> Prin .
+	op c : -> PqCipher .
+	op css : -> Suites .
+	op css2 : -> Suites .
+	op k : -> EcSecretK .
+	op k' : -> PqSecretK .
+	op pk2 : -> EcPublicK .
+	op r1 : -> Prin .
+	op r2 : -> Prin .
+	op r3 : -> Prin .
+	op r4 : -> Version .
+	op r5 : -> Version .
+	op s : -> Sys .
+	op v : -> Version .
+	op v2 : -> Version .
+	eq (verM(r1,r2,r3,r5) \in nw(s)) = false .
+	red inv10(s,b,v,v2,css,css2,k,k',pk2,c) implies inv10(sVer(s,r1,r2,r3,r4,r5),b,v,v2,css,css2,k,k',pk2,c) .
+close
+
+--> Time taken is 1859ms

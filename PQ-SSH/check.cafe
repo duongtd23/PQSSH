@@ -1,0 +1,27 @@
+open INV .
+  ops s1 s2 s3 s4 s5 s6 s7 : -> Sys .
+  ops a b : -> Prin .
+  ops v v2 : -> Version .
+  ops css css2 : -> Suites .
+  ops k k2 : -> EcSecretK .
+  ops pk2 : -> EcPublicK .
+  ops d sign : -> Data .
+  ops k' k2' : -> PqSecretK .
+  ops c : -> PqCipher .
+
+  eq (k = k2) = false .
+  eq (k' = k2') = false .
+
+  eq s1 = cVer(init,a,b,v) .
+  eq s2 = sVer(s1,a,a,b,v2,v) .
+  eq s3 = cKexInit(s2,b,a,b,css,v,v2) .
+  eq s4 = sKexInit(s3,a,a,b,css2,v,v2,css) .
+  eq s5 = cHbrInit(s4,b,a,b,k,k',v,v2,css,css2) .
+  eq s6 = sHbrReply(s5,a,a,b,k2,k2',v,v2,css,css2,ecPublic(k),keygen(k'),0) .
+
+  eq pk2 = ecPublic(k2) .
+  eq c = encapsC(keygen(k'),k2') .
+  eq sign = sign(priK(b), h(v || v2 || css || css2 || 
+    pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || (k | k2) || (k' & k2'))) .
+  red che(s6,a,b,v,v2,css,css2,k,k',pk2,c,sign,0,1) .
+close

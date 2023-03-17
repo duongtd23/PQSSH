@@ -1,0 +1,15 @@
+ipsgopen INV .
+  -- inv inv12(S:Sys,A:Prin) .
+  generate inv16(S:Sys,A:Prin,B:Prin,?P:Prin,V:Version,V2:Version,
+    CSs:Suites, CSs2:Suites, K:EcSecretK, K':PqSecretK,
+    PK2:EcPublicK,C:PqCipher,?M:Nat)
+  induction on S:Sys .
+close
+set-output v5/inv16.cafe .
+:save-proof .
+
+eof
+
+load v5/pqssh-v5.cafe .
+load v5/invariants.cafe .
+load v5/input16.cafe .

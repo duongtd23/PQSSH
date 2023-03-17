@@ -1,0 +1,12 @@
+-- load SDS/sds.cafe .
+ipsgopen INV .
+  -- inv inv9(S:Sys,B2:Prin,A:Prin,B:Prin,K:Secret,N:Nat) .
+  -- inv inv14(S:Sys,A:Prin,B:Prin,K:Secret,N:Nat,?T:Nat) .
+  generate auth(S:Sys,B2:Prin,A:Prin,B:Prin,K:Secret,N:Nat,N2:Nat,?T:Nat) 
+    induction on S:Sys .
+close
+set-output SDS/auth.cafe .
+:save-proof .
+
+eof
+load SDS/input-auth.cafe .

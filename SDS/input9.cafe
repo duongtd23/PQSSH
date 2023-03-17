@@ -1,0 +1,11 @@
+-- load SDS/sds.cafe .
+ipsgopen INV .
+  inv inv10(S:Sys,A:Prin,B:Prin,K:Secret) .
+  inv inv11(S:Sys,A2:Prin,A:Prin,B:Prin,K:Secret,N:Nat) .
+  generate inv9(S:Sys,B2:Prin,A:Prin,B:Prin,K:Secret,N:Nat) induction on S:Sys .
+close
+set-output SDS/inv9.cafe .
+:save-proof .
+
+eof
+load SDS/input9.cafe .
