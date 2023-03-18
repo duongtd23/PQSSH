@@ -10,4 +10,4 @@ set-output SDS/inv13.cafe .
 :save-proof .
 
 eof
-load SDS/input13.cafe .
+load SDS/inputs/input13.cafe .

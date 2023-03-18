@@ -6,11 +6,9 @@ mod* PRINCIPAL {
   op intru : -> Prin {constr}
   op priK : Prin -> PriKey {constr}
   op pubK : Prin -> PubKey {constr}
-  op priK : PubKey -> PriKey
   vars A B : Prin 
   eq (priK(A) = priK(B)) = (A = B) .
   eq (pubK(A) = pubK(B)) = (A = B) .
-  eq priK(pubK(A)) = priK(A) .
 }
 mod! SECRET {
   [Secret]

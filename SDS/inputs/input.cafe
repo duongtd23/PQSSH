@@ -23,4 +23,4 @@ set-output SDS/proof-scores.cafe .
 :save-proof .
 
 eof
-load SDS/input.cafe .
+load SDS/inputs/input.cafe .

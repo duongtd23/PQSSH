@@ -9,4 +9,4 @@ set-output SDS/auth.cafe .
 :save-proof .
 
 eof
-load SDS/input-auth.cafe .
+load SDS/inputs/input-auth.cafe .
