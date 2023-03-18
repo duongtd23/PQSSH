@@ -3,11 +3,11 @@ ipsgopen INV .
   generate inv9(S:Sys,A2:Prin,A:Prin,B:Prin,PK:EcPublicK,PK':PqPublicK,N:Nat)
   induction on S:Sys .
 close
-set-output v5/inv9.cafe .
+set-output PQ-SSH/inv9.cafe .
 :save-proof .
 
 eof
 
-load v5/pqssh-v5.cafe .
-load v5/invariants.cafe .
-load v5/input9.cafe .
+load PQ-SSH/pqssh.cafe .
+load PQ-SSH/invariants.cafe .
+load PQ-SSH/inputs/input9.cafe .

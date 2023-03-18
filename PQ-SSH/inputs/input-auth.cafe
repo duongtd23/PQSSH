@@ -7,11 +7,11 @@ ipsgopen INV .
     PK2:EcPublicK,C:PqCipher,SIGN:Data,N:Nat,N2:Nat,?M:Nat)
   induction on S:Sys .
 close
-set-output v5/auth.cafe .
+set-output PQ-SSH/auth.cafe .
 :save-proof .
 
 eof
 
-load v5/pqssh-v5.cafe .
-load v5/invariants.cafe .
-load v5/input-auth.cafe .
+load PQ-SSH/pqssh.cafe .
+load PQ-SSH/invariants.cafe .
+load PQ-SSH/inputs/input-auth.cafe .

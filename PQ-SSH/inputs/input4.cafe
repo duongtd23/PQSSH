@@ -4,11 +4,11 @@ ipsgopen INV .
   generate inv4(S:Sys,A:Prin,B:Prin,PK:EcPublicK,PK':PqPublicK,N:Nat)
   induction on S:Sys .
 close
-set-output v5/inv4.cafe .
+set-output PQ-SSH/inv4.cafe .
 :save-proof .
 
 eof
 
-load v5/pqssh-v5.cafe .
-load v5/invariants.cafe .
-load v5/input4.cafe .
+load PQ-SSH/pqssh.cafe .
+load PQ-SSH/invariants.cafe .
+load PQ-SSH/inputs/input4.cafe .

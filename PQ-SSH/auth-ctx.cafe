@@ -1,3 +1,5 @@
+-- a counterexample of the predicate auth (specifying the strong-authentication property).
+
 open INV .
 	ops a b a2 b2 : -> Prin .
 	op c : -> PqCipher .
@@ -60,6 +62,3 @@ open INV .
 -- but there does not exist the message hbrRepM(b,b,a,...)
   red hbrRepM(b,b,a2, pubK(b) || pk2 || c || sign, 2) \in nw(s13) .
 close
-
-eof
-load v5/auth-ctx.cafe .

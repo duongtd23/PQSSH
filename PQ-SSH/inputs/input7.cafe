@@ -3,11 +3,11 @@ ipsgopen INV .
   generate inv7(S:Sys, C:PqCipher)
   induction on S:Sys .
 close
-set-output v5/inv7.cafe .
+set-output PQ-SSH/inv7.cafe .
 :save-proof .
 
 eof
 
-load v5/pqssh-v5.cafe .
-load v5/invariants.cafe .
-load v5/input7.cafe .
+load PQ-SSH/pqssh.cafe .
+load PQ-SSH/invariants.cafe .
+load PQ-SSH/inputs/input7.cafe .

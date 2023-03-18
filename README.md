@@ -1,9 +1,9 @@
 ## Formal analysis of Hybrid Post-Quantum SSH Transport Layer Protocol
 In this repository, you can find:
 
-1. `SDS`: the SDS protocol specification in CafeOBJ, the proof scores to verify the *key secrecy* property, and the proof of the *authentication* property based on the verification method for invariant properties with existential quantifier variables.
+1. `SDS`: the SDS protocol specification in CafeOBJ, the proof scores to verify the *key secrecy* property, and the proof of the *authentication* property based on the verification method for invariant properties with existential quantifier variables. Please check README in the folder.
 
-2. `PQ-SSH`: the PQ SSH protocol specification and the proofs verifying the protocol enjoy four desired properties.
+2. `PQ-SSH`: the PQ SSH protocol specification and the proofs verifying the protocol enjoy four desired properties. Please check README in the folder.
 
 
 ## Tools installation

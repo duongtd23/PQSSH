@@ -1,4 +1,6 @@
---> false
+-- manually resolving some sub-cases in the generated proof of auth' (specifying the weak-authentication property)
+
+-- use a lemma
 open INV .
 	op ?m : -> Nat .
 	op ?p : -> Prin .
@@ -49,7 +51,7 @@ open INV .
 	implies auth'(s,b2,a,b,?p,v,v2,css,css2,k,k',pk2,c,sign,n,n2,?m) implies auth'(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b2,a,b,?p,v,v2,css,css2,k,k',pk2,c,sign,n,n2,?m) .
 close
 
---> false
+-- use a lemma
 open INV .
 	op ?m : -> Nat .
 	op ?p : -> Prin .
@@ -102,7 +104,7 @@ open INV .
   implies auth'(s,b2,a,b,?p,v,v2,css,css2,k,k',pk2,c,sign,n,n2,?m) implies auth'(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,?p,v,v2,css,css2,k,k',pk2,c,sign,n,n2,?m) .
 close
 
---> false
+-- choose a suitable witness
 open INV .
 	op ?m : -> Nat .
 	op ?p : -> Prin .
@@ -166,7 +168,7 @@ open INV .
 	red auth'(s,b2,a,b,?p,v,v2,css,css2,k,k',pk2,c,sign,n,n2,?m) implies auth'(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,?p,v,v2,css,css2,k,k',pk2,c,sign,n,n2,n2) .
 close
 
---> false
+-- choose a suitable witness
 open INV .
 	op ?m : -> Nat .
 	op ?p : -> Prin .

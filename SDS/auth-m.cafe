@@ -1,4 +1,6 @@
---> false
+-- manually resolving some sub-cases in the generated proof of auth. 
+
+-- use a lemma
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -24,11 +26,12 @@ open INV .
 	eq (msg2(r1,r1,r2,senc(k,(r2 || r1)),?t) \in nw(s)) = false .
 	eq (msg1(r2,r2,r1,aenc(pubK(r1),aenc(priK(r2),(r1 || k))),n) \in nw(s)) = true .
 	
-  red inv14(s,a,b,k,n,?t) .
+  red inv14(s,a,b,k,n,?t) 
+  implies auth(s,b2,a,b,k,n,n2,?t) implies auth(fkmsg2(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
   -- red auth(s,b2,a,b,k,n,n2,?t) implies auth(fkmsg2(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
 close
 
---> false
+-- use a lemma
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -51,11 +54,12 @@ open INV .
 	eq (msg2(b2,r2,r1,senc(r3,(r1 || r2)),n2) \in nw(s)) = true .
 	eq (msg2(r2,r2,r1,senc(r3,(r1 || r2)),?t) \in nw(s)) = false .
 	eq (msg1(r1,r1,r2,aenc(pubK(r2),aenc(priK(r1),(r2 || r3))),n) \in nw(s)) = false .
-	red inv9(s,b2,r1,r2,k,n2) .
+	red inv9(s,b2,r1,r2,k,n2) 
+	implies auth(s,b2,a,b,k,n,n2,?t) implies auth(send1(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
   -- red auth(s,b2,a,b,k,n,n2,?t) implies auth(send1(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
 close
 
---> false
+-- choose a suitable witness
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .

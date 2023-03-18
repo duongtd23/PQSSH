@@ -8,7 +8,7 @@ open INV .
 	op s : -> Sys .
 	op sign : -> Data .
 	ops v v2 : -> Version .
-  ops n n2 : -> Nat .
+    ops n n2 : -> Nat .
 	red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2)
 	  implies fwdSe(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close

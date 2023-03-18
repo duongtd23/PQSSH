@@ -1,0 +1,12 @@
+ipsgopen INV .
+  generate inv14(S:Sys,A:Prin)
+  induction on S:Sys .
+close
+set-output PQ-SSH/inv14.cafe .
+:save-proof .
+
+eof
+
+load PQ-SSH/pqssh.cafe .
+load PQ-SSH/invariants.cafe .
+load PQ-SSH/inputs/input14.cafe .

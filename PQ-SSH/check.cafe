@@ -1,3 +1,5 @@
+-- showing that two principals can successfully negotiage a shared secret.
+
 open INV .
   ops s1 s2 s3 s4 s5 s6 s7 : -> Sys .
   ops a b : -> Prin .

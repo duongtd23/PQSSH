@@ -1,4 +1,6 @@
---> false
+-- manually resolving some sub-cases in the generated proof of inv14. 
+
+-- use a lemma
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -20,11 +22,12 @@ open INV .
 	eq (senc(k,(a || b)) \in knl(s)) = false .
 	eq (msg2(b,b,a,senc(k,(a || b)),?t) \in nw(s)) = false .
 	eq (msg1(a,a,b,aenc(pubK(b),aenc(priK(a),(b || k))),n) \in nw(s)) = true .
-	red keySe(s,a,b,k,n) .
+	red keySe(s,a,b,k,n) 
+	implies inv14(s,a,b,k,n,?t) implies inv14(g2(s,r1,r2),a,b,k,n,?t) .
   -- red inv14(s,a,b,k,n,?t) implies inv14(g2(s,r1,r2),a,b,k,n,?t) .
 close
 
---> false
+-- use a lemma
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -43,11 +46,12 @@ open INV .
 	eq (senc(k,(a || b)) \in knl(s)) = false .
 	eq (msg2(b,b,a,senc(k,(a || b)),?t) \in nw(s)) = false .
 	eq (msg1(a,a,b,aenc(pubK(b),aenc(priK(a),(b || k))),n) \in nw(s)) = true .
-	red inv5(s,r1) .
+	red inv5(s,r1)
+	implies inv14(s,a,b,k,n,?t) implies inv14(g21(s,r1,r2),a,b,k,n,?t) .
   -- red inv14(s,a,b,k,n,?t) implies inv14(g21(s,r1,r2),a,b,k,n,?t) .
 close
 
---> false
+-- use a lemma
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -65,11 +69,12 @@ open INV .
 	eq (senc(k,(a || b)) \in knl(s)) = false .
 	eq (msg2(b,b,a,senc(k,(a || b)),?t) \in nw(s)) = false .
 	eq (msg1(a,a,b,aenc(pubK(b),aenc(priK(a),(b || k))),n) \in nw(s)) = true .
-  red inv4(s,r1,r2,k,a || b) .
+  red inv4(s,r1,r2,k,a || b) 
+  implies inv14(s,a,b,k,n,?t) implies inv14(g22(s,r1,r2),a,b,k,n,?t) .
   -- red inv14(s,a,b,k,n,?t) implies inv14(g22(s,r1,r2),a,b,k,n,?t) .
 close
 
---> false
+-- use a lemma
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -87,11 +92,12 @@ open INV .
 	eq (senc(k,(a || b)) \in knl(s)) = false .
 	eq (msg2(b,b,a,senc(k,(a || b)),?t) \in nw(s)) = false .
 	eq (msg1(a,a,b,aenc(pubK(b),aenc(priK(a),(b || k))),n) \in nw(s)) = true .
-  red inv7(s,r1,r2) .
+  red inv7(s,r1,r2) 
+  implies inv14(s,a,b,k,n,?t) implies inv14(g23(s,r1,r2),a,b,k,n,?t) .
 	-- red inv14(s,a,b,k,n,?t) implies inv14(g23(s,r1,r2),a,b,k,n,?t) .
 close
 
---> false
+-- use a lemma
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -112,11 +118,12 @@ open INV .
 	eq (senc(r3,(r1 || r2)) \in knl(s)) = true .
 	eq (msg2(r2,r2,r1,senc(r3,(r1 || r2)),?t) \in nw(s)) = false .
 	eq (msg1(r1,r1,r2,aenc(pubK(r2),aenc(priK(r1),(r2 || r3))),n) \in nw(s)) = false .
-	red inv10(s,r1,r2,r3) .
+	red inv10(s,r1,r2,r3) 
+	implies inv14(s,a,b,k,n,?t) implies inv14(send1(s,r1,r2,r3),a,b,k,n,?t) .
   -- red inv14(s,a,b,k,n,?t) implies inv14(send1(s,r1,r2,r3),a,b,k,n,?t) .
 close
 
---> false
+-- choose a suitable witness
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .

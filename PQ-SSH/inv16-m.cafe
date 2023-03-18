@@ -1,4 +1,6 @@
---> false
+-- manually resolving some sub-cases in the generated proof of inv16. 
+
+-- use a lemma
 open INV .
 	op ?m : -> Nat .
 	op ?p : -> Prin .
@@ -33,7 +35,7 @@ open INV .
   implies inv16(s,a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) implies inv16(g2(s,r1,r2),a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) .
 close
 
---> false
+-- use a lemma
 open INV .
 	op ?m : -> Nat .
 	op ?p : -> Prin .
@@ -67,7 +69,7 @@ open INV .
 	implies inv16(s,a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) implies inv16(gSign(s,r1,r2),a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) .
 close
 
---> false
+-- choose a suitable witness
 open INV .
 	op ?m : -> Nat .
 	op ?p : -> Prin .
@@ -122,7 +124,7 @@ open INV .
 	red inv16(s,a,b,?p,v,v2,css,css2,k,k',pk2,c,?m) implies inv16(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a,b,?p,v,v2,css,css2,k,k',pk2,c,time(s)) .
 close
 
---> false
+-- choose a suitable witness
 open INV .
 	op ?m : -> Nat .
 	op ?p : -> Prin .
