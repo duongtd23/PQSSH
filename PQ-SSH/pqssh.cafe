@@ -68,11 +68,9 @@ mod* PRINCIPAL {
   op intru : -> Prin {constr}
   op priK : Prin -> PriKey {constr}
   op pubK : Prin -> PubKey {constr}
-  op priK : PubKey -> PriKey
   vars A B : Prin 
   eq (priK(A) = priK(B)) = (A = B) .
   eq (pubK(A) = pubK(B)) = (A = B) .
-  eq priK(pubK(A)) = priK(A) .
 
 -- for the forward secrecy property
   op pkNPair : PriKey Nat -> PriKeyTime {constr}
@@ -303,9 +301,8 @@ mod! ENCRYPTION {
   vars KE KE1 KE2 D D2 AAD SIGN : DataL
   vars LPK : PubKey
 
-  eq verify(pubK(A), D, sign(priK(A), D)) = true .
-  eq verify(LPK, D, SIGN) = 
-    (SIGN = sign(priK(LPK),D)) .
+  -- eq verify(pubK(A), D, sign(priK(A), D)) = true .
+  eq verify(pubK(A), D, SIGN) = (SIGN = sign(priK(A),D)) .
 
   eq (h(D) = h(D2)) = (D = D2) .
   eq (sign(KE,D) = sign(KE2,D2)) = (KE = KE2 and D = D2) .

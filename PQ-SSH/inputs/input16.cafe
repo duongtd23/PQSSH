@@ -1,6 +1,7 @@
 ipsgopen INV .
-  -- inv inv12(S:Sys,A:Prin) .
-  generate inv16(S:Sys,A:Prin,B:Prin,?P:Prin,V:Version,V2:Version,
+  inv inv12(S:Sys,A:Prin) .
+  inv inv15(S:Sys,A:Prin,LSKT:PriKeyTime) .
+  generate inv16(S:Sys,B:Prin,?P:Prin,V:Version,V2:Version,
     CSs:Suites, CSs2:Suites, K:EcSecretK, K':PqSecretK,
     PK2:EcPublicK,C:PqCipher,?M:Nat)
   induction on S:Sys .

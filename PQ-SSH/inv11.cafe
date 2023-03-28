@@ -1744,4 +1744,4 @@ open INV .
 	red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sVer(s,r1,r2,r3,r4,r5),b2,a,b,pk,c,sign,n) .
 close
 
---> Time taken is 1276ms
+--> Time taken is 1374ms

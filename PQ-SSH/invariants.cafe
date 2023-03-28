@@ -68,25 +68,11 @@ mod INV {
         (K3 | K4) || (K3' & K4')) 
     implies (K = K3 and K' = K3' and K2 = K4 and K2' = K4')) .
 
--- not invariant, since there may be a mismatch A <-> A'
-  op auth : Sys Prin Prin Prin Version Version Suites Suites 
-      EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat Nat -> Bool
-  eq auth(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2,?M) =
-    ((not(A = intru or B = intru) and 
-      hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and
-      hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
-      verify(pubK(B), h(V || V2 || CSs || CSs2 || 
-          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          ecShare(PK2,K) || decaps(C,K')),
-      SIGN))
-    implies
-      hbrRepM(B,B,A, pubK(B) || PK2 || C || SIGN, ?M) \in nw(S)) .
-
 -- an invariant with existential quantifier (?P)
--- 11+16
 -- if client A receives a valid hbrRepM message apparently sent from server S,
 -- then that message is really created by S,
 -- but S might intend to send it to another client ?P instead of A.
+-- 16+17
   op auth' : Sys Prin Prin Prin Prin Version Version Suites Suites 
       EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat Nat -> Bool
   eq auth'(S,B2,A,B,?P,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2,?M) =
@@ -239,14 +225,14 @@ mod INV {
     implies priK(LSKT) \in' leakscr(S)) .
 
 -- an invariant with existential quantifier (?P)
--- 12
 -- if the intruder has learned a valid signature,
 -- then there must exist a valid hbrRepM in the network
 -- created by S, where its signature is exactly the signature learned by the intruder
-  op inv16 : Sys Prin Prin Prin Version Version Suites Suites 
+-- 12+15
+  op inv16 : Sys Prin Prin Version Version Suites Suites 
       EcSecretK PqSecretK EcPublicK PqCipher Nat -> Bool
-  eq inv16(S,A,B,?P,V,V2,CSs,CSs2,K,K',PK2,C,?M) =
-    ((not(A = intru or B = intru) and 
+  eq inv16(S,B,?P,V,V2,CSs,CSs2,K,K',PK2,C,?M) =
+    ((not(B = intru) and 
       not(decaps(C,K') \in leakscr(S)) and
       not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
       not(priK(B) \in' leakscr(S)) and
@@ -259,16 +245,49 @@ mod INV {
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
           (K | ecSecret(PK2)) || decaps(C,K'))),?M) \in nw(S)) .
 
+-- 9+18
   op inv17 : Sys Prin Prin Prin Version Version Suites Suites 
       EcSecretK PqSecretK EcPublicK PqCipher Nat -> Bool
   eq inv17(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,N) =
-    (hbrRepM(B2,B,A, pubK(B) || PK2 || C || 
+    (not(B = intru) and
+      not(priK(B) \in' leakscr(S)) and
+      hbrRepM(B2,B,A, pubK(B) || PK2 || C || 
       sign(priK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
           (K | ecSecret(PK2)) || decaps(C,K'))), N) \in nw(S)
     implies K' \in usecret(S)) .
 
--- two principals can successfully complete the protocol execution
+-- 9+12+15
+  op inv18 : Sys Prin Version Version Suites Suites 
+      EcSecretK PqSecretK EcPublicK PqCipher -> Bool
+  eq inv18(S,B,V,V2,CSs,CSs2,K,K',PK2,C) =
+    (not(B = intru) and
+      not(priK(B) \in' leakscr(S)) and
+      sign(priK(B), h(V || V2 || CSs || CSs2 || 
+          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
+          (K | ecSecret(PK2)) || decaps(C,K'))) \in knl(S))
+    implies K' \in usecret(S) .
+
+** **************
+** others
+** **************
+
+-- the strong version of the authentication property,
+-- but this is not invariant, since there may be a mismatch A <-> A'
+  op auth : Sys Prin Prin Prin Version Version Suites Suites 
+      EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat Nat -> Bool
+  eq auth(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2,?M) =
+    ((not(A = intru or B = intru) and 
+      hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and
+      hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
+      verify(pubK(B), h(V || V2 || CSs || CSs2 || 
+          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
+          ecShare(PK2,K) || decaps(C,K')),
+      SIGN))
+    implies
+      hbrRepM(B,B,A, pubK(B) || PK2 || C || SIGN, ?M) \in nw(S)) .
+
+-- to show that two principals can successfully complete a protocol execution
   op che : Sys Prin Prin Version Version Suites Suites 
     EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq che(S,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
@@ -283,7 +302,7 @@ mod INV {
         ecShare(PK2,K) || decaps(C,K')),
       SIGN)) .
 
--- the intruder can learn the ECDH shared key between two principals
+-- to show that the intruder can learn the ECDH shared key between two principals
   op learnEC : Sys Prin Prin 
     EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq learnEC(S,A,B,K,K',PK2,C,SIGN,N,N2) =
@@ -291,7 +310,7 @@ mod INV {
      hbrRepM(B,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
      ecShare(PK2,K) \in knl(S)) .
 
--- if the private host key of a server is revealed,
+-- to show that if the private host key of a server is revealed,
 -- the intruder can perform an MITM attack
   op learnSS : Sys Prin Prin Prin Version Version Suites Suites
     EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
