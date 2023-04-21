@@ -8,10 +8,15 @@ open INV .
   ops css css2 : -> Suites .
   ops c : -> PqCipher .
 
+-- some conditions
   eq (a = intru) = false .
   eq (b = intru) = false .
   eq (k = k2) = false .
   eq (k' = k2') = false .
+
+-- macros
+  eq pk2 = ecPublic(k2) .
+  eq c = encapsC(keygen(k'),k2') .
 
   eq s1 = cVer(init,a,b,v) .
   eq s2 = gBasic(s1,v2,css2,pubK(b)) .
@@ -21,8 +26,6 @@ open INV .
   eq s6 = cHbrInit(s5,intru,a,b,k,k',v,v2,css,css2) .
   eq s7 = gEcSecretK(s6,k2) .
   eq s8 = gPqSecretK(s7,k2') .
-  eq pk2 = ecPublic(k2) .
-  eq c = encapsC(keygen(k'),k2') .
   eq s9 = gPqShare(s8,k2',keygen(k')) .
   eq s10 = fkHbrReply(s9,b,a,pk2,c) .
   eq s11 = gEcShare(s10,k2,ecPublic(k)) .
