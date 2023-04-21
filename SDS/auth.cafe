@@ -141,7 +141,7 @@ open INV .
 	red auth(s,b2,a,b,k,n,n2,?t) implies auth(fkmsg2(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
 close
 
---> false
+--> true, use inv14 as a lemma
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -166,7 +166,7 @@ open INV .
 	eq (msg2(intru,r1,r2,senc(k,(r2 || r1)),n2) \in nw(s)) = false .
 	eq (msg2(r1,r1,r2,senc(k,(r2 || r1)),?t) \in nw(s)) = false .
 	eq (msg1(r2,r2,r1,aenc(pubK(r1),aenc(priK(r2),(r1 || k))),n) \in nw(s)) = true .
-	red auth(s,b2,a,b,k,n,n2,?t) implies auth(fkmsg2(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
+	red inv14(s,r2,r1,k,n,?t) implies auth(s,b2,a,b,k,n,n2,?t) implies auth(fkmsg2(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
 close
 
 --> true
@@ -718,7 +718,7 @@ open INV .
 	red auth(s,b2,a,b,k,n,n2,?t) implies auth(send1(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
 close
 
---> false
+--> true, use inv9 as a lemma
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -741,7 +741,7 @@ open INV .
 	eq (msg2(b2,r2,r1,senc(r3,(r1 || r2)),n2) \in nw(s)) = true .
 	eq (msg2(r2,r2,r1,senc(r3,(r1 || r2)),?t) \in nw(s)) = false .
 	eq (msg1(r1,r1,r2,aenc(pubK(r2),aenc(priK(r1),(r2 || r3))),n) \in nw(s)) = false .
-	red auth(s,b2,a,b,k,n,n2,?t) implies auth(send1(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
+	red inv9(s,b2,r1,r2,r3,n2) implies auth(s,b2,a,b,k,n,n2,?t) implies auth(send1(s,r1,r2,r3),b2,a,b,k,n,n2,?t) .
 close
 
 --> true
@@ -1062,7 +1062,7 @@ open INV .
 	red auth(s,b2,a,b,k,n,n2,?t) implies auth(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n,n2,?t) .
 close
 
---> false
+--> true, the witness is n2
 open INV .
 	op ?t : -> Nat .
 	op a : -> Prin .
@@ -1093,7 +1093,7 @@ open INV .
 	eq (msg2(r3,r3,r2,senc(r7,(r2 || r3)),?t) \in nw(s)) = false .
 	eq (msg2(r3,r3,r2,senc(r7,(r2 || r3)),n2) \in nw(s)) = false .
 	eq (msg1(r2,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),n) \in nw(s)) = true .
-	red auth(s,b2,a,b,k,n,n2,?t) implies auth(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n,n2,?t) .
+	red auth(s,b2,a,b,k,n,n2,?t) implies auth(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n,n2,n2) .
 close
 
 --> true
@@ -1328,4 +1328,4 @@ open INV .
 	red auth(s,b2,a,b,k,n,n2,?t) implies auth(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n,n2,?t) .
 close
 
---> Time taken is 421ms
+--> Time taken is 614ms
