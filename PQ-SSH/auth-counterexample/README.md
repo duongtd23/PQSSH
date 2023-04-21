@@ -1,0 +1,1 @@
+### Counterexample of `auth` - the strong authentication property.

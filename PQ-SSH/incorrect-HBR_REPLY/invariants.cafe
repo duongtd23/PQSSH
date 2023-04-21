@@ -1,0 +1,21 @@
+mod INV {
+  pr(PQSSH)
+  var S : Sys
+  vars A B A2 B2 : Prin 
+  vars K K2 : EcSecretK
+  vars PK PK2 : EcPublicK
+  vars K' K2' : PqSecretK
+  var C : PqCipher
+  vars N N2 : Nat 
+
+  op keySe : Sys Prin Prin Prin 
+      EcSecretK PqSecretK EcPublicK PqCipher Nat Nat -> Bool
+  eq keySe(S,B2,A,B,K,K',PK2,C,N,N2) =
+    ((not(A = intru or B = intru) and 
+      hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and
+      hbrRepM(B2,B,A, PK2 || C, N2) \in nw(S) and
+      not(decaps(C,K') \in leakscr(S)) and
+      not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
+      not(priK(B) \in' leakscr(S)))
+    implies not(ecShare(PK2,K) || decaps(C,K') \in knl(S))) .
+}

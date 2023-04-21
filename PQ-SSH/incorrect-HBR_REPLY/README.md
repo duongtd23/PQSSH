@@ -1,0 +1,2 @@
+This is the revised CafeOBJ specification of the protocol, in which the HBR_REPLY message no longer contains the server public host key and the signature. 
+The revised specification is in the file `i-pqssh.cafe`, while the counterexample of `keySe` is in the file `keySe-ctx.cafe`.

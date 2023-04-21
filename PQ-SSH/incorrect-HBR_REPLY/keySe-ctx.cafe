@@ -1,0 +1,31 @@
+open INV .
+  ops s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 : -> Sys .
+  ops a b : -> Prin .
+  ops k k2 : -> EcSecretK .
+  ops pk2 : -> EcPublicK .
+  ops k' k2' : -> PqSecretK .
+  ops v v2 : -> Version .
+  ops css css2 : -> Suites .
+  ops c : -> PqCipher .
+
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq (k = k2) = false .
+  eq (k' = k2') = false .
+
+  eq s1 = cVer(init,a,b,v) .
+  eq s2 = gBasic(s1,v2,css2,pubK(b)) .
+  eq s3 = fkVer(s2,b,a,v2) .
+  eq s4 = cKexInit(s3,intru,a,b,css,v,v2) .
+  eq s5 = fkKexInit(s4,b,a,css2) .
+  eq s6 = cHbrInit(s5,intru,a,b,k,k',v,v2,css,css2) .
+  eq s7 = gEcSecretK(s6,k2) .
+  eq s8 = gPqSecretK(s7,k2') .
+  eq pk2 = ecPublic(k2) .
+  eq c = encapsC(keygen(k'),k2') .
+  eq s9 = gPqShare(s8,k2',keygen(k')) .
+  eq s10 = fkHbrReply(s9,b,a,pk2,c) .
+  eq s11 = gEcShare(s10,k2,ecPublic(k)) .
+
+  red keySe(s11,intru,a,b,k,k',pk2,c,0,1) .
+close
