@@ -36,4 +36,4 @@ eq auth(S,B2,A,B,K,N,N2,?T) =
 
 where ?T indicates that this variable is existential quantifier. This ?-symbol prefix is not mandatory from a syntactic point of view, but it helps to distinguish between existential quantifier variables and universal quantifier ones, such as A and N. 
 To verify this property, we use "the proof method for invariant properties with existential quantifier variables".
-Six more lemmas are required to complete the proof of `auth`, namely `inv9`,...,`inv14`. The proofs of them are saved in files `inv9`,...,`inv14`. Human users are required to resolve some sub-cases in the generated proofs of `auth` and `inv14`, which are saved in files `auth-m.cafe` and `inv14-m.cafe`.
+Six more lemmas are required to complete the proof of `auth`, namely `inv9`,...,`inv14`. The proofs of them are saved in files `inv9`,...,`inv14`.
