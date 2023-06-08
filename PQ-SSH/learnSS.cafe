@@ -1,6 +1,5 @@
--- showing that the intruder can learn a shared secret if the private host key of the server is compromised
 open INV .
-  ops s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 : -> Sys .
+  ops s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 s15 : -> Sys .
   ops a b b2 : -> Prin .
   ops v v2 : -> Version .
   ops css css2 : -> Suites .
@@ -18,7 +17,7 @@ open INV .
   eq c = encapsC(keygen(k'), k2') .
   eq dl = v || v2 || css || css2 || pubK(b) || 
     ecPublic(k) || keygen(k') || ecPublic(k2) || c || 
-    (k | k2) || (k' & k2') .
+    h((k | k2) || (k' & k2')) .
 
   eq s1 = lLtK(init,b) .
   eq s2 = cVer(s1,a,b,v) .
@@ -31,11 +30,13 @@ open INV .
   eq s9 = gPqSecretK(s8,k2') .
   eq s10 = gEcShare(s9,k2,ecPublic(k)) .
   eq s11 = gPqShare(s10,k2',keygen(k')) .
-  eq s12 = g1(s11,dl) .
-  eq s13 = gSign(s12,pkNPair(priK(b), 0), h(dl)) .
-  eq s14 = fkHbrReply(s13, b, a, 
+  eq s12 = g1(s11,(k | k2) || (k' & k2')) .
+
+  eq s13 = g1(s12,dl) .
+  eq s14 = gSign(s13,pkNPair(priK(b), 0), h(dl)) .
+  eq s15 = fkHbrReply(s14, b, a, 
     pubK(b), ecPublic(k2), c, sign(priK(b), h(dl))) .
 
-  red learnSS(s14,intru,a,b,v,v2,css,css2,k,k',
+  red learnSS(s15,intru,a,b,v,v2,css,css2,k,k',
     ecPublic(k2), c, sign(priK(b), h(dl)), 1, 2) .
 close

@@ -1,1370 +1,1370 @@
 --> true
 open INV .
-	op a : -> Prin .
-	op s : -> Sys .
-	red inv14(init,a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = true .
-	red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = true .
-	red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
-	eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
-	eq a = intru .
-	red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
-	eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
-	red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
-	eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
-	red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
-	eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = false .
-	red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
+  op a : -> Prin .
+  op s : -> Sys .
+  red inv14(init,a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = true .
+  red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = true .
+  red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
+  eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
+  eq a = intru .
+  red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
+  eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
+  red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
+  eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
+  red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
+  eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = false .
+  red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
 close
 
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
-	eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
-close
-
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
+  eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),a) .
+close
+
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Suites .
-	op r5 : -> Version .
-	op r6 : -> Version .
-	op s : -> Sys .
-	eq (verM(r1,r3,r2,r6) \in nw(s)) = true .
-	eq (verM(r2,r2,r3,r5) \in nw(s)) = true .
-	red inv14(s,a) implies inv14(cKexInit(s,r1,r2,r3,r4,r5,r6),a) .
-close
-
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op s : -> Sys .
+  eq (verM(r1,r3,r2,r6) \in nw(s)) = true .
+  eq (verM(r2,r2,r3,r5) \in nw(s)) = true .
+  red inv14(s,a) implies inv14(cKexInit(s,r1,r2,r3,r4,r5,r6),a) .
+close
+
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Suites .
-	op r5 : -> Version .
-	op r6 : -> Version .
-	op s : -> Sys .
-	eq (verM(r1,r3,r2,r6) \in nw(s)) = true .
-	eq (verM(r2,r2,r3,r5) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(cKexInit(s,r1,r2,r3,r4,r5,r6),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op s : -> Sys .
+  eq (verM(r1,r3,r2,r6) \in nw(s)) = true .
+  eq (verM(r2,r2,r3,r5) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(cKexInit(s,r1,r2,r3,r4,r5,r6),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Suites .
-	op r5 : -> Version .
-	op r6 : -> Version .
-	op s : -> Sys .
-	eq (verM(r1,r3,r2,r6) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(cKexInit(s,r1,r2,r3,r4,r5,r6),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op s : -> Sys .
+  eq (verM(r1,r3,r2,r6) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(cKexInit(s,r1,r2,r3,r4,r5,r6),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Version .
-	op s : -> Sys .
-	red inv14(s,a) implies inv14(cVer(s,r1,r2,r3),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op s : -> Sys .
+  red inv14(s,a) implies inv14(cVer(s,r1,r2,r3),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcPublicK .
-	op r4 : -> PqPublicK .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq a = intru .
-	red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcPublicK .
+  op r4 : -> PqPublicK .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq a = intru .
+  red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcPublicK .
-	op r4 : -> PqPublicK .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
-	red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcPublicK .
+  op r4 : -> PqPublicK .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
+  red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcPublicK .
-	op r4 : -> PqPublicK .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
-	red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
-close
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcPublicK .
+  op r4 : -> PqPublicK .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
+  red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
+close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcPublicK .
-	op r4 : -> PqPublicK .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = false .
-	red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcPublicK .
-	op r4 : -> PqPublicK .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcPublicK .
-	op r4 : -> PqPublicK .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PubKey .
-	op r4 : -> EcPublicK .
-	op r5 : -> PqCipher .
-	op r6 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq (r5 \in knl(s)) = true .
-	eq (r6 \in knl(s)) = true .
-	eq a = intru .
-	red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PubKey .
-	op r4 : -> EcPublicK .
-	op r5 : -> PqCipher .
-	op r6 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq (r5 \in knl(s)) = true .
-	eq (r6 \in knl(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
-	red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
-close
-
---> true
-open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PubKey .
-	op r4 : -> EcPublicK .
-	op r5 : -> PqCipher .
-	op r6 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq (r5 \in knl(s)) = true .
-	eq (r6 \in knl(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
-	red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcPublicK .
+  op r4 : -> PqPublicK .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = false .
+  red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcPublicK .
+  op r4 : -> PqPublicK .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcPublicK .
+  op r4 : -> PqPublicK .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(fkHbrInit(s,r1,r2,r3,r4),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = intru .
+  red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
+  red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
+  red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PubKey .
-	op r4 : -> EcPublicK .
-	op r5 : -> PqCipher .
-	op r6 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq (r5 \in knl(s)) = true .
-	eq (r6 \in knl(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = false .
-	red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = false .
+  red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PubKey .
-	op r4 : -> EcPublicK .
-	op r5 : -> PqCipher .
-	op r6 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq (r5 \in knl(s)) = true .
-	eq (r6 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PubKey .
-	op r4 : -> EcPublicK .
-	op r5 : -> PqCipher .
-	op r6 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = true .
-	eq (r5 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PubKey .
-	op r4 : -> EcPublicK .
-	op r5 : -> PqCipher .
-	op r6 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (r4 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PubKey .
-	op r4 : -> EcPublicK .
-	op r5 : -> PqCipher .
-	op r6 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(fkHbrReply(s,r1,r2,r3,r4,r5,r6),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Suites .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	red inv14(s,a) implies inv14(fkKexInit(s,r1,r2,r3),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Suites .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  red inv14(s,a) implies inv14(fkKexInit(s,r1,r2,r3),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Suites .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(fkKexInit(s,r1,r2,r3),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Suites .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(fkKexInit(s,r1,r2,r3),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Version .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	red inv14(s,a) implies inv14(fkVer(s,r1,r2,r3),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  red inv14(s,a) implies inv14(fkVer(s,r1,r2,r3),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Version .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(fkVer(s,r1,r2,r3),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(fkVer(s,r1,r2,r3),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	red inv14(s,a) implies inv14(g1(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  red inv14(s,a) implies inv14(g1(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(g1(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(g1(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> DataL .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = true .
-	red inv14(s,a) implies inv14(g2(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> DataL .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv14(s,a) implies inv14(g2(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> DataL .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(g2(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> DataL .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(g2(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> DataL .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(g2(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> DataL .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(g2(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Version .
-	op r2 : -> Suites .
-	op r3 : -> PubKey .
-	op s : -> Sys .
-	red inv14(s,a) implies inv14(gBasic(s,r1,r2,r3),a) .
+  op a : -> Prin .
+  op r1 : -> Version .
+  op r2 : -> Suites .
+  op r3 : -> PubKey .
+  op s : -> Sys .
+  red inv14(s,a) implies inv14(gBasic(s,r1,r2,r3),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PqSecretK .
-	op r2 : -> PqCipher .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = true .
-	red inv14(s,a) implies inv14(gDecaps(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv14(s,a) implies inv14(gDecaps(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PqSecretK .
-	op r2 : -> PqCipher .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gDecaps(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gDecaps(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PqSecretK .
-	op r2 : -> PqCipher .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gDecaps(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gDecaps(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> EcPublicK .
-	op r2 : -> EcPublicK .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = true .
-	red inv14(s,a) implies inv14(gEcKey(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> EcPublicK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv14(s,a) implies inv14(gEcKey(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> EcPublicK .
-	op r2 : -> EcPublicK .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gEcKey(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> EcPublicK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gEcKey(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> EcPublicK .
-	op r2 : -> EcPublicK .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gEcKey(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> EcPublicK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gEcKey(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> EcSecretK .
-	op s : -> Sys .
-	eq (r1 \in usecret(s)) = true .
-	red inv14(s,a) implies inv14(gEcSecretK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> EcSecretK .
+  op s : -> Sys .
+  eq (r1 \in usecret(s)) = true .
+  red inv14(s,a) implies inv14(gEcSecretK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> EcSecretK .
-	op s : -> Sys .
-	eq (r1 \in usecret(s)) = false .
-	red inv14(s,a) implies inv14(gEcSecretK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> EcSecretK .
+  op s : -> Sys .
+  eq (r1 \in usecret(s)) = false .
+  red inv14(s,a) implies inv14(gEcSecretK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> EcSecretK .
-	op r2 : -> EcPublicK .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = true .
-	red inv14(s,a) implies inv14(gEcShare(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> EcSecretK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv14(s,a) implies inv14(gEcShare(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> EcSecretK .
-	op r2 : -> EcPublicK .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gEcShare(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> EcSecretK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gEcShare(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> EcSecretK .
-	op r2 : -> EcPublicK .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gEcShare(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> EcSecretK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gEcShare(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PqSecretK .
-	op s : -> Sys .
-	eq (r1 \in usecret(s)) = true .
-	red inv14(s,a) implies inv14(gPqSecretK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> PqSecretK .
+  op s : -> Sys .
+  eq (r1 \in usecret(s)) = true .
+  red inv14(s,a) implies inv14(gPqSecretK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PqSecretK .
-	op s : -> Sys .
-	eq (r1 \in usecret(s)) = false .
-	red inv14(s,a) implies inv14(gPqSecretK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> PqSecretK .
+  op s : -> Sys .
+  eq (r1 \in usecret(s)) = false .
+  red inv14(s,a) implies inv14(gPqSecretK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PqSecretK .
-	op r2 : -> PqPublicK .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = true .
-	red inv14(s,a) implies inv14(gPqShare(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv14(s,a) implies inv14(gPqShare(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PqSecretK .
-	op r2 : -> PqPublicK .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gPqShare(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gPqShare(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PqSecretK .
-	op r2 : -> PqPublicK .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gPqShare(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gPqShare(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PriKeyTime .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = true .
-	red inv14(s,a) implies inv14(gSign(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> PriKeyTime .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv14(s,a) implies inv14(gSign(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PriKeyTime .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gSign(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> PriKeyTime .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gSign(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> PriKeyTime .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = false .
-	red inv14(s,a) implies inv14(gSign(s,r1,r2),a) .
+  op a : -> Prin .
+  op r1 : -> PriKeyTime .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = false .
+  red inv14(s,a) implies inv14(gSign(s,r1,r2),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op s : -> Sys .
-	eq (priK(r1) \in' leakscr(s)) = true .
-	red inv14(s,a) implies inv14(lLtK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op s : -> Sys .
+  eq (priK(r1) \in' leakscr(s)) = true .
+  red inv14(s,a) implies inv14(lLtK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op s : -> Sys .
-	eq (priK(r1) \in' leakscr(s)) = false .
-	eq a = r1 .
-	red inv14(s,a) implies inv14(lLtK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op s : -> Sys .
+  eq (priK(r1) \in' leakscr(s)) = false .
+  eq a = r1 .
+  red inv14(s,a) implies inv14(lLtK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op s : -> Sys .
-	eq (priK(r1) \in' leakscr(s)) = false .
-	eq (a = r1) = false .
-	eq a = intru .
-	red inv14(s,a) implies inv14(lLtK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op s : -> Sys .
+  eq (priK(r1) \in' leakscr(s)) = false .
+  eq (a = r1) = false .
+  eq a = intru .
+  red inv14(s,a) implies inv14(lLtK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op s : -> Sys .
-	eq (priK(r1) \in' leakscr(s)) = false .
-	eq (a = r1) = false .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
-	red inv14(s,a) implies inv14(lLtK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op s : -> Sys .
+  eq (priK(r1) \in' leakscr(s)) = false .
+  eq (a = r1) = false .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
+  red inv14(s,a) implies inv14(lLtK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op s : -> Sys .
-	eq (priK(r1) \in' leakscr(s)) = false .
-	eq (a = r1) = false .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
-	red inv14(s,a) implies inv14(lLtK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op s : -> Sys .
+  eq (priK(r1) \in' leakscr(s)) = false .
+  eq (a = r1) = false .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
+  red inv14(s,a) implies inv14(lLtK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op s : -> Sys .
-	eq (priK(r1) \in' leakscr(s)) = false .
-	eq (a = r1) = false .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = false .
-	red inv14(s,a) implies inv14(lLtK(s,r1),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op s : -> Sys .
+  eq (priK(r1) \in' leakscr(s)) = false .
+  eq (a = r1) = false .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = false .
+  red inv14(s,a) implies inv14(lLtK(s,r1),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcSecretK .
-	op r4 : -> PqSecretK .
-	op r5 : -> Nat .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
-	eq a = intru .
-	red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcSecretK .
+  op r4 : -> PqSecretK .
+  op r5 : -> Nat .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
+  eq a = intru .
+  red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcSecretK .
-	op r4 : -> PqSecretK .
-	op r5 : -> Nat .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
-	red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcSecretK .
+  op r4 : -> PqSecretK .
+  op r5 : -> Nat .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
+  red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcSecretK .
-	op r4 : -> PqSecretK .
-	op r5 : -> Nat .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
-	red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcSecretK .
+  op r4 : -> PqSecretK .
+  op r5 : -> Nat .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
+  red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcSecretK .
-	op r4 : -> PqSecretK .
-	op r5 : -> Nat .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = false .
-	red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcSecretK .
+  op r4 : -> PqSecretK .
+  op r5 : -> Nat .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = false .
+  red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> EcSecretK .
-	op r4 : -> PqSecretK .
-	op r5 : -> Nat .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcSecretK .
+  op r4 : -> PqSecretK .
+  op r5 : -> Nat .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(lPqSecretK1(s,r1,r2,r3,r4,r5),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PqPublicK .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Data .
-	op r7 : -> Nat .
-	op s : -> Sys .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
-	eq a = intru .
-	red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PqPublicK .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Data .
+  op r7 : -> Nat .
+  op s : -> Sys .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
+  eq a = intru .
+  red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PqPublicK .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Data .
-	op r7 : -> Nat .
-	op s : -> Sys .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
-	red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PqPublicK .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Data .
+  op r7 : -> Nat .
+  op s : -> Sys .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
+  red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PqPublicK .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Data .
-	op r7 : -> Nat .
-	op s : -> Sys .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
-	red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PqPublicK .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Data .
+  op r7 : -> Nat .
+  op s : -> Sys .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
+  red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PqPublicK .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Data .
-	op r7 : -> Nat .
-	op s : -> Sys .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = false .
-	red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PqPublicK .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Data .
+  op r7 : -> Nat .
+  op s : -> Sys .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = false .
+  red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> PqPublicK .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Data .
-	op r7 : -> Nat .
-	op s : -> Sys .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PqPublicK .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Data .
+  op r7 : -> Nat .
+  op s : -> Sys .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> PqSecretK .
-	op r11 : -> Nat .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Version .
-	op r4 : -> Version .
-	op r5 : -> Suites .
-	op r6 : -> Suites .
-	op r7 : -> EcSecretK .
-	op r8 : -> PqSecretK .
-	op r9 : -> EcSecretK .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || (r7 | r9) || (r8 & r10))))),r12) \in nw(s)) = true .
-	eq a = intru .
-	red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> PqSecretK .
+  op r11 : -> Nat .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op r4 : -> Version .
+  op r5 : -> Suites .
+  op r6 : -> Suites .
+  op r7 : -> EcSecretK .
+  op r8 : -> PqSecretK .
+  op r9 : -> EcSecretK .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || h(((r7 | r9) || (r8 & r10))))))),r12) \in nw(s)) = true .
+  eq a = intru .
+  red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> PqSecretK .
-	op r11 : -> Nat .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Version .
-	op r4 : -> Version .
-	op r5 : -> Suites .
-	op r6 : -> Suites .
-	op r7 : -> EcSecretK .
-	op r8 : -> PqSecretK .
-	op r9 : -> EcSecretK .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || (r7 | r9) || (r8 & r10))))),r12) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
-	red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> PqSecretK .
+  op r11 : -> Nat .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op r4 : -> Version .
+  op r5 : -> Suites .
+  op r6 : -> Suites .
+  op r7 : -> EcSecretK .
+  op r8 : -> PqSecretK .
+  op r9 : -> EcSecretK .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || h(((r7 | r9) || (r8 & r10))))))),r12) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
+  red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> PqSecretK .
-	op r11 : -> Nat .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Version .
-	op r4 : -> Version .
-	op r5 : -> Suites .
-	op r6 : -> Suites .
-	op r7 : -> EcSecretK .
-	op r8 : -> PqSecretK .
-	op r9 : -> EcSecretK .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || (r7 | r9) || (r8 & r10))))),r12) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
-	red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> PqSecretK .
+  op r11 : -> Nat .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op r4 : -> Version .
+  op r5 : -> Suites .
+  op r6 : -> Suites .
+  op r7 : -> EcSecretK .
+  op r8 : -> PqSecretK .
+  op r9 : -> EcSecretK .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || h(((r7 | r9) || (r8 & r10))))))),r12) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
+  red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> PqSecretK .
-	op r11 : -> Nat .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Version .
-	op r4 : -> Version .
-	op r5 : -> Suites .
-	op r6 : -> Suites .
-	op r7 : -> EcSecretK .
-	op r8 : -> PqSecretK .
-	op r9 : -> EcSecretK .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || (r7 | r9) || (r8 & r10))))),r12) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = false .
-	red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> PqSecretK .
+  op r11 : -> Nat .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op r4 : -> Version .
+  op r5 : -> Suites .
+  op r6 : -> Suites .
+  op r7 : -> EcSecretK .
+  op r8 : -> PqSecretK .
+  op r9 : -> EcSecretK .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || h(((r7 | r9) || (r8 & r10))))))),r12) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = false .
+  red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> PqSecretK .
-	op r11 : -> Nat .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Version .
-	op r4 : -> Version .
-	op r5 : -> Suites .
-	op r6 : -> Suites .
-	op r7 : -> EcSecretK .
-	op r8 : -> PqSecretK .
-	op r9 : -> EcSecretK .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
-	eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || (r7 | r9) || (r8 & r10))))),r12) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> PqSecretK .
+  op r11 : -> Nat .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op r4 : -> Version .
+  op r5 : -> Suites .
+  op r6 : -> Suites .
+  op r7 : -> EcSecretK .
+  op r8 : -> PqSecretK .
+  op r9 : -> EcSecretK .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || h(((r7 | r9) || (r8 & r10))))))),r12) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> PqSecretK .
-	op r11 : -> Nat .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Version .
-	op r4 : -> Version .
-	op r5 : -> Suites .
-	op r6 : -> Suites .
-	op r7 : -> EcSecretK .
-	op r8 : -> PqSecretK .
-	op r9 : -> EcSecretK .
-	op s : -> Sys .
-	eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> PqSecretK .
+  op r11 : -> Nat .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op r4 : -> Version .
+  op r5 : -> Suites .
+  op r6 : -> Suites .
+  op r7 : -> EcSecretK .
+  op r8 : -> PqSecretK .
+  op r9 : -> EcSecretK .
+  op s : -> Sys .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> EcPublicK .
-	op r11 : -> PqPublicK .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = true .
-	red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = true .
+  red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> EcPublicK .
-	op r11 : -> PqPublicK .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = true .
-	red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = true .
+  red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> EcPublicK .
-	op r11 : -> PqPublicK .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
-	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
-	eq a = intru .
-	red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+  eq a = intru .
+  red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> EcPublicK .
-	op r11 : -> PqPublicK .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
-	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
-	red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = true .
+  red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> EcPublicK .
-	op r11 : -> PqPublicK .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
-	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = true .
-	eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
-	red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = true .
+  eq (time(s) < timeLeak(priK(a),leakscr(s))) = false .
+  red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> EcPublicK .
-	op r11 : -> PqPublicK .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
-	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
-	eq (a = intru) = false .
-	eq (priK(a) \in' leakscr(s)) = false .
-	red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+  eq (a = intru) = false .
+  eq (priK(a) \in' leakscr(s)) = false .
+  red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> EcPublicK .
-	op r11 : -> PqPublicK .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
-	eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r10 : -> EcPublicK .
-	op r11 : -> PqPublicK .
-	op r12 : -> Nat .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> EcSecretK .
-	op r5 : -> PqSecretK .
-	op r6 : -> Version .
-	op r7 : -> Version .
-	op r8 : -> Suites .
-	op r9 : -> Suites .
-	op s : -> Sys .
-	eq (r4 \in usecret(s)) = false .
-	eq (r5 \in usecret(s)) = false .
-	eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Suites .
-	op r5 : -> Version .
-	op r6 : -> Version .
-	op r7 : -> Suites .
-	op s : -> Sys .
-	eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = true .
-	eq (verM(r3,r3,r2,r6) \in nw(s)) = true .
-	red inv14(s,a) implies inv14(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op r7 : -> Suites .
+  op s : -> Sys .
+  eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = true .
+  eq (verM(r3,r3,r2,r6) \in nw(s)) = true .
+  red inv14(s,a) implies inv14(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Suites .
-	op r5 : -> Version .
-	op r6 : -> Version .
-	op r7 : -> Suites .
-	op s : -> Sys .
-	eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = true .
-	eq (verM(r3,r3,r2,r6) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op r7 : -> Suites .
+  op s : -> Sys .
+  eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = true .
+  eq (verM(r3,r3,r2,r6) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Suites .
-	op r5 : -> Version .
-	op r6 : -> Version .
-	op r7 : -> Suites .
-	op s : -> Sys .
-	eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op r7 : -> Suites .
+  op s : -> Sys .
+  eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Version .
-	op r5 : -> Version .
-	op s : -> Sys .
-	eq (verM(r1,r2,r3,r5) \in nw(s)) = true .
-	red inv14(s,a) implies inv14(sVer(s,r1,r2,r3,r4,r5),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Version .
+  op r5 : -> Version .
+  op s : -> Sys .
+  eq (verM(r1,r2,r3,r5) \in nw(s)) = true .
+  red inv14(s,a) implies inv14(sVer(s,r1,r2,r3,r4,r5),a) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Version .
-	op r5 : -> Version .
-	op s : -> Sys .
-	eq (verM(r1,r2,r3,r5) \in nw(s)) = false .
-	red inv14(s,a) implies inv14(sVer(s,r1,r2,r3,r4,r5),a) .
+  op a : -> Prin .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Version .
+  op r5 : -> Version .
+  op s : -> Sys .
+  eq (verM(r1,r2,r3,r5) \in nw(s)) = false .
+  red inv14(s,a) implies inv14(sVer(s,r1,r2,r3,r4,r5),a) .
 close
 
---> Time taken is 1330ms
+--> Time taken is 1615ms

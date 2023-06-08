@@ -1,14 +1,15 @@
 open INV .
-	ops a b b2 : -> Prin .
-	op c : -> PqCipher .
-	ops css css2 : -> Suites .
-	op k : -> EcSecretK .
-	op k' : -> PqSecretK .
-	op pk2 : -> EcPublicK .
-	op s : -> Sys .
-	op sign : -> Data .
-	ops v v2 : -> Version .
-    ops n n2 : -> Nat .
-	red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2)
-	  implies fwdSe(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+  ops a b b2 : -> Prin .
+  op c : -> PqCipher .
+  ops css css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op pk2 : -> EcPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  ops v v2 : -> Version .
+  ops n n2 : -> Nat .
+  red (inv0(s,k,k',pk2,c)
+      and secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2))
+    implies fwdSe(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close

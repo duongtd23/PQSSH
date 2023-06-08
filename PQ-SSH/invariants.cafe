@@ -21,37 +21,43 @@ mod INV {
   vars ?M ?M2 : Nat
 
 -- key secrecy property
+-- 0+secrecy, no induction
   op keySe : Sys Prin Prin Prin Version Version Suites Suites 
       EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq keySe(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
-    ((not(A = intru or B = intru) and 
+    (not(A = intru or B = intru) and 
       hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and
       hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
       verify(pubK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          ecShare(PK2,K) || decaps(C,K')),
+          h(ecShare(PK2,K) || decaps(C,K'))),
       SIGN) and
       not(decaps(C,K') \in leakscr(S)) and
       not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
       not(priK(B) \in' leakscr(S)))
-    implies not(ecShare(PK2,K) || decaps(C,K') \in knl(S))) .
+    implies not(h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)) .
+  
+  op inv0 : Sys EcSecretK PqSecretK EcPublicK PqCipher -> Bool
+  eq inv0(S,K,K',PK2,C) = h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)
+    implies decaps(C,K') \in knl(S) .
 
--- authentication property
+-- forward secrecy property
+-- 0+secrecy, no induction
   op fwdSe : Sys Prin Prin Prin Version Version Suites Suites 
       EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq fwdSe(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
-    ((not(A = intru or B = intru) and 
+    (not(A = intru or B = intru) and 
       hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and
       hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
       verify(pubK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          ecShare(PK2,K) || decaps(C,K')),
+          h(ecShare(PK2,K) || decaps(C,K'))),
       SIGN) and
       not(decaps(C,K') \in leakscr(S)) and
       not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
       priK(B) \in' leakscr(S) and
       N2 < timeLeak(priK(B), leakscr(S)))
-    implies not(ecShare(PK2,K) || decaps(C,K') \in knl(S))) .
+    implies not(h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)) .
 
 -- uniqueness of session ids
   op unique : Sys Prin Version Version Suites Suites 
@@ -62,49 +68,28 @@ mod INV {
       B3,V3,V4,CSs3,CSs4,K3,K3',K4,K4') =
     (h(V || V2 || CSs || CSs2 || pubK(B) || 
         ecPublic(K) || keygen(K') || ecPublic(K2) || encapsC(keygen(K'),K2') || 
-        (K | K2) || (K' & K2')) =
+        h((K | K2) || (K' & K2'))) =
      h(V3 || V4 || CSs3 || CSs4 || pubK(B3) || 
         ecPublic(K3) || keygen(K3') || ecPublic(K4) || encapsC(keygen(K3'),K4') || 
-        (K3 | K4) || (K3' & K4')) 
+        h((K3 | K4) || (K3' & K4'))) 
     implies (K = K3 and K' = K3' and K2 = K4 and K2' = K4')) .
-
--- an invariant with existential quantifier (?P)
--- if client A receives a valid hbrRepM message apparently sent from server S,
--- then that message is really created by S,
--- but S might intend to send it to another client ?P instead of A.
--- 16+17
-  op auth' : Sys Prin Prin Prin Prin Version Version Suites Suites 
-      EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat Nat -> Bool
-  eq auth'(S,B2,A,B,?P,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2,?M) =
-    ((not(A = intru or B = intru) and 
-      not(decaps(C,K') \in leakscr(S)) and
-      not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
-      not(priK(B) \in' leakscr(S)) and
-      hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and
-      hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
-      verify(pubK(B), h(V || V2 || CSs || CSs2 || 
-          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          ecShare(PK2,K) || decaps(C,K')),
-      SIGN))
-    implies 
-      hbrRepM(B,B,?P, pubK(B) || PK2 || C || SIGN, ?M) \in nw(S)) .
 
 -- 1+3+4+5+6
   op secrecy : Sys Prin Prin Prin Version Version Suites Suites 
       EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq secrecy(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
-    ((not(A = intru or B = intru) and 
+    (not(A = intru or B = intru) and 
       hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and
       hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
       verify(pubK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          ecShare(PK2,K) || decaps(C,K')),
+          h(ecShare(PK2,K) || decaps(C,K'))),
       SIGN) and
       not(decaps(C,K') \in leakscr(S)) and
       not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
       (not(priK(B) \in' leakscr(S)) or
        N2 < timeLeak(priK(B), leakscr(S))))
-    implies not(decaps(C,K') \in knl(S))) .
+    implies not(decaps(C,K') \in knl(S)) .
 
 -- 2+7+8+9+11
   op inv1 : Sys PqSecretK PqSecretK -> Bool
@@ -140,7 +125,7 @@ mod INV {
       hbrRepM(B2,B,A, pubK(B) || PK2 || C || 
         sign(priK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          (K | ecSecret(PK2)) || decaps(C,K'))), N) \in nw(S))
+          h((K | ecSecret(PK2)) || decaps(C,K')))), N) \in nw(S))
     implies not(pqSecret(C) \in knl(S))) .
 
 -- 1+3+4+10+12+14+15
@@ -155,7 +140,7 @@ mod INV {
       hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and
       sign(priK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          (K | ecSecret(PK2)) || decaps(C, K'))) \in knl(S))
+          h((K | ecSecret(PK2)) || decaps(C, K')))) \in knl(S))
     implies not(decaps(C, K') \in knl(S))) .
 
 -- 2
@@ -183,7 +168,7 @@ mod INV {
       not(priK(B) \in' leakscr(S)) and
       sign(priK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          (K | ecSecret(PK2)) || decaps(C,K'))) \in knl(S))
+          h((K | ecSecret(PK2)) || decaps(C,K')))) \in knl(S))
     implies not(pqSecret(C) \in knl(S))) .
 
 -- 7
@@ -208,7 +193,7 @@ mod INV {
       not(B = intru) and
       sign(priK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          (K | ecSecret(PK2)) || decaps(C,K'))) \in knl(S))
+          h((K | ecSecret(PK2)) || decaps(C,K')))) \in knl(S))
     implies pqSecret(C) \in usecret(S)) .
 
 -- no lemma
@@ -224,55 +209,12 @@ mod INV {
       not(A = intru))
     implies priK(LSKT) \in' leakscr(S)) .
 
--- an invariant with existential quantifier (?P)
--- if the intruder has learned a valid signature,
--- then there must exist a valid hbrRepM in the network
--- created by S, where its signature is exactly the signature learned by the intruder
--- 12+15
-  op inv16 : Sys Prin Prin Version Version Suites Suites 
-      EcSecretK PqSecretK EcPublicK PqCipher Nat -> Bool
-  eq inv16(S,B,?P,V,V2,CSs,CSs2,K,K',PK2,C,?M) =
-    ((not(B = intru) and 
-      not(decaps(C,K') \in leakscr(S)) and
-      not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
-      not(priK(B) \in' leakscr(S)) and
-      sign(priK(B), h(V || V2 || CSs || CSs2 || 
-          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          (K | ecSecret(PK2)) || decaps(C,K'))) \in knl(S))
-    implies 
-      hbrRepM(B,B,?P, pubK(B) || PK2 || C || 
-        sign(priK(B), h(V || V2 || CSs || CSs2 || 
-          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          (K | ecSecret(PK2)) || decaps(C,K'))),?M) \in nw(S)) .
-
--- 9+18
-  op inv17 : Sys Prin Prin Prin Version Version Suites Suites 
-      EcSecretK PqSecretK EcPublicK PqCipher Nat -> Bool
-  eq inv17(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,N) =
-    (not(B = intru) and
-      not(priK(B) \in' leakscr(S)) and
-      hbrRepM(B2,B,A, pubK(B) || PK2 || C || 
-      sign(priK(B), h(V || V2 || CSs || CSs2 || 
-          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          (K | ecSecret(PK2)) || decaps(C,K'))), N) \in nw(S)
-    implies K' \in usecret(S)) .
-
--- 9+12+15
-  op inv18 : Sys Prin Version Version Suites Suites 
-      EcSecretK PqSecretK EcPublicK PqCipher -> Bool
-  eq inv18(S,B,V,V2,CSs,CSs2,K,K',PK2,C) =
-    (not(B = intru) and
-      not(priK(B) \in' leakscr(S)) and
-      sign(priK(B), h(V || V2 || CSs || CSs2 || 
-          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          (K | ecSecret(PK2)) || decaps(C,K'))) \in knl(S))
-    implies K' \in usecret(S) .
 
 ** **************
 ** others
 ** **************
 
--- the strong version of the authentication property,
+-- authentication property,
 -- but this is not invariant, since there may be a mismatch A <-> A'
   op auth : Sys Prin Prin Prin Version Version Suites Suites 
       EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat Nat -> Bool
@@ -282,7 +224,7 @@ mod INV {
       hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
       verify(pubK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          ecShare(PK2,K) || decaps(C,K')),
+          h(ecShare(PK2,K) || decaps(C,K'))),
       SIGN))
     implies
       hbrRepM(B,B,A, pubK(B) || PK2 || C || SIGN, ?M) \in nw(S)) .
@@ -299,7 +241,7 @@ mod INV {
      hbrRepM(B,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
      verify(pubK(B), h(V || V2 || CSs || CSs2 || pubK(B) || 
         ecPublic(K) || keygen(K') || PK2 || C || 
-        ecShare(PK2,K) || decaps(C,K')),
+        h(ecShare(PK2,K) || decaps(C,K'))),
       SIGN)) .
 
 -- to show that the intruder can learn the ECDH shared key between two principals
@@ -320,7 +262,7 @@ mod INV {
      hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
      verify(pubK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
-          ecShare(PK2,K) || decaps(C,K')),
+          h(ecShare(PK2,K) || decaps(C,K'))),
       SIGN) and
      not(decaps(C,K') \in leakscr(S)) and
      not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and

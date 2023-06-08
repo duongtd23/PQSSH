@@ -528,7 +528,7 @@ mod PQSSH {
       (hbrRepM(B,B,A, pubK(B) || ecPublic(K2) || encapsC(PK',K2') ||
         sign(priK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || PK || PK' || ecPublic(K2) || encapsC(PK',K2') ||
-          ecShare(PK,K2) || encapsK(PK',K2') )), time(S)) , nw(S)) 
+          h(ecShare(PK,K2) || encapsK(PK',K2')) )), time(S)) , nw(S)) 
     if c-sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) .
   ceq usecret(sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N)) = 
       (K2 K2' usecret(S)) 
@@ -541,7 +541,7 @@ mod PQSSH {
       (ecPublic(K2) || encapsC(PK',K2') ||
        sign(priK(B), h(V || V2 || CSs || CSs2 || 
           pubK(B) || PK || PK' || ecPublic(K2) || encapsC(PK',K2') ||
-          ecShare(PK,K2) || encapsK(PK',K2') )) ||
+          h(ecShare(PK,K2) || encapsK(PK',K2')) )) ||
        knl(S))
     if c-sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) .
   ceq sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) = S
@@ -755,7 +755,7 @@ mod PQSSH {
      hbrRepM(B,B,A, pubK(B) || ecPublic(K2) || encapsC(keygen(K'),K2') ||
         sign(priK(B), h(V || V2 || CSs || CSs2 || pubK(B) || 
           ecPublic(K) || keygen(K') || ecPublic(K2) || encapsC(keygen(K'),K2') ||
-          (K | K2) || (K' & K2') )), N2)
+          h((K | K2) || (K' & K2')) )), N2)
      \in nw(S)) .
   eq nw(lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2)) = nw(S) .
   eq usecret(lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2)) = usecret(S) .
