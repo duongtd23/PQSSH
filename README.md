@@ -1,9 +1,12 @@
-## Formal analysis of Hybrid Post-Quantum SSH Transport Layer Protocol
+## Formal analysis of Post-quantum Hybrid Key Exchange SSH Transport Layer Protocol
+
 In this repository, you can find:
 
-1. `SDS`: the SDS protocol specification in CafeOBJ, the proof scores to verify the *key secrecy* property, and the proof of the *authentication* property based on the verification method for invariant properties with existential quantifier variables. Please check README in the folder.
+1. `SDS`: the formal verification of the SDS protocol, including the protocol formal specification in CafeOBJ, the proof scores to verify the *key secrecy* property and the *authentication* property. Please check README in the folder.
 
-2. `PQ-SSH`: the PQ SSH protocol specification and the proofs verifying the protocol enjoy four desired properties. Please check README in the folder.
+2. `PQ-SSH`: the formal analysis of the original Post-quantum Hybrid Key Exchange SSH Transport Layer Protocol (PQ SSH), including the protocol specification, the proofs verifying the protocol enjoy three properties, and the counterexample of the authentication property. Please check README in the folder.
+
+3. `revised-PQ-SSH`: the formal verification of the revised protocol, which is proposed in order to make the protocol enjoy the authentication property. Please check README in the folder.
 
 
 ## Tools installation
@@ -14,7 +17,7 @@ After that, move to the next step to execute proof scores.
 
 ## Executing proof scores
 Proof scores are executable (CafeOBJ code).
-Once intalled CafeInMaude, you can try to run a part of the proof score of `keySe` of the SDS case study (verifies the *key secrecy* property) by the following commands:
+Once intalled CafeInMaude, you can try to run the proof score of `inv1` of the SDS case study (a lemma to verify the *key secrecy* property) by the following commands:
 
 ```
 maude -allow-files path-to-CafeInMaude/src/cafeInMaude.maude
@@ -38,3 +41,6 @@ In this case, because the file is large,
 CafeInMaude may take a little bit more time to return the result.
 
 *Note also that* we can use CafeOBJ (https://cafeobj.org/) to execute the proof score (instead of CafeInMaude). But it may take a longer time since the rewriting system of the original CafeOBJ normally takes a longer amount of time to reduce a given term than that of CafeInMaude.
+
+### Re-generating proof scores
+To re-generate the proof scores again, see `README` in folder `PQ-SSH/inputs`.

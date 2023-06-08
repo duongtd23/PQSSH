@@ -1,0 +1,1748 @@
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  red inv11(init,b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
+  eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = true .
+  eq (kexInitM(r2,r2,r3,r8) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r1,r3,r2,r9) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(cHbrInit(s,r1,r2,r3,r4,r5,r6,r7,r8,r9),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (verM(r1,r3,r2,r6) \in nw(s)) = true .
+  eq (verM(r2,r2,r3,r5) \in nw(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(cKexInit(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (verM(r1,r3,r2,r6) \in nw(s)) = true .
+  eq (verM(r2,r2,r3,r5) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(cKexInit(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (verM(r1,r3,r2,r6) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(cKexInit(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op s : -> Sys .
+  op sign : -> Data .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(cVer(s,r1,r2,r3),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcPublicK .
+  op r4 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrInit(s,r1,r2,r3,r4),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcPublicK .
+  op r4 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrInit(s,r1,r2,r3,r4),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcPublicK .
+  op r4 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrInit(s,r1,r2,r3,r4),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq c = r5 .
+  eq sign = r6 .
+  eq r3 = pubK(r1) .
+  eq (pubK(r1) \in knl(s)) = true .
+  eq time(s) = n .
+  eq (pqSecret(r5) \in usecret(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq c = r5 .
+  eq sign = r6 .
+  eq r3 = pubK(r1) .
+  eq (pubK(r1) \in knl(s)) = true .
+  eq time(s) = n .
+  eq (pqSecret(r5) \in usecret(s)) = false .
+  eq ecSecret(pk) = ecSecret(r4) .
+  eq (hbrRepM(intru,r1,r2,(pubK(r1) || pk || r5 || r6),n) \in nw(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true, use inv7 as a lemma
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq c = r5 .
+  eq sign = r6 .
+  eq r3 = pubK(r1) .
+  eq (pubK(r1) \in knl(s)) = true .
+  eq time(s) = n .
+  eq (pqSecret(r5) \in usecret(s)) = false .
+  eq ecSecret(pk) = ecSecret(r4) .
+  eq (hbrRepM(intru,r1,r2,(pubK(r1) || pk || r5 || r6),n) \in nw(s)) = false .
+  red inv7(s,r5) implies inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq c = r5 .
+  eq sign = r6 .
+  eq r3 = pubK(r1) .
+  eq (pubK(r1) \in knl(s)) = true .
+  eq time(s) = n .
+  eq (pqSecret(r5) \in usecret(s)) = false .
+  eq (ecSecret(pk) = ecSecret(r4)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq c = r5 .
+  eq sign = r6 .
+  eq r3 = pubK(r1) .
+  eq (pubK(r1) \in knl(s)) = true .
+  eq (time(s) = n) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq c = r5 .
+  eq sign = r6 .
+  eq r3 = pubK(r1) .
+  eq (pubK(r1) \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq c = r5 .
+  eq sign = r6 .
+  eq (r3 = pubK(r1)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq c = r5 .
+  eq (sign = r6) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq (c = r5) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq (b2 = intru) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq a = r2 .
+  eq (b = r1) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = true .
+  eq (a = r2) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = true .
+  eq (r6 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = true .
+  eq (r5 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  eq (r4 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PubKey .
+  op r4 : -> EcPublicK .
+  op r5 : -> PqCipher .
+  op r6 : -> Data .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkHbrReply(s,r1,r2,r3,r4,r5,r6),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkKexInit(s,r1,r2,r3),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkKexInit(s,r1,r2,r3),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkVer(s,r1,r2,r3),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r3 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(fkVer(s,r1,r2,r3),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> DataL .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(g1(s,r1),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> DataL .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(g1(s,r1),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> DataL .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(g2(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> DataL .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(g2(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> DataL .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(g2(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Version .
+  op r3 : -> Suites .
+  op r4 : -> PubKey .
+  op s : -> Sys .
+  op sign : -> Data .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gBasic(s,r1,r2,r3,r4),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gDecaps(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gDecaps(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gDecaps(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> EcPublicK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gEcKey(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> EcPublicK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gEcKey(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> EcPublicK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gEcKey(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> EcSecretK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in usecret(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gEcSecretK(s,r1),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> EcSecretK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in usecret(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gEcSecretK(s,r1),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> EcSecretK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gEcShare(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> EcSecretK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gEcShare(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> EcSecretK .
+  op r2 : -> EcPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gEcShare(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in usecret(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gPqSecretK(s,r1),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in usecret(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gPqSecretK(s,r1),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gPqShare(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gPqShare(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gPqShare(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PriKeyTime .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gSign(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PriKeyTime .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gSign(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> PriKeyTime .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r1 \in knl(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(gSign(s,r1,r2),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (priK(r1) \in' leakscr(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(lLtK(s,r1),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (priK(r1) \in' leakscr(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(lLtK(s,r1),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcSecretK .
+  op r4 : -> PqSecretK .
+  op r5 : -> Nat .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(lPqSecretK1(s,r1,r2,r3,r4,r5),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> EcSecretK .
+  op r4 : -> PqSecretK .
+  op r5 : -> Nat .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r3) || keygen(r4)),r5) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(lPqSecretK1(s,r1,r2,r3,r4,r5),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PqPublicK .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Data .
+  op r7 : -> Nat .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> PqPublicK .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Data .
+  op r7 : -> Nat .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r4) || encapsC(r3,r5) || r6),r7) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(lPqSecretK2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> PqSecretK .
+  op r11 : -> Nat .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op r4 : -> Version .
+  op r5 : -> Suites .
+  op r6 : -> Suites .
+  op r7 : -> EcSecretK .
+  op r8 : -> PqSecretK .
+  op r9 : -> EcSecretK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || h(((r7 | r9) || (r8 & r10))) || r1 || r2)))),r12) \in nw(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> PqSecretK .
+  op r11 : -> Nat .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op r4 : -> Version .
+  op r5 : -> Suites .
+  op r6 : -> Suites .
+  op r7 : -> EcSecretK .
+  op r8 : -> PqSecretK .
+  op r9 : -> EcSecretK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = true .
+  eq (hbrRepM(r2,r2,r1,(pubK(r2) || ecPublic(r9) || encapsC(keygen(r8),r10) || sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || h(((r7 | r9) || (r8 & r10))) || r1 || r2)))),r12) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> PqSecretK .
+  op r11 : -> Nat .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Version .
+  op r4 : -> Version .
+  op r5 : -> Suites .
+  op r6 : -> Suites .
+  op r7 : -> EcSecretK .
+  op r8 : -> PqSecretK .
+  op r9 : -> EcSecretK .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (hbrIniM(r1,r1,r2,(ecPublic(r7) || keygen(r8)),r11) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+  eq a = r2 .
+  eq b = r3 .
+  eq b2 = r3 .
+  eq c = encapsC(r11,r5) .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+  eq a = r2 .
+  eq b = r3 .
+  eq b2 = r3 .
+  eq (c = encapsC(r11,r5)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+  eq a = r2 .
+  eq b = r3 .
+  eq (b2 = r3) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+  eq a = r2 .
+  eq (b = r3) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = true .
+  eq (a = r2) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = true .
+  eq (hbrIniM(r1,r2,r3,(r10 || r11),r12) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r10 : -> EcPublicK .
+  op r11 : -> PqPublicK .
+  op r12 : -> Nat .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> EcSecretK .
+  op r5 : -> PqSecretK .
+  op r6 : -> Version .
+  op r7 : -> Version .
+  op r8 : -> Suites .
+  op r9 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (r4 \in usecret(s)) = false .
+  eq (r5 \in usecret(s)) = false .
+  eq (kexInitM(r3,r3,r2,r9) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sHbrReply(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op r7 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = true .
+  eq (verM(r3,r3,r2,r6) \in nw(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op r7 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = true .
+  eq (verM(r3,r3,r2,r6) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Suites .
+  op r5 : -> Version .
+  op r6 : -> Version .
+  op r7 : -> Suites .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (kexInitM(r1,r2,r3,r7) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sKexInit(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Version .
+  op r5 : -> Version .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (verM(r1,r2,r3,r5) \in nw(s)) = true .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sVer(s,r1,r2,r3,r4,r5),b2,a,b,pk,c,sign,n) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op n : -> Nat .
+  op pk : -> EcPublicK .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Version .
+  op r5 : -> Version .
+  op s : -> Sys .
+  op sign : -> Data .
+  eq (verM(r1,r2,r3,r5) \in nw(s)) = false .
+  red inv11(s,b2,a,b,pk,c,sign,n) implies inv11(sVer(s,r1,r2,r3,r4,r5),b2,a,b,pk,c,sign,n) .
+close
+
+--> Time taken is 1518ms

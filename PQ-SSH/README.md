@@ -1,4 +1,6 @@
-## Formal analysis of the PQ SSH protocol
+## Formal analysis of Post-quantum Hybrid Key Exchange SSH Transport Layer Protocol
+
+This folder contains materials of the formal analysis of the original Post-quantum Hybrid Key Exchange SSH Transport Layer Protocol, including the CafeOBJ formal specification of the protocol, the desired properties formalized in CafeOBJ, and the proof scores verifying those properties.
 
 In this folder, you can find:
 

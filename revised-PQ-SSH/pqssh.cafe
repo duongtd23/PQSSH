@@ -1,0 +1,804 @@
+-- ECDH key exchange protocol
+mod! ECDH {
+  [EcSecretK EcPublicK EcShareK]
+
+-- C (or S) randomly chooses an ephemeral secret key, from that
+-- compute the corresponding public key
+  op ecPublic : EcSecretK -> EcPublicK {constr}
+  op _|_ : EcSecretK EcSecretK -> EcShareK {constr comm}
+  op ecSecret : EcPublicK -> EcSecretK
+  op ecShare : EcPublicK EcSecretK -> EcShareK
+
+  vars K K2 K3 K4 : EcSecretK
+  vars PK PK2 : EcPublicK
+  var KC : EcShareK
+
+  eq ecSecret(ecPublic(K)) = K .
+  eq ecPublic(ecSecret(PK)) = PK .
+  eq (PK = PK2) = (ecSecret(PK) = ecSecret(PK2)) .
+  eq ecShare(PK,K) = (ecSecret(PK) | K) .
+  eq ((K | K2) = (K3 | K4))
+    = (K = K3 and K2 = K4) or
+      (K = K4 and K2 = K3) .
+}
+
+-- post-quantum KEMs
+mod! PQ-KEM {
+  [PqSecretK PqPublicK PqCipher PqShareK]
+
+-- C (or S) randomly chooses an ephemeral secret key, from that
+-- compute the corresponding public key
+  op keygen  : PqSecretK -> PqPublicK {constr}
+  op encapsC : PqPublicK PqSecretK -> PqCipher {constr}
+  op encapsK : PqPublicK PqSecretK -> PqShareK
+  op decaps  : PqCipher  PqSecretK -> PqShareK
+
+  op _&_ : PqSecretK PqSecretK -> PqShareK {constr}
+  op pqSecret : PqPublicK -> PqSecretK
+  op pqSecret : PqCipher  -> PqSecretK
+  op pqPublic : PqCipher  -> PqPublicK
+
+  vars K' K2' K3' K4' : PqSecretK
+  vars PK' PK2' : PqPublicK
+  vars C C2 : PqCipher
+  var KP : PqShareK
+
+  eq pqSecret(keygen(K')) = K' .
+  eq pqSecret(encapsC(PK', K2')) = K2' .
+  eq pqPublic(encapsC(PK', K2')) = PK' .
+  eq (PK' = PK2') = (pqSecret(PK') = pqSecret(PK2')) .
+  eq encapsK(PK',K') = (pqSecret(PK') & K') .
+  -- eq decaps(encapsC(keygen(K'), K2'), K') = (K' & K2') .
+  ceq decaps(C, K') = (K' & pqSecret(C)) if K' = pqSecret(pqPublic(C)) .
+  eq (decaps(C, K') = (K2' & K3')) =
+    (K' = K2' and K3' = pqSecret(C) and K' = pqSecret(pqPublic(C))) .
+  eq ((K' & K2') = (K3' & K4'))
+    = (K' = K3' and K2' = K4') .
+  eq (encapsK(PK',K') = encapsK(PK2',K2')) =
+    (PK' = PK2' and K' = K2') .
+  eq (encapsC(PK',K') = encapsC(PK2',K2')) =
+    (PK' = PK2' and K' = K2') .
+  eq (decaps(C,K') = decaps(C2,K2')) =
+    (C = C2 and K' = K2') .
+}
+
+mod* PRINCIPAL {
+  pr(NAT)
+  [Prin PubKey PriKey PriKeyTime]
+  op intru : -> Prin {constr}
+  op priK : Prin -> PriKey {constr}
+  op pubK : Prin -> PubKey {constr}
+  vars A B : Prin 
+  eq (priK(A) = priK(B)) = (A = B) .
+  eq (pubK(A) = pubK(B)) = (A = B) .
+
+-- for the forward secrecy property
+  op pkNPair : PriKey Nat -> PriKeyTime {constr}
+  op priK : PriKeyTime -> PriKey
+  op time : PriKeyTime -> Nat
+  vars N N2 : Nat
+  vars LSK LSK2 : PriKey
+  eq priK(pkNPair(LSK, N)) = LSK .
+  eq time(pkNPair(LSK, N)) = N .
+  eq (pkNPair(LSK, N) = pkNPair(LSK2, N2))
+    = (LSK = LSK2 and N = N2) .
+
+-- lemmas
+  ceq (s(N) < N2) = false if not(N < N2) .
+  eq (N < N) = false .
+}
+mod! PROTOCOL-VERSION {
+  [Version]
+}
+-- supported algorithms
+mod! CIPHER-SUITE {
+  [Suites]
+}
+mod! DATA {
+  pr(ECDH + PQ-KEM +
+    PRINCIPAL + PROTOCOL-VERSION + CIPHER-SUITE)
+  [Data < DataL]
+  [EcSecretK EcPublicK EcShareK PqSecretK PqPublicK PqShareK PqCipher
+    Prin PubKey PriKey PriKeyTime Version Suites < Data]
+  op _||_ : DataL DataL -> DataL {assoc r-assoc constr}
+
+  op _\in_ : DataL DataL -> Bool
+
+  vars D1 D2 : Data
+  vars DL DL2 DL3 : DataL
+  var P : Prin
+  var K : EcSecretK
+  var PK : EcPublicK
+  var KC : EcShareK
+  var V : Version
+  var SS : Suites
+  var LSK : PriKey
+  var LPK : PubKey
+  var K' : PqSecretK
+  var PK' : PqPublicK
+  var KP : PqShareK
+  var C : PqCipher
+  var LSKT : PriKeyTime
+
+  eq (D1 = (D2 || DL2)) = false .
+  eq ((D1 || DL) = (D2 || DL2)) 
+      = (D1 = D2 and DL = DL2) .
+
+  eq (D1 || DL) \in D2 = false .
+  eq (D1 || DL) \in DL2 = (D1 \in DL2 and DL \in DL2) .
+  eq D1 \in D2 = (D1 = D2) .
+  eq D1 \in (D2 || DL2) = (D1 = D2 or D1 \in DL2) .
+
+  ceq (P = D1)   = false if (D1 :is EcSecretK) or 
+                            (D1 :is EcPublicK) or 
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (K = D1)   = false if (D1 :is Prin) or
+                            (D1 :is EcPublicK) or 
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (PK = D1)  = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (KC = D1)  = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (V = D1)   = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (SS = D1)  = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (LSK = D1) = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (LPK = D1) = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (K' = D1)  = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (PK' = D1) = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (KP = D1)  = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqCipher) or 
+                            (D1 :is PriKeyTime) .
+  ceq (C = D1)   = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PriKeyTime) .
+  ceq (LSKT = D1) = false if (D1 :is Prin) or
+                            (D1 :is EcSecretK) or
+                            (D1 :is EcPublicK) or
+                            (D1 :is EcShareK) or 
+                            (D1 :is Version) or 
+                            (D1 :is Suites) or 
+                            (D1 :is PriKey) or 
+                            (D1 :is PubKey) or 
+                            (D1 :is PqSecretK) or 
+                            (D1 :is PqPublicK) or 
+                            (D1 :is PqShareK) or 
+                            (D1 :is PqCipher) .
+}
+mod! ENCRYPTION {
+  pr(DATA)
+  
+--            Data                          Hash
+  op h      : DataL                      -> Data {constr}
+--            Key   Plaintext               Signature
+  op sign   : DataL DataL                -> Data {constr}
+--            Key   Plaintext  Signature
+  op verify : DataL DataL      DataL     -> Bool
+
+  vars A B : Prin 
+  vars D0 : Data
+  vars KE KE1 KE2 D D2 AAD SIGN : DataL
+  vars LPK : PubKey
+
+  -- eq verify(pubK(A), D, sign(priK(A), D)) = true .
+  eq verify(pubK(A), D, SIGN) = (SIGN = sign(priK(A),D)) .
+
+  eq (h(D) = h(D2)) = (D = D2) .
+  eq (sign(KE,D) = sign(KE2,D2)) = (KE = KE2 and D = D2) .
+  eq (h(D) = sign(KE,D2)) = false .
+
+  ceq (h(D) = D0) = false 
+    if (D0 :is Prin) or (D0 :is EcSecretK) or (D0 :is EcPublicK) or
+      (D0 :is EcShareK) or (D0 :is Version) or (D0 :is Suites) or 
+      (D0 :is PriKey) or (D0 :is PubKey) or (D0 :is PqSecretK) or 
+      (D0 :is PqPublicK) or (D0 :is PqShareK) or (D0 :is PqCipher) or
+      (D0 :is PriKeyTime) .
+  ceq (sign(KE,D) = D0) = false 
+    if (D0 :is Prin) or (D0 :is EcSecretK) or (D0 :is EcPublicK) or
+      (D0 :is EcShareK) or (D0 :is Version) or (D0 :is Suites) or 
+      (D0 :is PriKey) or (D0 :is PubKey) or (D0 :is PqSecretK) or 
+      (D0 :is PqPublicK) or (D0 :is PqShareK) or (D0 :is PqCipher) or
+      (D0 :is PriKeyTime) .
+}
+mod! MESSAGE {
+  pr(ENCRYPTION)
+  [Msg]
+  op verM     : Prin Prin Prin Version   -> Msg {constr}
+  op kexInitM : Prin Prin Prin Suites    -> Msg {constr}
+  op hbrIniM  : Prin Prin Prin DataL Nat -> Msg {constr}
+  op hbrRepM  : Prin Prin Prin DataL Nat -> Msg {constr}
+ 
+  vars A B A2 B2 A' A2' : Prin 
+  vars D D2 : DataL 
+  vars V V2 : Version
+  vars SS SS2 : Suites
+  vars N N2 : Nat
+  eq (verM(A',A,B,V) = verM(A2',A2,B2,V2)) =
+    (A' = A2' and A = A2 and B = B2 and V = V2) .
+  eq (kexInitM(A',A,B,SS) = kexInitM(A2',A2,B2,SS2)) =
+    (A' = A2' and A = A2 and B = B2 and SS = SS2) .
+  eq (hbrIniM(A',A,B,D,N) = hbrIniM(A2',A2,B2,D2,N2)) =
+    (A' = A2' and A = A2 and B = B2 and D = D2 and N = N2) .
+  eq (hbrRepM(A',A,B,D,N) = hbrRepM(A2',A2,B2,D2,N2)) =
+    (A' = A2' and A = A2 and B = B2 and D = D2 and N = N2) .
+  eq (verM(A',A,B,V) = kexInitM(A2',A2,B2,SS2)) = false .
+  eq (verM(A',A,B,V) = hbrIniM(A2',A2,B2,D2,N2)) = false .
+  eq (verM(A',A,B,V) = hbrRepM(A2',A2,B2,D2,N2)) = false .
+  eq (kexInitM(A',A,B,SS) = hbrIniM(A2',A2,B2,D2,N2)) = false .
+  eq (kexInitM(A',A,B,SS) = hbrRepM(A2',A2,B2,D2,N2)) = false .
+  eq (hbrIniM(A',A,B,D,N) = hbrRepM(A2',A2,B2,D2,N2)) = false .
+}
+mod! SET (D :: TRIV) {
+  [Elt.D < Set]
+  op empty : -> Set {constr}
+  op __ : Set Set -> Set {assoc constr comm idem id: empty}
+  op _\in_ : Elt.D Set -> Bool
+  var S : Set
+  vars E1 E2 : Elt.D
+  eq E1 \in empty = false .
+  eq E1 \in E2 = (E1 = E2) .
+  eq E1 \in (E2 S) = (E1 = E2) or (E1 \in S) .
+}
+mod! BAG (D :: TRIV) {
+  [Elt.D < Bag]
+  op void : -> Bag {constr}
+  op _,_ : Bag Bag -> Bag {assoc constr comm id: void}
+  op _\in_ : Elt.D Bag -> Bool
+  var B : Bag
+  vars E1 E2 : Elt.D
+  eq E1 \in void = false .
+  eq E1 \in E2 = (E1 = E2) .
+  eq E1 \in (E2,B) = (E1 = E2) or (E1 \in B) .
+}
+view TRIV2MESSAGE from TRIV to MESSAGE {
+  sort Elt -> Msg
+}
+mod! NETWORK {
+  pr(BAG(D <= TRIV2MESSAGE)*{sort Bag -> Network})
+}
+view TRIV2DATA from TRIV to DATA {
+  sort Elt -> Data
+}
+mod PQSSH {
+  pr(NETWORK)
+  pr(SET(D <= TRIV2DATA)*{sort Set -> SecretKS})
+
+  [Sys]
+-- initial states and transitions
+  op init : -> Sys {constr}
+  op cVer : Sys Prin Prin Version -> Sys {constr}
+  op sVer : Sys Prin Prin Prin Version Version -> Sys {constr}
+  op cKexInit : Sys Prin Prin Prin Suites Version Version -> Sys {constr}
+  op sKexInit : Sys Prin Prin Prin Suites Version Version Suites -> Sys {constr}
+  op cHbrInit : Sys Prin Prin Prin EcSecretK PqSecretK
+    Version Version Suites Suites -> Sys {constr}
+  op sHbrReply : Sys Prin Prin Prin EcSecretK PqSecretK
+    Version Version Suites Suites EcPublicK PqPublicK Nat -> Sys {constr}
+
+-- observers
+  op nw : Sys -> Network
+  op usecret : Sys -> SecretKS
+  op time : Sys -> Nat
+  op knl : Sys -> DataL
+  op leakscr : Sys -> SecretKS
+
+  var S : Sys
+  vars A B A2 B2 A3 B3 : Prin 
+  vars CSs CSs2 : Suites
+  vars K K2 K3 : EcSecretK
+  vars PK PK2 PK3 : EcPublicK
+  vars V V2 : Version
+  vars D SIGN : Data
+  vars DL DL2 DL3 : DataL
+  vars LPK : PubKey
+  vars K' K2' K3' : PqSecretK
+  vars PK' PK2' : PqPublicK
+  vars C C2 : PqCipher
+  vars N N2 : Nat
+  vars LSKT : PriKeyTime
+  var LSKTS : SecretKS
+  vars LSK LSK2 : PriKey
+
+-- auxiliary operators
+  op _\in'_ : PriKey SecretKS -> Bool .
+  op timeLeak : PriKey SecretKS -> Nat .
+  eq LSK \in' empty = false .
+  eq LSK \in' (LSKT LSKTS) = 
+    (LSK = priK(LSKT)) or (LSK \in' LSKTS) .
+  ceq LSK \in' (D LSKTS) = (LSK \in' LSKTS)
+    if (D :is Prin) or (D :is EcSecretK) or (D :is EcPublicK) or
+       (D :is EcShareK) or (D :is Version) or (D :is Suites) or 
+       (D :is PriKey) or (D :is PubKey) or (D :is PqSecretK) or 
+       (D :is PqPublicK) or (D :is PqShareK) or (D :is PqCipher) .
+  eq timeLeak(LSK, empty) = 0 .
+  eq timeLeak(LSK, (LSKT LSKTS)) = 
+    (if (LSK = priK(LSKT))
+     then time(LSKT)
+     else timeLeak(LSK, LSKTS)
+     fi) .
+  ceq timeLeak(LSK, (D LSKTS)) = timeLeak(LSK, LSKTS)
+    if (D :is Prin) or (D :is EcSecretK) or (D :is EcPublicK) or
+       (D :is EcShareK) or (D :is Version) or (D :is Suites) or 
+       (D :is PriKey) or (D :is PubKey) or (D :is PqSecretK) or 
+       (D :is PqPublicK) or (D :is PqShareK) or (D :is PqCipher) .
+
+  eq nw(init) = void .
+  eq usecret(init) = empty .
+  eq time(init) = 0 .
+  eq leakscr(init) = empty .
+  eq knl(init) = (priK(intru) || pubK(intru)) .
+  
+  eq nw(cVer(S,A,B,V)) = (verM(A,A,B, V) , nw(S)) .
+  eq usecret(cVer(S,A,B,V)) = usecret(S) .
+  eq time(cVer(S,A,B,V)) = time(S) .
+  eq leakscr(cVer(S,A,B,V)) = leakscr(S) .
+  eq knl(cVer(S,A,B,V)) = (V || knl(S)) .
+
+  op c-sVer : Sys Prin Prin Prin Version -> Bool
+  eq c-sVer(S,A2,A,B,V) = (verM(A2,A,B,V) \in nw(S)) .
+  ceq nw(sVer(S,A2,A,B,V2,V)) = (verM(B,B,A,V2) , nw(S)) 
+    if c-sVer(S,A2,A,B,V) .
+  eq usecret(sVer(S,A2,A,B,V2,V)) = usecret(S) .
+  eq time(sVer(S,A2,A,B,V2,V)) = time(S) .
+  eq leakscr(sVer(S,A2,A,B,V2,V)) = leakscr(S) .
+  ceq knl(sVer(S,A2,A,B,V2,V)) = (V2 || knl(S))
+    if c-sVer(S,A2,A,B,V) .
+  ceq sVer(S,A2,A,B,V2,V) = S 
+    if not c-sVer(S,A2,A,B,V) .
+  
+  op c-cKexInit : Sys Prin Prin Prin Version Version -> Bool
+  eq c-cKexInit(S,B2,A,B,V,V2) = 
+    (verM(A,A,B,V) \in nw(S) and
+     verM(B2,B,A,V2) \in nw(S)) .
+  ceq nw(cKexInit(S,B2,A,B,CSs,V,V2)) = (kexInitM(A,A,B,CSs) , nw(S)) 
+    if c-cKexInit(S,B2,A,B,V,V2) .
+  eq usecret(cKexInit(S,B2,A,B,CSs,V,V2)) = usecret(S) .
+  eq time(cKexInit(S,B2,A,B,CSs,V,V2)) = time(S) .
+  eq leakscr(cKexInit(S,B2,A,B,CSs,V,V2)) = leakscr(S) .
+  ceq knl(cKexInit(S,B2,A,B,CSs,V,V2)) = (CSs || knl(S))
+    if c-cKexInit(S,B2,A,B,V,V2) .
+  ceq cKexInit(S,B2,A,B,CSs,V,V2) = S 
+    if not c-cKexInit(S,B2,A,B,V,V2) .
+
+  op c-sKexInit : Sys Prin Prin Prin Version Version Suites -> Bool
+  eq c-sKexInit(S,A2,A,B,V,V2,CSs) = 
+    (verM(B,B,A,V2) \in nw(S) and
+     kexInitM(A2,A,B,CSs) \in nw(S)) .
+  ceq nw(sKexInit(S,A2,A,B,CSs2,V,V2,CSs)) = 
+      (kexInitM(B,B,A,CSs2) , nw(S)) 
+    if c-sKexInit(S,A2,A,B,V,V2,CSs) .
+  eq usecret(sKexInit(S,A2,A,B,CSs2,V,V2,CSs)) = usecret(S) .
+  eq time(sKexInit(S,A2,A,B,CSs2,V,V2,CSs)) = time(S) .
+  eq leakscr(sKexInit(S,A2,A,B,CSs2,V,V2,CSs)) = leakscr(S) .
+  ceq knl(sKexInit(S,A2,A,B,CSs2,V,V2,CSs)) = (CSs2 || knl(S))
+    if c-sKexInit(S,A2,A,B,V,V2,CSs) .
+  ceq sKexInit(S,A2,A,B,CSs2,V,V2,CSs) = S 
+    if not c-sKexInit(S,A2,A,B,V,V2,CSs) .
+
+  op c-cHbrInit : Sys Prin Prin Prin EcSecretK PqSecretK
+    Version Version Suites Suites -> Bool
+  eq c-cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2) = 
+    (kexInitM(A,A,B,CSs) \in nw(S) and
+     kexInitM(B2,B,A,CSs2) \in nw(S) and
+     not(K \in usecret(S) or K' \in usecret(S))) .
+  ceq nw(cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2)) = 
+      (hbrIniM(A,A,B,ecPublic(K) || keygen(K'), time(S)) , nw(S)) 
+    if c-cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2) .
+  ceq usecret(cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2)) = 
+      (K K' usecret(S))
+    if c-cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2) .
+  ceq time(cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2)) = 
+      s(time(S))
+    if c-cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2) .
+  eq leakscr(cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2)) = leakscr(S) .
+  ceq knl(cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2)) = 
+      (ecPublic(K) || keygen(K') || knl(S))
+    if c-cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2) .
+  ceq cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2) = S 
+    if not c-cHbrInit(S,B2,A,B,K,K',V,V2,CSs,CSs2) .
+
+  op c-sHbrReply : Sys Prin Prin Prin EcSecretK PqSecretK
+    Version Version Suites Suites EcPublicK PqPublicK Nat -> Bool
+  eq c-sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) = 
+    (kexInitM(B,B,A,CSs2) \in nw(S) and
+     hbrIniM(A2,A,B, PK || PK',N) \in nw(S) and
+     not(K2 \in usecret(S) or K2' \in usecret(S))) .
+  ceq nw(sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N)) = 
+      (hbrRepM(B,B,A, pubK(B) || ecPublic(K2) || encapsC(PK',K2') ||
+        sign(priK(B), h(V || V2 || CSs || CSs2 || 
+          pubK(B) || PK || PK' || ecPublic(K2) || encapsC(PK',K2') ||
+          h(ecShare(PK,K2) || encapsK(PK',K2')) || A || B )), time(S)) , nw(S)) 
+    if c-sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) .
+  ceq usecret(sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N)) = 
+      (K2 K2' usecret(S)) 
+    if c-sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) .
+  ceq time(sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N)) = 
+      s(time(S)) 
+    if c-sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) .
+  eq leakscr(sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N)) = leakscr(S) .
+  ceq knl(sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N)) = 
+      (ecPublic(K2) || encapsC(PK',K2') ||
+       sign(priK(B), h(V || V2 || CSs || CSs2 || 
+          pubK(B) || PK || PK' || ecPublic(K2) || encapsC(PK',K2') ||
+          h(ecShare(PK,K2) || encapsK(PK',K2')) || A || B)) ||
+       knl(S))
+    if c-sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) .
+  ceq sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) = S
+    if not c-sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) .
+
+-- intruder capabilities
+-- generating a ECDH secret key by themself
+  op gEcSecretK : Sys EcSecretK -> Sys {constr}
+  op c-gEcSecretK : Sys EcSecretK -> Bool
+  eq c-gEcSecretK(S,K) = not(K \in usecret(S)) .
+  eq nw(gEcSecretK(S,K)) = nw(S) .
+  ceq usecret(gEcSecretK(S,K)) = (K usecret(S))
+    if c-gEcSecretK(S,K) .
+  eq time(gEcSecretK(S,K)) = time(S) .
+  eq leakscr(gEcSecretK(S,K)) = leakscr(S) .
+  ceq knl(gEcSecretK(S,K)) = (K || ecPublic(K) || knl(S))
+    if c-gEcSecretK(S,K) .
+  ceq gEcSecretK(S,K) = S 
+    if not c-gEcSecretK(S,K) .
+
+-- generating a KEM secret key by themself
+  op gPqSecretK : Sys PqSecretK -> Sys {constr}
+  op c-gPqSecretK : Sys PqSecretK -> Bool
+  eq c-gPqSecretK(S,K') = not(K' \in usecret(S)) .
+  eq nw(gPqSecretK(S,K')) = nw(S) .
+  ceq usecret(gPqSecretK(S,K')) = (K' usecret(S))
+    if c-gPqSecretK(S,K') .
+  eq time(gPqSecretK(S,K')) = time(S) .
+  eq leakscr(gPqSecretK(S,K')) = leakscr(S) .
+  ceq knl(gPqSecretK(S,K')) = (K' || keygen(K') || knl(S))
+    if c-gPqSecretK(S,K') .
+  ceq gPqSecretK(S,K') = S 
+    if not c-gPqSecretK(S,K') .
+
+-- know all possible values of basic data types
+  op gBasic : Sys Prin Version Suites PubKey -> Sys {constr}
+  eq nw(gBasic(S,A,V,CSs,LPK)) = nw(S) .
+  eq usecret(gBasic(S,A,V,CSs,LPK)) = usecret(S) .
+  eq time(gBasic(S,A,V,CSs,LPK)) = time(S) .
+  eq leakscr(gBasic(S,A,V,CSs,LPK)) = leakscr(S) .
+  eq knl(gBasic(S,A,V,CSs,LPK)) = 
+    (A || V || CSs || LPK || knl(S)) .
+
+  op gEcShare : Sys EcSecretK EcPublicK -> Sys {constr}
+  op c-gEcShare : Sys EcSecretK EcPublicK -> Bool
+  eq c-gEcShare(S,K,PK) = (K \in knl(S) and PK \in knl(S)) .
+  eq nw(gEcShare(S,K,PK)) = nw(S) . 
+  eq usecret(gEcShare(S,K,PK)) = usecret(S) . 
+  eq time(gEcShare(S,K,PK)) = time(S) . 
+  eq leakscr(gEcShare(S,K,PK)) = leakscr(S) . 
+  ceq knl(gEcShare(S,K,PK)) = (ecShare(PK,K) || knl(S)) 
+    if c-gEcShare(S,K,PK) . 
+  ceq gEcShare(S,K,PK) = S 
+    if not c-gEcShare(S,K,PK) .
+
+  op gPqShare : Sys PqSecretK PqPublicK -> Sys {constr}
+  op c-gPqShare : Sys PqSecretK PqPublicK -> Bool
+  eq c-gPqShare(S,K',PK') = (K' \in knl(S) and PK' \in knl(S)) .
+  eq nw(gPqShare(S,K',PK')) = nw(S) . 
+  eq usecret(gPqShare(S,K',PK')) = usecret(S) . 
+  eq time(gPqShare(S,K',PK')) = time(S) . 
+  eq leakscr(gPqShare(S,K',PK')) = leakscr(S) . 
+  ceq knl(gPqShare(S,K',PK')) = 
+      (encapsK(PK',K') || encapsC(PK',K') || knl(S)) 
+    if c-gPqShare(S,K',PK') . 
+  ceq gPqShare(S,K',PK') = S 
+    if not c-gPqShare(S,K',PK') .
+
+  op gDecaps : Sys PqSecretK PqCipher -> Sys {constr}
+  op c-gDecaps : Sys PqSecretK PqCipher -> Bool
+  eq c-gDecaps(S,K',C) = (K' \in knl(S) and C \in knl(S)) .
+  eq nw(gDecaps(S,K',C)) = nw(S) . 
+  eq usecret(gDecaps(S,K',C)) = usecret(S) . 
+  eq time(gDecaps(S,K',C)) = time(S) . 
+  eq leakscr(gDecaps(S,K',C)) = leakscr(S) . 
+  ceq knl(gDecaps(S,K',C)) = 
+      (decaps(C,K') || knl(S)) 
+    if c-gDecaps(S,K',C) . 
+  ceq gDecaps(S,K',C) = S 
+    if not c-gDecaps(S,K',C) .
+
+  op g1 : Sys DataL -> Sys {constr}
+  op c-g1 : Sys DataL -> Bool
+  eq c-g1(S,DL) = DL \in knl(S) .
+  eq nw(g1(S,DL)) = nw(S) .
+  eq usecret(g1(S,DL)) = usecret(S) .
+  eq time(g1(S,DL)) = time(S) .
+  eq leakscr(g1(S,DL)) = leakscr(S) .
+  ceq knl(g1(S,DL)) = (h(DL) || knl(S)) 
+    if c-g1(S,DL) .
+  ceq g1(S,DL) = S if not c-g1(S,DL) .
+
+  op g2 : Sys DataL DataL -> Sys {constr}
+  op c-g2 : Sys DataL DataL -> Bool
+  eq c-g2(S,DL,DL2) = (DL \in knl(S) and DL2 \in knl(S)) .
+  eq nw(g2(S,DL,DL2)) = nw(S) .
+  eq usecret(g2(S,DL,DL2)) = usecret(S) .
+  eq time(g2(S,DL,DL2)) = time(S) .
+  eq leakscr(g2(S,DL,DL2)) = leakscr(S) .
+  ceq knl(g2(S,DL,DL2)) = 
+      (sign(DL,DL2) || knl(S)) 
+    if c-g2(S,DL,DL2) .
+  ceq g2(S,DL,DL2) = S if not c-g2(S,DL,DL2) .
+
+  op gSign : Sys PriKeyTime DataL -> Sys {constr}
+  op c-gSign : Sys PriKeyTime DataL -> Bool
+  eq c-gSign(S,LSKT,DL) = (LSKT \in knl(S) and DL \in knl(S)) .
+  eq nw(gSign(S,LSKT,DL)) = nw(S) .
+  eq usecret(gSign(S,LSKT,DL)) = usecret(S) .
+  eq time(gSign(S,LSKT,DL)) = time(S) .
+  eq leakscr(gSign(S,LSKT,DL)) = leakscr(S) .
+  ceq knl(gSign(S,LSKT,DL)) = 
+      (sign(priK(LSKT), DL) || knl(S)) 
+    if c-gSign(S,LSKT,DL) .
+  ceq gSign(S,LSKT,DL) = S if not c-gSign(S,LSKT,DL) .
+
+-- faking protocol version exchange messages
+  op fkVer : Sys Prin Prin Version -> Sys {constr}
+  op c-fkVer : Sys Prin Prin Version -> Bool
+  eq c-fkVer(S,A,B,V) = (V \in knl(S)) .
+  ceq nw(fkVer(S,A,B,V)) = (verM(intru,A,B, V) , nw(S))
+    if c-fkVer(S,A,B,V) .
+  eq usecret(fkVer(S,A,B,V)) = usecret(S) .
+  eq time(fkVer(S,A,B,V)) = time(S) .
+  eq leakscr(fkVer(S,A,B,V)) = leakscr(S) .
+  eq knl(fkVer(S,A,B,V)) = knl(S) .
+  ceq fkVer(S,A,B,V) = S if not c-fkVer(S,A,B,V) .
+
+-- faking key exchange initialization messages
+  op fkKexInit : Sys Prin Prin Suites -> Sys {constr}
+  op c-fkKexInit : Sys Prin Prin Suites -> Bool
+  eq c-fkKexInit(S,A,B,CSs) = (CSs \in knl(S)) .
+  ceq nw(fkKexInit(S,A,B,CSs)) = (kexInitM(intru,A,B, CSs) , nw(S))
+    if c-fkKexInit(S,A,B,CSs) .
+  eq usecret(fkKexInit(S,A,B,CSs)) = usecret(S) .
+  eq time(fkKexInit(S,A,B,CSs)) = time(S) .
+  eq leakscr(fkKexInit(S,A,B,CSs)) = leakscr(S) .
+  eq knl(fkKexInit(S,A,B,CSs)) = knl(S) .
+  ceq fkKexInit(S,A,B,CSs) = S if not c-fkKexInit(S,A,B,CSs) .
+
+-- faking HBR INIT messages
+  op fkHbrInit : Sys Prin Prin EcPublicK PqPublicK -> Sys {constr}
+  op c-fkHbrInit : Sys Prin Prin EcPublicK PqPublicK -> Bool
+  eq c-fkHbrInit(S,A,B,PK,PK') = 
+    (PK \in knl(S) and PK' \in knl(S)) .
+  ceq nw(fkHbrInit(S,A,B,PK,PK')) = 
+      (hbrIniM(intru,A,B, PK || PK', time(S)) , nw(S))
+    if c-fkHbrInit(S,A,B,PK,PK') .
+  eq usecret(fkHbrInit(S,A,B,PK,PK')) = usecret(S) .
+  ceq time(fkHbrInit(S,A,B,PK,PK')) = s(time(S))
+    if c-fkHbrInit(S,A,B,PK,PK') .
+  eq leakscr(fkHbrInit(S,A,B,PK,PK')) = leakscr(S) .
+  eq knl(fkHbrInit(S,A,B,PK,PK')) = knl(S) .
+  ceq fkHbrInit(S,A,B,PK,PK') = S if not c-fkHbrInit(S,A,B,PK,PK') .
+
+-- faking HBR REPLY messages
+  op fkHbrReply : Sys Prin Prin PubKey EcPublicK PqCipher Data -> Sys {constr}
+  op c-fkHbrReply : Sys Prin Prin PubKey EcPublicK PqCipher Data -> Bool
+  eq c-fkHbrReply(S,A,B,LPK,PK,C,SIGN) = 
+    (LPK \in knl(S) and
+     PK \in knl(S) and
+     C \in knl(S) and
+     SIGN \in knl(S)) .
+  ceq nw(fkHbrReply(S,A,B,LPK,PK,C,SIGN)) = 
+      (hbrRepM(intru,A,B, LPK || PK || C || SIGN, time(S)) , nw(S))
+    if c-fkHbrReply(S,A,B,LPK,PK,C,SIGN) .
+  eq usecret(fkHbrReply(S,A,B,LPK,PK,C,SIGN)) = usecret(S) .
+  ceq time(fkHbrReply(S,A,B,LPK,PK,C,SIGN)) = s(time(S))
+    if c-fkHbrReply(S,A,B,LPK,PK,C,SIGN) .
+  eq leakscr(fkHbrReply(S,A,B,LPK,PK,C,SIGN)) = leakscr(S) .
+  eq knl(fkHbrReply(S,A,B,LPK,PK,C,SIGN)) = knl(S) .
+  ceq fkHbrReply(S,A,B,LPK,PK,C,SIGN) = S 
+    if not c-fkHbrReply(S,A,B,LPK,PK,C,SIGN) .
+
+-- break ECDH
+  op gEcKey : Sys EcPublicK EcPublicK -> Sys {constr}
+  op c-gEcKey : Sys EcPublicK EcPublicK -> Bool
+  eq c-gEcKey(S,PK,PK2) = (PK \in knl(S) and PK2 \in knl(S)) .
+  eq nw(gEcKey(S,PK,PK2)) = nw(S) . 
+  eq usecret(gEcKey(S,PK,PK2)) = usecret(S) . 
+  eq time(gEcKey(S,PK,PK2)) = time(S) . 
+  eq leakscr(gEcKey(S,PK,PK2)) = leakscr(S) . 
+  ceq knl(gEcKey(S,PK,PK2)) = 
+      ((ecSecret(PK) | ecSecret(PK2)) || knl(S)) 
+    if c-gEcKey(S,PK,PK2) . 
+  ceq gEcKey(S,PK,PK2) = S 
+    if not c-gEcKey(S,PK,PK2) .
+
+-- secret compromise
+-- compromise of long-term private key of servers (private host keys)
+  op lLtK : Sys Prin -> Sys {constr}
+  op c-lLtK : Sys Prin -> Bool
+  eq c-lLtK(S,A) = not(priK(A) \in' leakscr(S)) .
+  eq nw(lLtK(S,A)) = nw(S) . 
+  eq usecret(lLtK(S,A)) = usecret(S) . 
+  ceq time(lLtK(S,A)) = s(time(S)) if c-lLtK(S,A) . 
+  ceq leakscr(lLtK(S,A)) = 
+      (pkNPair(priK(A), time(S)) leakscr(S)) 
+    if c-lLtK(S,A) . 
+  ceq knl(lLtK(S,A)) = (pkNPair(priK(A), time(S)) || knl(S)) 
+    if c-lLtK(S,A) . 
+  ceq lLtK(S,A) = S if not c-lLtK(S,A) .
+
+-- compromise of shared secrets
+  op lShSecret : Sys Prin Prin Version Version Suites Suites
+    EcSecretK PqSecretK EcSecretK PqSecretK Nat Nat -> Sys {constr}
+  op c-lShSecret : Sys Prin Prin Version Version Suites Suites
+    EcSecretK PqSecretK EcSecretK PqSecretK Nat Nat -> Bool
+  eq c-lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2) = 
+    (hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and
+     hbrRepM(B,B,A, pubK(B) || ecPublic(K2) || encapsC(keygen(K'),K2') ||
+        sign(priK(B), h(V || V2 || CSs || CSs2 || pubK(B) || 
+          ecPublic(K) || keygen(K') || ecPublic(K2) || encapsC(keygen(K'),K2') ||
+          h((K | K2) || (K' & K2')) || A || B )), N2)
+     \in nw(S)) .
+  eq nw(lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2)) = nw(S) .
+  eq usecret(lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2)) = usecret(S) .
+  ceq time(lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2)) = 
+      s(time(S)) 
+    if c-lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2) .
+  ceq leakscr(lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2)) = 
+      ((K' & K2') leakscr(S)) 
+    if c-lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2) .
+  ceq knl(lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2)) = 
+      ((K' & K2') || knl(S))
+    if c-lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2) .
+  ceq lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2) = S
+    if not c-lShSecret(S,A,B,V,V2,CSs,CSs2,K,K',K2,K2',N,N2) .
+
+-- compromise of KEM secrets
+  op lPqSecretK1 : Sys Prin Prin EcSecretK PqSecretK Nat -> Sys {constr}
+  op c-lPqSecretK1 : Sys Prin Prin EcSecretK PqSecretK Nat -> Bool
+  eq c-lPqSecretK1(S,A,B,K,K',N) = 
+    hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) .
+  eq nw(lPqSecretK1(S,A,B,K,K',N)) = nw(S) . 
+  eq usecret(lPqSecretK1(S,A,B,K,K',N)) = usecret(S) .
+  ceq time(lPqSecretK1(S,A,B,K,K',N)) = s(time(S)) 
+    if c-lPqSecretK1(S,A,B,K,K',N) . 
+  ceq leakscr(lPqSecretK1(S,A,B,K,K',N)) = (K' leakscr(S)) 
+    if c-lPqSecretK1(S,A,B,K,K',N) . 
+  ceq knl(lPqSecretK1(S,A,B,K,K',N)) = (K' || knl(S)) 
+    if c-lPqSecretK1(S,A,B,K,K',N) . 
+  ceq lPqSecretK1(S,A,B,K,K',N) = S 
+    if not c-lPqSecretK1(S,A,B,K,K',N) .
+
+  op lPqSecretK2 : Sys Prin Prin PqPublicK EcSecretK PqSecretK Data Nat -> Sys {constr}
+  op c-lPqSecretK2 : Sys Prin Prin PqPublicK EcSecretK PqSecretK Data Nat -> Bool
+  eq c-lPqSecretK2(S,A,B,PK',K,K',SIGN,N) = 
+    hbrRepM(B,B,A, pubK(B) || ecPublic(K) || encapsC(PK',K') || SIGN, N) \in nw(S) .
+  eq nw(lPqSecretK2(S,A,B,PK',K,K',SIGN,N)) = nw(S) . 
+  eq usecret(lPqSecretK2(S,A,B,PK',K,K',SIGN,N)) = usecret(S) .
+  ceq time(lPqSecretK2(S,A,B,PK',K,K',SIGN,N)) = s(time(S)) 
+    if c-lPqSecretK2(S,A,B,PK',K,K',SIGN,N) .
+  ceq leakscr(lPqSecretK2(S,A,B,PK',K,K',SIGN,N)) = (K' leakscr(S)) 
+    if c-lPqSecretK2(S,A,B,PK',K,K',SIGN,N) . 
+  ceq knl(lPqSecretK2(S,A,B,PK',K,K',SIGN,N)) = (K' || knl(S)) 
+    if c-lPqSecretK2(S,A,B,PK',K,K',SIGN,N) . 
+  ceq lPqSecretK2(S,A,B,PK',K,K',SIGN,N) = S 
+    if not c-lPqSecretK2(S,A,B,PK',K,K',SIGN,N) .
+}

@@ -1,0 +1,17 @@
+ipsgopen INV .
+  inv inv9(S:Sys,A2:Prin,A:Prin,B:Prin,PK:EcPublicK,PK':PqPublicK,N:Nat) .
+  inv inv18(S:Sys,A:Prin,B:Prin,V:Version,V2:Version,CSs:Suites, CSs2:Suites,
+    K:EcSecretK,K':PqSecretK,PK2:EcPublicK,C:PqCipher) .
+  generate inv17(S:Sys,B2:Prin,A:Prin,B:Prin,V:Version,V2:Version,
+    CSs:Suites, CSs2:Suites, K:EcSecretK, K':PqSecretK,
+    PK2:EcPublicK,C:PqCipher,N:Nat)
+  induction on S:Sys .
+close
+set-output revised-PQ-SSH/inv17.cafe .
+:save-proof .
+
+eof
+
+load revised-PQ-SSH/pqssh.cafe .  
+load revised-PQ-SSH/invariants.cafe . 
+load revised-PQ-SSH/inputs/input17.cafe .

@@ -1,0 +1,15 @@
+ipsgopen INV .
+  inv inv9(S:Sys,A2:Prin,A:Prin,B:Prin,PK:EcPublicK,PK':PqPublicK,N:Nat) .
+  inv inv11(S:Sys,B2:Prin,A:Prin,B:Prin, PK:EcPublicK, 
+    C:PqCipher, SIGN:Data, N:Nat) .
+  generate inv2(S:Sys, K':PqSecretK)
+  induction on S:Sys .
+close
+set-output revised-PQ-SSH/inv2.cafe .
+:save-proof .
+
+eof
+
+load revised-PQ-SSH/pqssh.cafe .
+load revised-PQ-SSH/invariants.cafe .
+load revised-PQ-SSH/inputs/input2.cafe .

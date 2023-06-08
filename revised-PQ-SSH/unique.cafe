@@ -1,0 +1,10 @@
+open INV .
+  ops a b a2 b2 : -> Prin .
+  ops s : -> Sys .
+  ops v v2 v3 v4 : -> Version .
+  ops css css2 css3 css4 : -> Suites .
+  ops k k2 k3 k4 : -> EcSecretK .
+  ops k' k2' k3' k4' : -> PqSecretK .
+  red unique(s,a,b,v,v2,css,css2,k,k',k2,k2',
+      a2,b2,v3,v4,css3,css4,k3,k3',k4,k4') .
+close

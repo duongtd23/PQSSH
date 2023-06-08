@@ -1,0 +1,12 @@
+ipsgopen INV .
+  generate inv8(S:Sys, PK':PqPublicK)
+  induction on S:Sys .
+close
+set-output revised-PQ-SSH/inv8.cafe .
+:save-proof .
+
+eof
+
+load revised-PQ-SSH/pqssh.cafe .
+load revised-PQ-SSH/invariants.cafe .
+load revised-PQ-SSH/inputs/input8.cafe .
