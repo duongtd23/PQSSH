@@ -1,0 +1,40 @@
+open PRED .
+  ops s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 : -> Sys .
+  ops a b b2 : -> Prin .
+  ops v v2 : -> Version .
+  ops css css2 : -> Suites .
+  ops k k2 : -> EcSecretK .
+  ops d sign : -> Data .
+  op  dl : -> DataL .
+  ops k' k2' : -> PqSecretK .
+  ops c : -> PqCipher .
+
+  eq (k = k2) = false .
+  eq (k' = k2') = false .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+
+  eq c = encapsC(keygen(k'), k2') .
+  eq dl = v || v2 || css || css2 || pubK(b) || 
+    ecPublic(k) || keygen(k') || ecPublic(k2) || c || 
+    h((k | k2) || (k' & k2')) .
+
+  eq s1 = cVer(init,a,b,v) .
+  eq s2 = sVer(s1,a,a,b,v2,v) .
+  eq s3 = cKexInit(s2,b,a,b,css,v,v2) .
+  eq s4 = sKexInit(s3,a,a,b,css2,v,v2,css) .
+  eq s5 = cHbrInit(s4,b,a,b,k,k',v,v2,css,css2) .
+  eq s6 = gBasic(s5,v,css,pubK(b)) .
+  eq s7 = gEcSecretK(s6,k2) .
+  eq s8 = gPqSecretK(s7,k2') .
+  eq s9 = gEcShare(s8,k2,ecPublic(k)) .
+  eq s10 = gPqShare(s9,k2',keygen(k')) .
+  eq s11 = g1(s10,(k | k2) || (k' & k2')) .
+
+  eq s12 = g1(s11,dl) .
+  eq s13 = g2(s12, priK(intru), h(dl)) .  
+  eq s14 = fkHbrReply(s13, b, a, 
+    pubK(b), ecPublic(k2), c, sign(priK(intru), h(dl))) .
+
+  red keySe-f1(s14,intru,a,b,k,k',ecPublic(k2),c,sign(priK(intru), h(dl)), 0, 1) .
+close

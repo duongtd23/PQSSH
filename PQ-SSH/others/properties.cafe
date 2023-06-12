@@ -1,0 +1,97 @@
+mod PRED {
+  pr(PQSSH)
+  var S : Sys
+  vars A B A2 B2 A3 B3 : Prin 
+  vars CSs CSs2 CSs3 CSs4 : Suites
+  vars V V2 V3 V4 : Version
+  vars K K2 K3 K4 : EcSecretK
+  vars PK PK2 : EcPublicK
+  vars D D2 SIGN : Data
+  vars DL DL2 : DataL
+  vars HK : EcShareK
+  vars LPK : PubKey
+  vars K' K2' K3' K4' : PqSecretK
+  vars C C2 : PqCipher
+  vars PK' PK2' : PqPublicK
+  vars N N2 : Nat
+
+-- to show that two principals can successfully complete a protocol execution
+-- see file 'check.cafe'
+  op check : Sys Prin Prin Version Version Suites Suites 
+    EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
+  eq check(S,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
+    (verM(A,A,B,V) \in nw(S) and
+     verM(B,B,A,V2) \in nw(S) and
+     kexInitM(A,A,B,CSs) \in nw(S) and
+     kexInitM(B,B,A,CSs2) \in nw(S) and
+     hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and 
+     hbrRepM(B,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
+     verify(pubK(B), h(V || V2 || CSs || CSs2 || pubK(B) || 
+        ecPublic(K) || keygen(K') || PK2 || C || 
+        h(ecShare(PK2,K) || decaps(C,K'))),
+      SIGN)) .
+
+-- to show that the intruder can learn the ECDH shared key between two principals
+-- see file 'learnEC.cafe'
+  op learnEC : Sys Prin Prin 
+    EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
+  eq learnEC(S,A,B,K,K',PK2,C,SIGN,N,N2) =
+    (hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and 
+     hbrRepM(B,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
+     ecShare(PK2,K) \in knl(S)) .
+
+-- to show that if any sub-constraint in the premise of 'keySe' is eliminated,
+-- the invariant will be no longer valid
+  op keySe-f1 : Sys Prin Prin Prin
+    EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
+  eq keySe-f1(S,B2,A,B,K,K',PK2,C,SIGN,N,N2) =
+    (not(A = intru or B = intru) and 
+      hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and 
+      hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
+      not(decaps(C,K') \in leakscr(S)) and
+      not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
+      not(priK(B) \in' leakscr(S)))
+    implies not(h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)) .
+
+  op keySe-f2 : Sys Prin Prin Prin Version Version Suites Suites
+    EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
+  eq keySe-f2(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
+    (not(A = intru or B = intru) and 
+      hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and 
+      hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
+      verify(pubK(B), h(V || V2 || CSs || CSs2 || 
+          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
+          h(ecShare(PK2,K) || decaps(C,K'))),
+        SIGN) and
+      not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
+      not(priK(B) \in' leakscr(S)))
+    implies not(h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)) .
+  
+  op keySe-f3 : Sys Prin Prin Prin Version Version Suites Suites
+    EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
+  eq keySe-f3(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
+    (not(A = intru or B = intru) and 
+      hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and 
+      hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
+      verify(pubK(B), h(V || V2 || CSs || CSs2 || 
+          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
+          h(ecShare(PK2,K) || decaps(C,K'))),
+        SIGN) and
+      not(decaps(C,K') \in leakscr(S)) and
+      not(priK(B) \in' leakscr(S)))
+    implies not(h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)) .
+
+  op keySe-f4 : Sys Prin Prin Prin Version Version Suites Suites
+    EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
+  eq keySe-f4(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
+    (not(A = intru or B = intru) and 
+      hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and 
+      hbrRepM(B2,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
+      verify(pubK(B), h(V || V2 || CSs || CSs2 || 
+          pubK(B) || ecPublic(K) || keygen(K') || PK2 || C ||
+          h(ecShare(PK2,K) || decaps(C,K'))),
+        SIGN) and
+      not(decaps(C,K') \in leakscr(S)) and
+      not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)))
+    implies not(h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)) .
+}
