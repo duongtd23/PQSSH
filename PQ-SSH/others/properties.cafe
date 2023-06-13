@@ -36,12 +36,15 @@ mod PRED {
   op learnEC : Sys Prin Prin 
     EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq learnEC(S,A,B,K,K',PK2,C,SIGN,N,N2) =
-    (hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and 
+    (not(A = intru or B = intru) and 
+     hbrIniM(A,A,B, ecPublic(K) || keygen(K'), N) \in nw(S) and 
      hbrRepM(B,B,A, pubK(B) || PK2 || C || SIGN, N2) \in nw(S) and
      ecShare(PK2,K) \in knl(S)) .
 
 -- to show that if any sub-constraint in the premise of 'keySe' is eliminated,
 -- the invariant will be no longer valid
+-- "(1) the signature of the exchange hash in the KEX_HBR_REPLY message is valid" 
+-- is eliminated
   op keySe-f1 : Sys Prin Prin Prin
     EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq keySe-f1(S,B2,A,B,K,K',PK2,C,SIGN,N,N2) =
@@ -53,6 +56,7 @@ mod PRED {
       not(priK(B) \in' leakscr(S)))
     implies not(h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)) .
 
+-- "(2) the KEM shared secret is not revealed" is eliminated
   op keySe-f2 : Sys Prin Prin Prin Version Version Suites Suites
     EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq keySe-f2(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
@@ -66,7 +70,9 @@ mod PRED {
       not(K' \in leakscr(S) or pqSecret(C) \in leakscr(S)) and
       not(priK(B) \in' leakscr(S)))
     implies not(h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)) .
-  
+
+-- "(3) the two corresponding KEM ephemeral secret keys are not revealed" 
+-- is eliminated.
   op keySe-f3 : Sys Prin Prin Prin Version Version Suites Suites
     EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq keySe-f3(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =
@@ -81,6 +87,7 @@ mod PRED {
       not(priK(B) \in' leakscr(S)))
     implies not(h(ecShare(PK2,K) || decaps(C,K')) \in knl(S)) .
 
+-- "(4) the private host key of the server is not revealed" is eliminated.
   op keySe-f4 : Sys Prin Prin Prin Version Version Suites Suites
     EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq keySe-f4(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =

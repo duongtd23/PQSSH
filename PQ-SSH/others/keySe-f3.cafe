@@ -1,0 +1,71 @@
+-- if the KEM ephemeral secret key on the client side is compromised
+open PRED .
+  ops s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 : -> Sys .
+  ops a b b2 : -> Prin .
+  ops v v2 : -> Version .
+  ops css css2 : -> Suites .
+  ops k k2 : -> EcSecretK .
+  ops d sign : -> Data .
+  op  dl : -> DataL .
+  ops k' k2' : -> PqSecretK .
+  ops c : -> PqCipher .
+
+  eq (k = k2) = false .
+  eq (k' = k2') = false .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+
+  eq c = encapsC(keygen(k'), k2') .
+  eq dl = v || v2 || css || css2 || pubK(b) || 
+    ecPublic(k) || keygen(k') || ecPublic(k2) || c || 
+    h((k | k2) || (k' & k2')) .
+
+  eq s1 = cVer(init,a,b,v) .
+  eq s2 = sVer(s1,a,a,b,v2,v) .
+  eq s3 = cKexInit(s2,b,a,b,css,v,v2) .
+  eq s4 = sKexInit(s3,a,a,b,css2,v,v2,css) .
+  eq s5 = cHbrInit(s4,b,a,b,k,k',v,v2,css,css2) .
+  eq s6 = sHbrReply(s5,a,a,b,k2,k2',v,v2,css,css2,ecPublic(k),keygen(k'),0) .
+  eq s7 = gEcKey(s6,ecPublic(k),ecPublic(k2)) .
+  eq s8 = lPqSecretK1(s7,a,b,k,k',0) .
+  eq s9 = gDecaps(s8,k',encapsC(keygen(k'), k2')) .
+  eq s10 = g1(s9, (k | k2) || (k' & k2')) .
+
+  red keySe-f3(s10,b,a,b,v,v2,css,css2,k,k',ecPublic(k2),c,sign(priK(b), h(dl)), 0, 1) .
+close
+
+-- if the KEM ephemeral secret key on the server side is compromised
+open PRED .
+  ops s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 : -> Sys .
+  ops a b b2 : -> Prin .
+  ops v v2 : -> Version .
+  ops css css2 : -> Suites .
+  ops k k2 : -> EcSecretK .
+  ops d sign : -> Data .
+  op  dl : -> DataL .
+  ops k' k2' : -> PqSecretK .
+  ops c : -> PqCipher .
+
+  eq (k = k2) = false .
+  eq (k' = k2') = false .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+
+  eq c = encapsC(keygen(k'), k2') .
+  eq dl = v || v2 || css || css2 || pubK(b) || 
+    ecPublic(k) || keygen(k') || ecPublic(k2) || c || 
+    h((k | k2) || (k' & k2')) .
+
+  eq s1 = cVer(init,a,b,v) .
+  eq s2 = sVer(s1,a,a,b,v2,v) .
+  eq s3 = cKexInit(s2,b,a,b,css,v,v2) .
+  eq s4 = sKexInit(s3,a,a,b,css2,v,v2,css) .
+  eq s5 = cHbrInit(s4,b,a,b,k,k',v,v2,css,css2) .
+  eq s6 = sHbrReply(s5,a,a,b,k2,k2',v,v2,css,css2,ecPublic(k),keygen(k'),0) .
+  eq s7 = gEcKey(s6,ecPublic(k),ecPublic(k2)) .
+  eq s8 = lPqSecretK2(s7,a,b,keygen(k'),k2,k2',sign(priK(b), h(dl)),1) .
+  eq s9 = gPqShare(s8,k2',keygen(k')) .
+  eq s10 = g1(s9, (k | k2) || (k' & k2')) .
+
+  red keySe-f3(s10,b,a,b,v,v2,css,css2,k,k',ecPublic(k2),c,sign(priK(b), h(dl)), 0, 1) .
+close

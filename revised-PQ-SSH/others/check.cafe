@@ -1,4 +1,4 @@
-open INV .
+open PRED .
   ops s1 s2 s3 s4 s5 s6 s7 : -> Sys .
   ops a b : -> Prin .
   ops v v2 : -> Version .
@@ -24,5 +24,5 @@ open INV .
   eq sign = sign(priK(b), h(v || v2 || css || css2 || 
     pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || 
     h((k | k2) || (k' & k2')) || a || b)) .
-  red che(s6,a,b,v,v2,css,css2,k,k',pk2,c,sign,0,1) .
+  red check(s6,a,b,v,v2,css,css2,k,k',pk2,c,sign,0,1) .
 close

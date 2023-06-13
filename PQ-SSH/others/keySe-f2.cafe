@@ -1,5 +1,5 @@
 open PRED .
-  ops s1 s2 s3 s4 s5 s6 s7 : -> Sys .
+  ops s1 s2 s3 s4 s5 s6 s7 s8 s9 : -> Sys .
   ops a b b2 : -> Prin .
   ops v v2 : -> Version .
   ops css css2 : -> Suites .
@@ -26,6 +26,8 @@ open PRED .
   eq s5 = cHbrInit(s4,b,a,b,k,k',v,v2,css,css2) .
   eq s6 = sHbrReply(s5,a,a,b,k2,k2',v,v2,css,css2,ecPublic(k),keygen(k'),0) .
   eq s7 = gEcKey(s6,ecPublic(k),ecPublic(k2)) .
+  eq s8 = lShSecret(s7,a,b,v,v2,css,css2,k,k',k2,k2',0,1) .
+  eq s9 = g1(s8, (k | k2) || (k' & k2')) .
 
-  red learnEC(s7,a,b,k,k',ecPublic(k2),c,sign(priK(b), h(dl)), 0, 1) .
+  red keySe-f2(s9,b,a,b,v,v2,css,css2,k,k',ecPublic(k2),c,sign(priK(b), h(dl)), 0, 1) .
 close

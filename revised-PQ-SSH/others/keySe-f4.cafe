@@ -1,10 +1,9 @@
-open INV .
+open PRED .
   ops s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 s15 s16 : -> Sys .
   ops a b b2 : -> Prin .
   ops v v2 : -> Version .
   ops css css2 : -> Suites .
   ops k k2 : -> EcSecretK .
-  ops pk2 : -> EcPublicK .
   ops d sign : -> Data .
   op  dl : -> DataL .
   ops k' k2' : -> PqSecretK .
@@ -12,6 +11,7 @@ open INV .
 
   eq (k = k2) = false .
   eq (k' = k2') = false .
+  eq (a = intru) = false .
   eq (b = intru) = false .
 
   eq c = encapsC(keygen(k'), k2') .
@@ -38,6 +38,6 @@ open INV .
   eq s16 = fkHbrReply(s15, b, a, 
     pubK(b), ecPublic(k2), c, sign(priK(b), h(dl))) .
 
-  red learnSS(s16,intru,a,b,v,v2,css,css2,k,k',
+  red keySe-f4(s16,intru,a,b,v,v2,css,css2,k,k',
     ecPublic(k2), c, sign(priK(b), h(dl)), 1, 2) .
 close
