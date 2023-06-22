@@ -1833,7 +1833,7 @@ open INV .
   eq (priK(b) \in' leakscr(s)) = true .
   eq (n < timeLeak(priK(b),leakscr(s))) = true .
   eq (hbrRepM(b2,b,a,(pubK(b) || pk2 || c || sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k'))) || a || b)))),n) \in nw(s)) = true .
-  red inv11(s,b2,a,b,pk2,c,sign(priK(b),h((v||v2||css||css2||pubK(b)||ecPublic(k)||keygen(k')||pk2||c||h(((k | ecSecret(pk2)) || decaps(c,k')))||a||b))),n) implies inv5(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,n) implies inv5(gPqSecretK(s,r1),b2,a,b,v,v2,css,css2,k,k',pk2,c,n) .
+  red inv11(s,b2,a,b,pk2,c,sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k'))) || a || b))),n) implies inv5(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,n) implies inv5(gPqSecretK(s,r1),b2,a,b,v,v2,css,css2,k,k',pk2,c,n) .
 close
 
 --> true
@@ -1915,7 +1915,7 @@ open INV .
   eq (r1 \in leakscr(s)) = false .
   eq (priK(b) \in' leakscr(s)) = false .
   eq (hbrRepM(b2,b,a,(pubK(b) || pk2 || c || sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k'))) || a || b)))),n) \in nw(s)) = true .
-  red inv11(s,b2,a,b,pk2,c,sign(priK(b),h((v||v2||css||css2||pubK(b)||ecPublic(k)||keygen(k')||pk2||c||h(((k | ecSecret(pk2)) || decaps(c,k')))||a||b))),n) implies inv5(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,n) implies inv5(gPqSecretK(s,r1),b2,a,b,v,v2,css,css2,k,k',pk2,c,n) .
+  red inv11(s,b2,a,b,pk2,c,sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k'))) || a || b))),n) implies inv5(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,n) implies inv5(gPqSecretK(s,r1),b2,a,b,v,v2,css,css2,k,k',pk2,c,n) .
 close
 
 --> true
@@ -3735,4 +3735,4 @@ open INV .
   red inv5(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,n) implies inv5(sVer(s,r1,r2,r3,r4,r5),b2,a,b,v,v2,css,css2,k,k',pk2,c,n) .
 close
 
---> Time taken is 6641ms
+--> Time taken is 6601ms

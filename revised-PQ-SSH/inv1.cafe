@@ -1041,7 +1041,7 @@ open INV .
   eq k2' = r10 .
   eq (r10 \in usecret(s)) = false .
   eq ((r8 & r10) \in knl(s)) = false .
-  red inv11(s,r2,r1,r2,ecPublic(r9),encapsC(keygen(r8),r10),sign(priK(r2),h((r3||r4||r5||r6||pubK(r2)||ecPublic(r7)||keygen(r8)||ecPublic(r9)||encapsC(keygen(r8),r10)||h(((r7 | r9) || (r8 & r10)))||r1||r2))),r12) implies inv1(s,k',k2') implies inv1(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),k',k2') .
+  red inv11(s,r2,r1,r2,ecPublic(r9),encapsC(keygen(r8),r10),sign(priK(r2),h((r3 || r4 || r5 || r6 || pubK(r2) || ecPublic(r7) || keygen(r8) || ecPublic(r9) || encapsC(keygen(r8),r10) || h(((r7 | r9) || (r8 & r10))) || r1 || r2))),r12) implies inv1(s,k',k2') implies inv1(lShSecret(s,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12),k',k2') .
 close
 
 --> true
@@ -1326,4 +1326,4 @@ open INV .
   red inv1(s,k',k2') implies inv1(sVer(s,r1,r2,r3,r4,r5),k',k2') .
 close
 
---> Time taken is 1576ms
+--> Time taken is 1477ms

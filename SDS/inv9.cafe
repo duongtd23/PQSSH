@@ -1,761 +1,761 @@
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op s : -> Sys .
-	red inv9(init,b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op s : -> Sys .
+  red inv9(init,b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg1(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg1(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg1(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg1(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq a = r2 .
-	eq b = r1 .
-	eq b2 = intru .
-	eq r3 = senc(k,(r2 || r1)) .
-	eq (senc(k,(r2 || r1)) \in knl(s)) = true .
-	eq time(s) = n .
-	eq (k \in usecret(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq r3 = senc(k,(r2 || r1)) .
+  eq (senc(k,(r2 || r1)) \in knl(s)) = true .
+  eq time(s) = n .
+  eq (k \in usecret(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq a = r2 .
-	eq b = r1 .
-	eq b2 = intru .
-	eq r3 = senc(k,(r2 || r1)) .
-	eq (senc(k,(r2 || r1)) \in knl(s)) = true .
-	eq time(s) = n .
-	eq (k \in usecret(s)) = false .
-	eq (msg2(intru,r1,r2,senc(k,(r2 || r1)),n) \in nw(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq r3 = senc(k,(r2 || r1)) .
+  eq (senc(k,(r2 || r1)) \in knl(s)) = true .
+  eq time(s) = n .
+  eq (k \in usecret(s)) = false .
+  eq (msg2(intru,r1,r2,senc(k,(r2 || r1)),n) \in nw(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true, use inv10 as a lemma
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq a = r2 .
-	eq b = r1 .
-	eq b2 = intru .
-	eq r3 = senc(k,(r2 || r1)) .
-	eq (senc(k,(r2 || r1)) \in knl(s)) = true .
-	eq time(s) = n .
-	eq (k \in usecret(s)) = false .
-	eq (msg2(intru,r1,r2,senc(k,(r2 || r1)),n) \in nw(s)) = false .
-	red inv10(s,r2,r1,k) implies inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq r3 = senc(k,(r2 || r1)) .
+  eq (senc(k,(r2 || r1)) \in knl(s)) = true .
+  eq time(s) = n .
+  eq (k \in usecret(s)) = false .
+  eq (msg2(intru,r1,r2,senc(k,(r2 || r1)),n) \in nw(s)) = false .
+  red inv10(s,r2,r1,k) implies inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq a = r2 .
-	eq b = r1 .
-	eq b2 = intru .
-	eq r3 = senc(k,(r2 || r1)) .
-	eq (senc(k,(r2 || r1)) \in knl(s)) = true .
-	eq (time(s) = n) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq r3 = senc(k,(r2 || r1)) .
+  eq (senc(k,(r2 || r1)) \in knl(s)) = true .
+  eq (time(s) = n) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq a = r2 .
-	eq b = r1 .
-	eq b2 = intru .
-	eq r3 = senc(k,(r2 || r1)) .
-	eq (senc(k,(r2 || r1)) \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq r3 = senc(k,(r2 || r1)) .
+  eq (senc(k,(r2 || r1)) \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq a = r2 .
-	eq b = r1 .
-	eq b2 = intru .
-	eq (r3 = senc(k,(r2 || r1))) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq b2 = intru .
+  eq (r3 = senc(k,(r2 || r1))) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq a = r2 .
-	eq b = r1 .
-	eq (b2 = intru) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq a = r2 .
+  eq b = r1 .
+  eq (b2 = intru) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq a = r2 .
-	eq (b = r1) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq a = r2 .
+  eq (b = r1) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = true .
-	eq (a = r2) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = true .
+  eq (a = r2) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Data .
-	op s : -> Sys .
-	eq (r3 \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Data .
+  op s : -> Sys .
+  eq (r3 \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(fkmsg2(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Data .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(g2(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Data .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(g2(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Data .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (r2 \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(g2(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Data .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(g2(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Data .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(g2(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Data .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(g2(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq r1 = intru .
-	red inv9(s,b2,a,b,k,n) implies inv9(g21(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq r1 = intru .
+  red inv9(s,b2,a,b,k,n) implies inv9(g21(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 = intru) = false .
-	eq (priK(r1) \in knl(s)) = true .
-	eq (aenc(pubK(r1),r2) \in knl(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(g21(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 = intru) = false .
+  eq (priK(r1) \in knl(s)) = true .
+  eq (aenc(pubK(r1),r2) \in knl(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(g21(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 = intru) = false .
-	eq (priK(r1) \in knl(s)) = true .
-	eq (aenc(pubK(r1),r2) \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(g21(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 = intru) = false .
+  eq (priK(r1) \in knl(s)) = true .
+  eq (aenc(pubK(r1),r2) \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(g21(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 = intru) = false .
-	eq (priK(r1) \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(g21(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 = intru) = false .
+  eq (priK(r1) \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(g21(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Data .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (senc(r1,r2) \in knl(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(g22(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Data .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (senc(r1,r2) \in knl(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(g22(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Data .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = true .
-	eq (senc(r1,r2) \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(g22(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Data .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (senc(r1,r2) \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(g22(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Data .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(g22(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Data .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(g22(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq r1 = intru .
-	red inv9(s,b2,a,b,k,n) implies inv9(g23(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq r1 = intru .
+  red inv9(s,b2,a,b,k,n) implies inv9(g23(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 = intru) = false .
-	eq (aenc(priK(r1),r2) \in knl(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(g23(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 = intru) = false .
+  eq (aenc(priK(r1),r2) \in knl(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(g23(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> DataL .
-	op s : -> Sys .
-	eq (r1 = intru) = false .
-	eq (aenc(priK(r1),r2) \in knl(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(g23(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> DataL .
+  op s : -> Sys .
+  eq (r1 = intru) = false .
+  eq (aenc(priK(r1),r2) \in knl(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(g23(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> PubKey .
-	op s : -> Sys .
-	red inv9(s,b2,a,b,k,n) implies inv9(gBasic(s,r1,r2),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> PubKey .
+  op s : -> Sys .
+  red inv9(s,b2,a,b,k,n) implies inv9(gBasic(s,r1,r2),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Secret .
-	op s : -> Sys .
-	eq (r1 \in usecret(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(gSecret(s,r1),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Secret .
+  op s : -> Sys .
+  eq (r1 \in usecret(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(gSecret(s,r1),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Secret .
-	op s : -> Sys .
-	eq (r1 \in usecret(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(gSecret(s,r1),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Secret .
+  op s : -> Sys .
+  eq (r1 \in usecret(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(gSecret(s,r1),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Secret .
-	op s : -> Sys .
-	eq (r3 \in usecret(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(send1(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Secret .
+  op s : -> Sys .
+  eq (r3 \in usecret(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(send1(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Secret .
-	op s : -> Sys .
-	eq (r3 \in usecret(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(send1(s,r1,r2,r3),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Secret .
+  op s : -> Sys .
+  eq (r3 \in usecret(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(send1(s,r1,r2,r3),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq r6 = aenc(priK(r2),(r3 || r7)) .
-	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
-	eq a = r2 .
-	eq b = r3 .
-	eq b2 = r3 .
-	eq k = r7 .
-	eq time(s) = n .
-	eq (r7 \in usecret(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq r6 = aenc(priK(r2),(r3 || r7)) .
+  eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+  eq a = r2 .
+  eq b = r3 .
+  eq b2 = r3 .
+  eq k = r7 .
+  eq time(s) = n .
+  eq (r7 \in usecret(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq r6 = aenc(priK(r2),(r3 || r7)) .
-	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
-	eq a = r2 .
-	eq b = r3 .
-	eq b2 = r3 .
-	eq k = r7 .
-	eq time(s) = n .
-	eq (r7 \in usecret(s)) = false .
-	eq (msg2(r3,r3,r2,senc(r7,(r2 || r3)),n) \in nw(s)) = true .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq r6 = aenc(priK(r2),(r3 || r7)) .
+  eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+  eq a = r2 .
+  eq b = r3 .
+  eq b2 = r3 .
+  eq k = r7 .
+  eq time(s) = n .
+  eq (r7 \in usecret(s)) = false .
+  eq (msg2(r3,r3,r2,senc(r7,(r2 || r3)),n) \in nw(s)) = true .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true, use inv11 as a lemma
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq r6 = aenc(priK(r2),(r3 || r7)) .
-	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
-	eq a = r2 .
-	eq b = r3 .
-	eq b2 = r3 .
-	eq k = r7 .
-	eq time(s) = n .
-	eq (r7 \in usecret(s)) = false .
-	eq (msg2(r3,r3,r2,senc(r7,(r2 || r3)),n) \in nw(s)) = false .
-	red inv11(s,r1,r2,r3,r7,r5) implies inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq r6 = aenc(priK(r2),(r3 || r7)) .
+  eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+  eq a = r2 .
+  eq b = r3 .
+  eq b2 = r3 .
+  eq k = r7 .
+  eq time(s) = n .
+  eq (r7 \in usecret(s)) = false .
+  eq (msg2(r3,r3,r2,senc(r7,(r2 || r3)),n) \in nw(s)) = false .
+  red inv11(s,r1,r2,r3,r7,r5) implies inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq r6 = aenc(priK(r2),(r3 || r7)) .
-	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
-	eq a = r2 .
-	eq b = r3 .
-	eq b2 = r3 .
-	eq k = r7 .
-	eq (time(s) = n) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq r6 = aenc(priK(r2),(r3 || r7)) .
+  eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+  eq a = r2 .
+  eq b = r3 .
+  eq b2 = r3 .
+  eq k = r7 .
+  eq (time(s) = n) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq r6 = aenc(priK(r2),(r3 || r7)) .
-	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
-	eq a = r2 .
-	eq b = r3 .
-	eq b2 = r3 .
-	eq (k = r7) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq r6 = aenc(priK(r2),(r3 || r7)) .
+  eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+  eq a = r2 .
+  eq b = r3 .
+  eq b2 = r3 .
+  eq (k = r7) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq r6 = aenc(priK(r2),(r3 || r7)) .
-	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
-	eq a = r2 .
-	eq b = r3 .
-	eq (b2 = r3) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq r6 = aenc(priK(r2),(r3 || r7)) .
+  eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+  eq a = r2 .
+  eq b = r3 .
+  eq (b2 = r3) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq r6 = aenc(priK(r2),(r3 || r7)) .
-	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
-	eq a = r2 .
-	eq (b = r3) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq r6 = aenc(priK(r2),(r3 || r7)) .
+  eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+  eq a = r2 .
+  eq (b = r3) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq r6 = aenc(priK(r2),(r3 || r7)) .
-	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
-	eq (a = r2) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq r6 = aenc(priK(r2),(r3 || r7)) .
+  eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = true .
+  eq (a = r2) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq r6 = aenc(priK(r2),(r3 || r7)) .
-	eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq r6 = aenc(priK(r2),(r3 || r7)) .
+  eq (msg1(r1,r2,r3,aenc(pubK(r3),aenc(priK(r2),(r3 || r7))),r5) \in nw(s)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq r4 = aenc(pubK(r3),r6) .
-	eq (r6 = aenc(priK(r2),(r3 || r7))) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq r4 = aenc(pubK(r3),r6) .
+  eq (r6 = aenc(priK(r2),(r3 || r7))) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
 --> true
 open INV .
-	op a : -> Prin .
-	op b : -> Prin .
-	op b2 : -> Prin .
-	op k : -> Secret .
-	op n : -> Nat .
-	op r1 : -> Prin .
-	op r2 : -> Prin .
-	op r3 : -> Prin .
-	op r4 : -> Data .
-	op r5 : -> Nat .
-	op r6 : -> Data .
-	op r7 : -> Secret .
-	op s : -> Sys .
-	eq (r4 = aenc(pubK(r3),r6)) = false .
-	red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op k : -> Secret .
+  op n : -> Nat .
+  op r1 : -> Prin .
+  op r2 : -> Prin .
+  op r3 : -> Prin .
+  op r4 : -> Data .
+  op r5 : -> Nat .
+  op r6 : -> Data .
+  op r7 : -> Secret .
+  op s : -> Sys .
+  eq (r4 = aenc(pubK(r3),r6)) = false .
+  red inv9(s,b2,a,b,k,n) implies inv9(send2(s,r1,r2,r3,r4,r5,r6,r7),b2,a,b,k,n) .
 close
 
---> Time taken is 274ms
+--> Time taken is 251ms
