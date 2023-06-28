@@ -1,0 +1,13 @@
+ipsgopen INV .
+  generate inv0(S:Sys, K:EcSecretK, K':PqSecretK,
+    PK2:EcPublicK,C:PqCipher)
+  induction on S:Sys .
+close
+set-output improved-PQ-SSH/inv0.cafe .
+:save-proof .
+
+eof
+
+load improved-PQ-SSH/pqssh.cafe .
+load improved-PQ-SSH/invariants.cafe .
+load improved-PQ-SSH/inputs/input0.cafe .

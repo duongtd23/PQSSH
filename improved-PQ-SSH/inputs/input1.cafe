@@ -8,11 +8,11 @@ ipsgopen INV .
   generate inv1(S:Sys, K':PqSecretK, K2':PqSecretK)
   induction on S:Sys .
 close
-set-output revised-PQ-SSH/inv1.cafe .
+set-output improved-PQ-SSH/inv1.cafe .
 :save-proof .
 
 eof
 
-load revised-PQ-SSH/pqssh.cafe .
-load revised-PQ-SSH/invariants.cafe .
-load revised-PQ-SSH/inputs/input1.cafe .
+load improved-PQ-SSH/pqssh.cafe .
+load improved-PQ-SSH/invariants.cafe .
+load improved-PQ-SSH/inputs/input1.cafe .

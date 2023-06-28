@@ -6,7 +6,7 @@ In this repository, you can find:
 
 2. `PQ-SSH`: the formal analysis of the original Post-quantum Hybrid Key Exchange SSH Transport Layer Protocol (PQ SSH), including the protocol specification, the proofs verifying the protocol enjoy three properties, and the counterexample of the authentication property. Please check README in the folder.
 
-3. `revised-PQ-SSH`: the formal verification of the revised protocol, which is proposed in order to make the protocol enjoy the authentication property. Please check README in the folder.
+3. `improved-PQ-SSH`: the formal verification of the improved protocol, which is proposed in order to make the protocol enjoy the authentication property. Please check README in the folder.
 
 
 ## Tools installation

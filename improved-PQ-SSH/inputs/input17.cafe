@@ -7,11 +7,11 @@ ipsgopen INV .
     PK2:EcPublicK,C:PqCipher,N:Nat)
   induction on S:Sys .
 close
-set-output revised-PQ-SSH/inv17.cafe .
+set-output improved-PQ-SSH/inv17.cafe .
 :save-proof .
 
 eof
 
-load revised-PQ-SSH/pqssh.cafe .  
-load revised-PQ-SSH/invariants.cafe . 
-load revised-PQ-SSH/inputs/input17.cafe .
+load improved-PQ-SSH/pqssh.cafe .  
+load improved-PQ-SSH/invariants.cafe . 
+load improved-PQ-SSH/inputs/input17.cafe .

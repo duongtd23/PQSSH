@@ -1,0 +1,12 @@
+ipsgopen INV .
+  generate inv15(S:Sys,A:Prin,LSKT:PriKeyTime)
+  induction on S:Sys .
+close
+set-output improved-PQ-SSH/inv15.cafe .
+:save-proof .
+
+eof
+
+load improved-PQ-SSH/pqssh.cafe .
+load improved-PQ-SSH/invariants.cafe .
+load improved-PQ-SSH/inputs/input15.cafe .

@@ -5,11 +5,11 @@ ipsgopen INV .
     K:EcSecretK,K':PqSecretK,PK2:EcPublicK,C:PqCipher)
   induction on S:Sys .
 close
-set-output revised-PQ-SSH/inv13.cafe .
+set-output improved-PQ-SSH/inv13.cafe .
 :save-proof .
 
 eof
 
-load revised-PQ-SSH/pqssh.cafe .
-load revised-PQ-SSH/invariants.cafe .
-load revised-PQ-SSH/inputs/input13.cafe .
+load improved-PQ-SSH/pqssh.cafe .
+load improved-PQ-SSH/invariants.cafe .
+load improved-PQ-SSH/inputs/input13.cafe .
