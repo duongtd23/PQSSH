@@ -102,11 +102,11 @@ mod* PRINCIPAL {
   ceq (s(N) < N2) = false if not(N < N2) .
   eq (N < N) = false .
 }
-mod! PROTOCOL-VERSION {
+mod* PROTOCOL-VERSION {
   [Version]
 }
 -- supported algorithms
-mod! CIPHER-SUITE {
+mod* CIPHER-SUITE {
   [Suites]
 }
 mod! DATA {
@@ -403,7 +403,7 @@ mod! NETWORK {
 view TRIV2DATA from TRIV to DATA {
   sort Elt -> Data
 }
-mod PQSSH {
+mod* PQSSH {
   pr(NETWORK)
   pr(SET(D <= TRIV2DATA)*{sort Set -> SecretKS})
 

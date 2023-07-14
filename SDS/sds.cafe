@@ -10,7 +10,7 @@ mod* PRINCIPAL {
   eq (priK(A) = priK(B)) = (A = B) .
   eq (pubK(A) = pubK(B)) = (A = B) .
 }
-mod! SECRET {
+mod* SECRET {
   [Secret]
 }
 mod! DATA {
@@ -142,7 +142,7 @@ mod! NETWORK {
 view TRIV2DATA from TRIV to DATA {
   sort Elt -> Data
 }
-mod PROTOCOL {
+mod* PROTOCOL {
   pr(NETWORK)
   pr(SET(D <= TRIV2DATA)*{sort Set -> SecretSet})
 
