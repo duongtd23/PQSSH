@@ -2,12 +2,15 @@
 mod! ECDH {
   [EcSecretK EcPublicK EcShareK]
 
--- C (or S) randomly chooses an ephemeral secret key, from that
--- compute the corresponding public key
+-- the associated ECDH public key is derived from a secret key
   op ecPublic : EcSecretK -> EcPublicK {constr}
+-- constructor of a shared key is a secret key pair
   op _|_ : EcSecretK EcSecretK -> EcShareK {constr comm}
-  op ecSecret : EcPublicK -> EcSecretK
+-- a shared key is computed from a public and a secret keys
   op ecShare : EcPublicK EcSecretK -> EcShareK
+
+-- projection function
+  op ecSecret : EcPublicK -> EcSecretK
 
   vars K K2 K3 K4 : EcSecretK
   vars PK PK2 : EcPublicK
@@ -26,14 +29,19 @@ mod! ECDH {
 mod! PQ-KEM {
   [PqSecretK PqPublicK PqCipher PqShareK]
 
--- C (or S) randomly chooses an ephemeral secret key, from that
--- compute the corresponding public key
+-- KeyGen and Encaps are probabilistic, 
+-- so we must add an argument of PqSecretK
   op keygen  : PqSecretK -> PqPublicK {constr}
+-- Encaps: returns ciphertext
   op encapsC : PqPublicK PqSecretK -> PqCipher {constr}
+-- Encaps: returns shared key
   op encapsK : PqPublicK PqSecretK -> PqShareK
   op decaps  : PqCipher  PqSecretK -> PqShareK
 
+-- constructor of a shared key is a secret key pair
   op _&_ : PqSecretK PqSecretK -> PqShareK {constr}
+
+-- projection functions
   op pqSecret : PqPublicK -> PqSecretK
   op pqSecret : PqCipher  -> PqSecretK
   op pqPublic : PqCipher  -> PqPublicK
@@ -48,10 +56,14 @@ mod! PQ-KEM {
   eq pqPublic(encapsC(PK', K2')) = PK' .
   eq (PK' = PK2') = (pqSecret(PK') = pqSecret(PK2')) .
   eq encapsK(PK',K') = (pqSecret(PK') & K') .
-  -- eq decaps(encapsC(keygen(K'), K2'), K') = (K' & K2') .
-  ceq decaps(C, K') = (K' & pqSecret(C)) if K' = pqSecret(pqPublic(C)) .
-  eq (decaps(C, K') = (K2' & K3')) =
-    (K' = K2' and K3' = pqSecret(C) and K' = pqSecret(pqPublic(C))) .
+
+-- Decaps(C,K') properly outputs the shared secret only if 
+-- C encapsulates some secret to the associated public key of K'
+  ceq decaps(C, K') = (K' & pqSecret(C)) if (pqPublic(C) = keygen(K')) .
+-- Decaps(C,K) cannot be (K' & K2') if C does not encapsulate K2'.
+  ceq (decaps(C, K') = (K' & K2')) = false if not(K2' = pqSecret(C)) .
+  ceq (decaps(C, K') = (K2' & K3')) = false if not(K' = K2') .
+
   eq ((K' & K2') = (K3' & K4'))
     = (K' = K3' and K2' = K4') .
   eq (encapsK(PK',K') = encapsK(PK2',K2')) =
@@ -62,17 +74,20 @@ mod! PQ-KEM {
     (C = C2 and K' = K2') .
 }
 
+-- participants of the protocol
 mod* PRINCIPAL {
   pr(NAT)
   [Prin PubKey PriKey PriKeyTime]
   op intru : -> Prin {constr}
-  op priK : Prin -> PriKey {constr}
-  op pubK : Prin -> PubKey {constr}
+  op priK : Prin -> PriKey {constr}  -- private (host) key
+  op pubK : Prin -> PubKey {constr}  -- public  (host) key
   vars A B : Prin 
   eq (priK(A) = priK(B)) = (A = B) .
   eq (pubK(A) = pubK(B)) = (A = B) .
 
--- for the forward secrecy property
+-- for the forward secrecy property,
+-- pkNPair(LSK,N) will be used later, 
+-- where N indicates the time when LSK was compromised
   op pkNPair : PriKey Nat -> PriKeyTime {constr}
   op priK : PriKeyTime -> PriKey
   op time : PriKeyTime -> Nat
@@ -83,7 +98,7 @@ mod* PRINCIPAL {
   eq (pkNPair(LSK, N) = pkNPair(LSK2, N2))
     = (LSK = LSK2 and N = N2) .
 
--- lemmas
+-- trivial lemmas
   ceq (s(N) < N2) = false if not(N < N2) .
   eq (N < N) = false .
 }
@@ -100,8 +115,11 @@ mod! DATA {
   [Data < DataL]
   [EcSecretK EcPublicK EcShareK PqSecretK PqPublicK PqShareK PqCipher
     Prin PubKey PriKey PriKeyTime Version Suites < Data]
+
+-- concatenation function
   op _||_ : DataL DataL -> DataL {assoc r-assoc constr}
 
+-- membership function
   op _\in_ : DataL DataL -> Bool
 
   vars D1 D2 : Data
@@ -301,7 +319,6 @@ mod! ENCRYPTION {
   vars KE KE1 KE2 D D2 AAD SIGN : DataL
   vars LPK : PubKey
 
-  -- eq verify(pubK(A), D, sign(priK(A), D)) = true .
   eq verify(pubK(A), D, SIGN) = (SIGN = sign(priK(A),D)) .
 
   eq (h(D) = h(D2)) = (D = D2) .
@@ -324,9 +341,14 @@ mod! ENCRYPTION {
 mod! MESSAGE {
   pr(ENCRYPTION)
   [Msg]
+
+-- VERSION_EX messages
   op verM     : Prin Prin Prin Version   -> Msg {constr}
+-- KEX_ALGR messages
   op kexInitM : Prin Prin Prin Suites    -> Msg {constr}
+-- KEX_HBR_INIT messages
   op hbrIniM  : Prin Prin Prin DataL Nat -> Msg {constr}
+-- KEX_HBR_REPLY messages
   op hbrRepM  : Prin Prin Prin DataL Nat -> Msg {constr}
  
   vars A B A2 B2 A' A2' : Prin 
@@ -360,6 +382,7 @@ mod! SET (D :: TRIV) {
   eq E1 \in E2 = (E1 = E2) .
   eq E1 \in (E2 S) = (E1 = E2) or (E1 \in S) .
 }
+-- associative-commutative (AC-) collections
 mod! BAG (D :: TRIV) {
   [Elt.D < Bag]
   op void : -> Bag {constr}
@@ -443,6 +466,7 @@ mod PQSSH {
        (D :is PriKey) or (D :is PubKey) or (D :is PqSecretK) or 
        (D :is PqPublicK) or (D :is PqShareK) or (D :is PqCipher) .
 
+-- initial states
   eq nw(init) = void .
   eq usecret(init) = empty .
   eq time(init) = 0 .
@@ -548,7 +572,7 @@ mod PQSSH {
     if not c-sHbrReply(S,A2,A,B,K2,K2',V,V2,CSs,CSs2,PK,PK',N) .
 
 -- intruder capabilities
--- generating a ECDH secret key by themself
+-- randomly selecting an ECDH secret key by themself
   op gEcSecretK : Sys EcSecretK -> Sys {constr}
   op c-gEcSecretK : Sys EcSecretK -> Bool
   eq c-gEcSecretK(S,K) = not(K \in usecret(S)) .
@@ -562,7 +586,7 @@ mod PQSSH {
   ceq gEcSecretK(S,K) = S 
     if not c-gEcSecretK(S,K) .
 
--- generating a KEM secret key by themself
+-- randomly selecting a KEM secret key by themself
   op gPqSecretK : Sys PqSecretK -> Sys {constr}
   op c-gPqSecretK : Sys PqSecretK -> Bool
   eq c-gPqSecretK(S,K') = not(K' \in usecret(S)) .
@@ -585,6 +609,7 @@ mod PQSSH {
   eq knl(gBasic(S,A,V,CSs,LPK)) = 
     (A || V || CSs || LPK || knl(S)) .
 
+-- computing an ECDH shared secret
   op gEcShare : Sys EcSecretK EcPublicK -> Sys {constr}
   op c-gEcShare : Sys EcSecretK EcPublicK -> Bool
   eq c-gEcShare(S,K,PK) = (K \in knl(S) and PK \in knl(S)) .
@@ -597,6 +622,7 @@ mod PQSSH {
   ceq gEcShare(S,K,PK) = S 
     if not c-gEcShare(S,K,PK) .
 
+-- computing a KEM shared secret, KEM ciphertext
   op gPqShare : Sys PqSecretK PqPublicK -> Sys {constr}
   op c-gPqShare : Sys PqSecretK PqPublicK -> Bool
   eq c-gPqShare(S,K',PK') = (K' \in knl(S) and PK' \in knl(S)) .
@@ -610,6 +636,7 @@ mod PQSSH {
   ceq gPqShare(S,K',PK') = S 
     if not c-gPqShare(S,K',PK') .
 
+-- performing Decaps
   op gDecaps : Sys PqSecretK PqCipher -> Sys {constr}
   op c-gDecaps : Sys PqSecretK PqCipher -> Bool
   eq c-gDecaps(S,K',C) = (K' \in knl(S) and C \in knl(S)) .
@@ -623,6 +650,8 @@ mod PQSSH {
   ceq gDecaps(S,K',C) = S 
     if not c-gDecaps(S,K',C) .
 
+-- use any cryptographic primitive function 
+-- with any available information as input to learn the output
   op g1 : Sys DataL -> Sys {constr}
   op c-g1 : Sys DataL -> Bool
   eq c-g1(S,DL) = DL \in knl(S) .

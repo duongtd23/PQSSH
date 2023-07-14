@@ -411,9 +411,141 @@ open INV .
   op s : -> Sys .
   eq (r1 \in knl(s)) = true .
   eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = true .
+  eq (k2' \in usecret(s)) = true .
+  red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = true .
+  eq (k2' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = true .
+  red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = true .
+  eq (k2' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
   eq k' = r1 .
+  eq ((r1 & k2') \in knl(s)) = true .
+  red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true, use inv7 as a lemma
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = true .
+  eq (k2' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
+  eq k' = r1 .
+  eq ((r1 & k2') \in knl(s)) = false .
   eq pqSecret(r2) = k2' .
-  eq pqSecret(pqPublic(r2)) = r1 .
+  eq decaps(r2,r1) = (r1 & k2') .
+  red inv7(s,r2) implies inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = true .
+  eq (k2' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
+  eq k' = r1 .
+  eq ((r1 & k2') \in knl(s)) = false .
+  eq pqSecret(r2) = k2' .
+  eq (decaps(r2,r1) = (r1 & k2')) = false .
+  red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = true .
+  eq (k2' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
+  eq k' = r1 .
+  eq ((r1 & k2') \in knl(s)) = false .
+  eq (pqSecret(r2) = k2') = false .
+  red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = true .
+  eq (k2' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
+  eq (k' = r1) = false .
+  red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = true .
+  red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
+  eq k' = r1 .
   eq (k2' \in usecret(s)) = true .
   eq (r1 \in usecret(s)) = true .
   red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
@@ -428,9 +560,9 @@ open INV .
   op s : -> Sys .
   eq (r1 \in knl(s)) = true .
   eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
   eq k' = r1 .
-  eq pqSecret(r2) = k2' .
-  eq pqSecret(pqPublic(r2)) = r1 .
   eq (k2' \in usecret(s)) = true .
   eq (r1 \in usecret(s)) = false .
   eq ((r1 & k2') \in knl(s)) = true .
@@ -446,12 +578,14 @@ open INV .
   op s : -> Sys .
   eq (r1 \in knl(s)) = true .
   eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
   eq k' = r1 .
-  eq pqSecret(r2) = k2' .
-  eq pqSecret(pqPublic(r2)) = r1 .
   eq (k2' \in usecret(s)) = true .
   eq (r1 \in usecret(s)) = false .
   eq ((r1 & k2') \in knl(s)) = false .
+  eq pqSecret(r2) = k2' .
+  eq decaps(r2,r1) = (r1 & k2') .
   red inv2(s,r1) implies inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
 close
 
@@ -464,9 +598,48 @@ open INV .
   op s : -> Sys .
   eq (r1 \in knl(s)) = true .
   eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
   eq k' = r1 .
+  eq (k2' \in usecret(s)) = true .
+  eq (r1 \in usecret(s)) = false .
+  eq ((r1 & k2') \in knl(s)) = false .
   eq pqSecret(r2) = k2' .
-  eq pqSecret(pqPublic(r2)) = r1 .
+  eq (decaps(r2,r1) = (r1 & k2')) = false .
+  red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
+  eq k' = r1 .
+  eq (k2' \in usecret(s)) = true .
+  eq (r1 \in usecret(s)) = false .
+  eq ((r1 & k2') \in knl(s)) = false .
+  eq (pqSecret(r2) = k2') = false .
+  red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
+close
+
+--> true
+open INV .
+  op k' : -> PqSecretK .
+  op k2' : -> PqSecretK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqCipher .
+  op s : -> Sys .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
+  eq k' = r1 .
   eq (k2' \in usecret(s)) = false .
   eq ((r1 & k2') \in knl(s)) = true .
   red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
@@ -481,11 +654,13 @@ open INV .
   op s : -> Sys .
   eq (r1 \in knl(s)) = true .
   eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
   eq k' = r1 .
-  eq pqSecret(r2) = k2' .
-  eq pqSecret(pqPublic(r2)) = r1 .
   eq (k2' \in usecret(s)) = false .
   eq ((r1 & k2') \in knl(s)) = false .
+  eq pqSecret(r2) = k2' .
+  eq decaps(r2,r1) = (r1 & k2') .
   red inv7(s,r2) implies inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
 close
 
@@ -498,9 +673,13 @@ open INV .
   op s : -> Sys .
   eq (r1 \in knl(s)) = true .
   eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
   eq k' = r1 .
+  eq (k2' \in usecret(s)) = false .
+  eq ((r1 & k2') \in knl(s)) = false .
   eq pqSecret(r2) = k2' .
-  eq (pqSecret(pqPublic(r2)) = r1) = false .
+  eq (decaps(r2,r1) = (r1 & k2')) = false .
   red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
 close
 
@@ -513,7 +692,11 @@ open INV .
   op s : -> Sys .
   eq (r1 \in knl(s)) = true .
   eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
   eq k' = r1 .
+  eq (k2' \in usecret(s)) = false .
+  eq ((r1 & k2') \in knl(s)) = false .
   eq (pqSecret(r2) = k2') = false .
   red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
 close
@@ -527,6 +710,8 @@ open INV .
   op s : -> Sys .
   eq (r1 \in knl(s)) = true .
   eq (r2 \in knl(s)) = true .
+  eq (k' \in usecret(s)) = false .
+  eq ((k' & k2') \in knl(s)) = false .
   eq (k' = r1) = false .
   red inv1(s,k',k2') implies inv1(gDecaps(s,r1,r2),k',k2') .
 close
@@ -1325,4 +1510,4 @@ open INV .
   red inv1(s,k',k2') implies inv1(sVer(s,r1,r2,r3,r4,r5),k',k2') .
 close
 
---> Time taken is 1340ms
+--> Time taken is 1779ms

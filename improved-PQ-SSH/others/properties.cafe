@@ -42,8 +42,8 @@ mod PRED {
      ecShare(PK2,K) \in knl(S)) .
 
 -- to show that if the private host key of a server is revealed,
--- the intruder can perform an MITM attack
--- see file 'learnSS.cafe'
+-- the intruder can perform an MITM attack, i.e., the shared key will be no longer secure
+-- see file 'keySe-f4.cafe'
   op keySe-f4 : Sys Prin Prin Prin Version Version Suites Suites
     EcSecretK PqSecretK EcPublicK PqCipher Data Nat Nat -> Bool
   eq keySe-f4(S,B2,A,B,V,V2,CSs,CSs2,K,K',PK2,C,SIGN,N,N2) =

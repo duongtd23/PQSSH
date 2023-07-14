@@ -3818,10 +3818,7 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
   eq (k' \in leakscr(s)) = true .
   red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close
@@ -3849,11 +3846,108 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
   eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = true .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = true .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = true .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
   eq (r1 \in leakscr(s)) = true .
   red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close
@@ -3881,13 +3975,17 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
   eq (k' \in leakscr(s)) = false .
-  eq (r1 \in leakscr(s)) = false .
   eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
+  eq (r1 \in leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
   eq ((k' & r1) \in knl(s)) = true .
   red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close
@@ -3915,13 +4013,17 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
   eq (k' \in leakscr(s)) = false .
-  eq (r1 \in leakscr(s)) = false .
   eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
+  eq (r1 \in leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
   eq ((k' & r1) \in knl(s)) = false .
   eq ((k' & r1) \in leakscr(s)) = true .
   red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
@@ -3950,231 +4052,17 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
   eq (k' \in leakscr(s)) = false .
-  eq (r1 \in leakscr(s)) = false .
   eq (priK(b) \in' leakscr(s)) = true .
-  eq ((k' & r1) \in knl(s)) = false .
-  eq ((k' & r1) \in leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
   eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
-  eq (hbrIniM(a,a,b,(ecPublic(k) || keygen(k')),n) \in nw(s)) = true .
-  eq (hbrRepM(b2,b,a,(pubK(b) || pk2 || c || sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1))))))),n2) \in nw(s)) = true .
-  red inv5(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,n2) implies secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
-close
-
---> true
-open INV .
-  op a : -> Prin .
-  op b : -> Prin .
-  op b2 : -> Prin .
-  op c : -> PqCipher .
-  op css : -> Suites .
-  op css2 : -> Suites .
-  op k : -> EcSecretK .
-  op k' : -> PqSecretK .
-  op n : -> Nat .
-  op n2 : -> Nat .
-  op pk2 : -> EcPublicK .
-  op r1 : -> PqSecretK .
-  op r2 : -> PqPublicK .
-  op s : -> Sys .
-  op sign : -> Data .
-  op v : -> Version .
-  op v2 : -> Version .
-  eq (r1 \in knl(s)) = true .
-  eq (r2 \in knl(s)) = true .
-  eq (a = intru) = false .
-  eq (b = intru) = false .
   eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
   eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
-  eq (k' \in leakscr(s)) = false .
   eq (r1 \in leakscr(s)) = false .
-  eq (priK(b) \in' leakscr(s)) = true .
-  eq ((k' & r1) \in knl(s)) = false .
-  eq ((k' & r1) \in leakscr(s)) = false .
-  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
-  eq (hbrIniM(a,a,b,(ecPublic(k) || keygen(k')),n) \in nw(s)) = true .
-  eq (hbrRepM(b2,b,a,(pubK(b) || pk2 || c || sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1))))))),n2) \in nw(s)) = false .
-  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
-close
-
---> true
-open INV .
-  op a : -> Prin .
-  op b : -> Prin .
-  op b2 : -> Prin .
-  op c : -> PqCipher .
-  op css : -> Suites .
-  op css2 : -> Suites .
-  op k : -> EcSecretK .
-  op k' : -> PqSecretK .
-  op n : -> Nat .
-  op n2 : -> Nat .
-  op pk2 : -> EcPublicK .
-  op r1 : -> PqSecretK .
-  op r2 : -> PqPublicK .
-  op s : -> Sys .
-  op sign : -> Data .
-  op v : -> Version .
-  op v2 : -> Version .
-  eq (r1 \in knl(s)) = true .
-  eq (r2 \in knl(s)) = true .
-  eq (a = intru) = false .
-  eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
-  eq (k' \in leakscr(s)) = false .
-  eq (r1 \in leakscr(s)) = false .
-  eq (priK(b) \in' leakscr(s)) = true .
-  eq ((k' & r1) \in knl(s)) = false .
-  eq ((k' & r1) \in leakscr(s)) = false .
-  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
-  eq (hbrIniM(a,a,b,(ecPublic(k) || keygen(k')),n) \in nw(s)) = false .
-  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
-close
-
---> true
-open INV .
-  op a : -> Prin .
-  op b : -> Prin .
-  op b2 : -> Prin .
-  op c : -> PqCipher .
-  op css : -> Suites .
-  op css2 : -> Suites .
-  op k : -> EcSecretK .
-  op k' : -> PqSecretK .
-  op n : -> Nat .
-  op n2 : -> Nat .
-  op pk2 : -> EcPublicK .
-  op r1 : -> PqSecretK .
-  op r2 : -> PqPublicK .
-  op s : -> Sys .
-  op sign : -> Data .
-  op v : -> Version .
-  op v2 : -> Version .
-  eq (r1 \in knl(s)) = true .
-  eq (r2 \in knl(s)) = true .
-  eq (a = intru) = false .
-  eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
-  eq (k' \in leakscr(s)) = false .
-  eq (r1 \in leakscr(s)) = false .
-  eq (priK(b) \in' leakscr(s)) = true .
-  eq ((k' & r1) \in knl(s)) = false .
-  eq ((k' & r1) \in leakscr(s)) = false .
-  eq (n2 < timeLeak(priK(b),leakscr(s))) = false .
-  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
-close
-
---> true
-open INV .
-  op a : -> Prin .
-  op b : -> Prin .
-  op b2 : -> Prin .
-  op c : -> PqCipher .
-  op css : -> Suites .
-  op css2 : -> Suites .
-  op k : -> EcSecretK .
-  op k' : -> PqSecretK .
-  op n : -> Nat .
-  op n2 : -> Nat .
-  op pk2 : -> EcPublicK .
-  op r1 : -> PqSecretK .
-  op r2 : -> PqPublicK .
-  op s : -> Sys .
-  op sign : -> Data .
-  op v : -> Version .
-  op v2 : -> Version .
-  eq (r1 \in knl(s)) = true .
-  eq (r2 \in knl(s)) = true .
-  eq (a = intru) = false .
-  eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
-  eq (k' \in leakscr(s)) = false .
-  eq (r1 \in leakscr(s)) = false .
-  eq (priK(b) \in' leakscr(s)) = false .
-  eq ((k' & r1) \in knl(s)) = true .
-  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
-close
-
---> true
-open INV .
-  op a : -> Prin .
-  op b : -> Prin .
-  op b2 : -> Prin .
-  op c : -> PqCipher .
-  op css : -> Suites .
-  op css2 : -> Suites .
-  op k : -> EcSecretK .
-  op k' : -> PqSecretK .
-  op n : -> Nat .
-  op n2 : -> Nat .
-  op pk2 : -> EcPublicK .
-  op r1 : -> PqSecretK .
-  op r2 : -> PqPublicK .
-  op s : -> Sys .
-  op sign : -> Data .
-  op v : -> Version .
-  op v2 : -> Version .
-  eq (r1 \in knl(s)) = true .
-  eq (r2 \in knl(s)) = true .
-  eq (a = intru) = false .
-  eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
-  eq (k' \in leakscr(s)) = false .
-  eq (r1 \in leakscr(s)) = false .
-  eq (priK(b) \in' leakscr(s)) = false .
-  eq ((k' & r1) \in knl(s)) = false .
-  eq ((k' & r1) \in leakscr(s)) = true .
-  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
-close
-
---> true, use inv5 as a lemma
-open INV .
-  op a : -> Prin .
-  op b : -> Prin .
-  op b2 : -> Prin .
-  op c : -> PqCipher .
-  op css : -> Suites .
-  op css2 : -> Suites .
-  op k : -> EcSecretK .
-  op k' : -> PqSecretK .
-  op n : -> Nat .
-  op n2 : -> Nat .
-  op pk2 : -> EcPublicK .
-  op r1 : -> PqSecretK .
-  op r2 : -> PqPublicK .
-  op s : -> Sys .
-  op sign : -> Data .
-  op v : -> Version .
-  op v2 : -> Version .
-  eq (r1 \in knl(s)) = true .
-  eq (r2 \in knl(s)) = true .
-  eq (a = intru) = false .
-  eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
-  eq (k' \in leakscr(s)) = false .
-  eq (r1 \in leakscr(s)) = false .
-  eq (priK(b) \in' leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
   eq ((k' & r1) \in knl(s)) = false .
   eq ((k' & r1) \in leakscr(s)) = false .
   eq (hbrIniM(a,a,b,(ecPublic(k) || keygen(k')),n) \in nw(s)) = true .
@@ -4205,13 +4093,17 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
   eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
   eq (r1 \in leakscr(s)) = false .
-  eq (priK(b) \in' leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
   eq ((k' & r1) \in knl(s)) = false .
   eq ((k' & r1) \in leakscr(s)) = false .
   eq (hbrIniM(a,a,b,(ecPublic(k) || keygen(k')),n) \in nw(s)) = true .
@@ -4242,13 +4134,17 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
-  eq pqSecret(c) = r1 .
-  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1)))))) .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
   eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
   eq (r1 \in leakscr(s)) = false .
-  eq (priK(b) \in' leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
   eq ((k' & r1) \in knl(s)) = false .
   eq ((k' & r1) \in leakscr(s)) = false .
   eq (hbrIniM(a,a,b,(ecPublic(k) || keygen(k')),n) \in nw(s)) = false .
@@ -4278,10 +4174,17 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
   eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
   eq pqSecret(c) = r1 .
-  eq (sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1))))))) = false .
+  eq (r1 \in leakscr(s)) = false .
+  eq (decaps(c,k') = (k' & r1)) = false .
   red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close
 
@@ -4308,8 +4211,14 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
   eq pqSecret(r2) = k' .
-  eq pqSecret(pqPublic(c)) = k' .
   eq (pqSecret(c) = r1) = false .
   red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close
@@ -4337,8 +4246,14 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
-  eq pqSecret(r2) = k' .
-  eq (pqSecret(pqPublic(c)) = k') = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq (n2 < timeLeak(priK(b),leakscr(s))) = true .
+  eq (pqSecret(r2) = k') = false .
   red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close
 
@@ -4365,7 +4280,465 @@ open INV .
   eq (r2 \in knl(s)) = true .
   eq (a = intru) = false .
   eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = true .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq (n2 < timeLeak(priK(b),leakscr(s))) = false .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = true .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = true .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = true .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
+  eq (r1 \in leakscr(s)) = true .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
+  eq (r1 \in leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
+  eq ((k' & r1) \in knl(s)) = true .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
+  eq (r1 \in leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
+  eq ((k' & r1) \in knl(s)) = false .
+  eq ((k' & r1) \in leakscr(s)) = true .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true, use inv5 as a lemma
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
+  eq (r1 \in leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
+  eq ((k' & r1) \in knl(s)) = false .
+  eq ((k' & r1) \in leakscr(s)) = false .
+  eq (hbrIniM(a,a,b,(ecPublic(k) || keygen(k')),n) \in nw(s)) = true .
+  eq (hbrRepM(b2,b,a,(pubK(b) || pk2 || c || sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1))))))),n2) \in nw(s)) = true .
+  red inv5(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,n2) implies secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
+  eq (r1 \in leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
+  eq ((k' & r1) \in knl(s)) = false .
+  eq ((k' & r1) \in leakscr(s)) = false .
+  eq (hbrIniM(a,a,b,(ecPublic(k) || keygen(k')),n) \in nw(s)) = true .
+  eq (hbrRepM(b2,b,a,(pubK(b) || pk2 || c || sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || (k' & r1))))))),n2) \in nw(s)) = false .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
+  eq (r1 \in leakscr(s)) = false .
+  eq decaps(c,k') = (k' & r1) .
+  eq ((k' & r1) \in knl(s)) = false .
+  eq ((k' & r1) \in leakscr(s)) = false .
+  eq (hbrIniM(a,a,b,(ecPublic(k) || keygen(k')),n) \in nw(s)) = false .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq pqSecret(r2) = k' .
+  eq pqSecret(c) = r1 .
+  eq (r1 \in leakscr(s)) = false .
+  eq (decaps(c,k') = (k' & r1)) = false .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
+  eq pqSecret(r2) = k' .
+  eq (pqSecret(c) = r1) = false .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k')))))) .
+  eq (k' \in leakscr(s)) = false .
+  eq (priK(b) \in' leakscr(s)) = false .
+  eq (pqSecret(c) \in leakscr(s)) = false .
+  eq (decaps(c,k') \in knl(s)) = false .
+  eq (decaps(c,k') \in leakscr(s)) = false .
   eq (pqSecret(r2) = k') = false .
+  red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
+close
+
+--> true
+open INV .
+  op a : -> Prin .
+  op b : -> Prin .
+  op b2 : -> Prin .
+  op c : -> PqCipher .
+  op css : -> Suites .
+  op css2 : -> Suites .
+  op k : -> EcSecretK .
+  op k' : -> PqSecretK .
+  op n : -> Nat .
+  op n2 : -> Nat .
+  op pk2 : -> EcPublicK .
+  op r1 : -> PqSecretK .
+  op r2 : -> PqPublicK .
+  op s : -> Sys .
+  op sign : -> Data .
+  op v : -> Version .
+  op v2 : -> Version .
+  eq (r1 \in knl(s)) = true .
+  eq (r2 \in knl(s)) = true .
+  eq (a = intru) = false .
+  eq (b = intru) = false .
+  eq (sign = sign(priK(b),h((v || v2 || css || css2 || pubK(b) || ecPublic(k) || keygen(k') || pk2 || c || h(((k | ecSecret(pk2)) || decaps(c,k'))))))) = false .
   red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(gPqShare(s,r1,r2),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close
 
@@ -6549,4 +6922,4 @@ open INV .
   red secrecy(s,b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) implies secrecy(sVer(s,r1,r2,r3,r4,r5),b2,a,b,v,v2,css,css2,k,k',pk2,c,sign,n,n2) .
 close
 
---> Time taken is 8166ms
+--> Time taken is 9525ms
